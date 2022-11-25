@@ -17,6 +17,7 @@
     --secondary-button-bg-color: #004650;
     --font-weight-primary: 400;
     --font-weight-secondary: 600;
+    --abe-red: #C7002C;
 }
 
 * {
@@ -35,7 +36,7 @@ body {
     line-height: 1.5;
     text-rendering: optimizespeed;
     color: var(--text-color);
-    overflow-y: overlay;
+    // overflow-y: overlay;
 }
 
 button,

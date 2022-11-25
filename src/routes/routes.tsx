@@ -1,6 +1,6 @@
 import config from '~/config';
 
-import { Home } from '~/pages';
+import { HomeContainer } from '~/layouts/containers';
 
 interface Route {
     path: string;
@@ -8,6 +8,6 @@ interface Route {
     layout?: any;
 }
 
-const publicRoutes: Route[] = [{ path: config.routes.home, component: Home }];
+const publicRoutes: Route[] = [{ path: config.routes.home, component: HomeContainer }];
 
 export { publicRoutes };

@@ -2,7 +2,8 @@
     "plugins": [
         ["module-resolver", {
             "alias": {
-                "~": "./src"
+                "~": "./src",
+                "$constants": ["./src/constants"]
             }
         }]
     ]

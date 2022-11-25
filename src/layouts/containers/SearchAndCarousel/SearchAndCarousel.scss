@@ -1,0 +1,45 @@
+.search-and-carousel {
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-form {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background-color: #f5f9fa;
+    padding: 40px 30px;
+    &__info {
+        color: var(--abe-red);
+        font-size: 1.4rem;
+    }
+    
+    &__header {
+        font-size: 2.4rem;
+        font-weight: 500;
+    }
+}
+
+.carousel {
+    flex: 2;
+}
+
+.search-form-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.search-form-input {
+    margin-bottom: 20px;
+
+    &__label {
+        font-weight: 600;
+        padding-bottom: 2px;
+        display: block;
+        font-size: 1.4rem;
+    }
+}
+
+.search-form-submit {
+    width: 30%;
+}
