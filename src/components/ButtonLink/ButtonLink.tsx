@@ -1,16 +1,16 @@
 import './ButtonLink.scss';
 import { Link } from 'react-router-dom';
-function Button({ to, text = null, Icon = null }: any) {
+
+interface ButtonProps {
+    to: string;
+    type?: string;
+    children: any;
+}
+
+function Button({ to, type = '', children }: ButtonProps) {
     return (
-        <Link to={to} className="button-link">
-            {Icon !== null ? (
-                <>
-                    {text !== null ? <span>{text}</span> : null}
-                    <Icon className={text !== null ? `button-link__icon` : `button-link__icon--no-text`} />
-                </>
-            ) : (
-                <span>{text}</span>
-            )}
+        <Link to={to} className={type ? `button-link--${type} button-link` : 'button-link'}>
+            {children}
         </Link>
     );
 }

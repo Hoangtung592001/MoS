@@ -1,13 +1,24 @@
 import { Button, ButtonLink } from '~/components';
-import { BiCartAlt } from 'react-icons/bi';
+import { BiCartAlt, BiSearchAlt2 } from 'react-icons/bi';
 import './Header.scss';
 function Header() {
     return (
         <div className="header">
-            <ButtonLink to="/" text="Basket" Icon={BiCartAlt} />
-            <ButtonLink to="/" text="Basket" Icon={BiCartAlt} />
-            <ButtonLink to="/" text="Basket Help" />
-            <ButtonLink to="/" Icon={BiCartAlt} />
+            <ButtonLink to="/">
+                Hello World!
+                <BiCartAlt className="header__icon" />
+            </ButtonLink>
+
+            <ButtonLink to="/" type="secondary">
+                Search
+            </ButtonLink>
+
+            <ButtonLink to="/" type="tertiary">
+                Search
+            </ButtonLink>
+            <ButtonLink to="/" type="quaternary">
+                <BiSearchAlt2 />
+            </ButtonLink>
         </div>
     );
 }

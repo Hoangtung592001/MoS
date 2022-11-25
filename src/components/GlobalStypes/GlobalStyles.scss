@@ -2,13 +2,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
 
 :root {
-    --button-text-primary: #333333;
-    --border-primary: #333333;
+    --button-text-primary: #48667e;
+    --border-primary: #8799aa;
+    --border-button-hover: #3d464e;
     --black: #111111;
     --text-primary: #111111;
     --default-layout-header-height: 60px;
     --default-layout-width: 1150px;
     --default-layout-horizontal-spacer: 24px;
+    --button-border-width: 1.5px;
+    --white: #ffffff;
+    --button-border-radius: 22px;
+    --primary-button-bg-color: #008296;
+    --secondary-button-bg-color: #004650;
+    --font-weight-primary: 400;
+    --font-weight-secondary: 600;
 }
 
 * {
