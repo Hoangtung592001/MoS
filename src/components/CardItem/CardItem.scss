@@ -1,0 +1,42 @@
+.card-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-item__image {
+    display: flex;
+    img {
+        object-fit: contain;
+    }
+}
+
+.card-item__image {
+    display: flex;
+    justify-self: center;
+    text-align: center;
+    height: 250px;
+    img {
+        object-fit: contain;
+        width: 100%;
+    }
+}
+
+.card-item-body {
+    display: flex;
+    flex-direction: column;
+    &__title {
+        display: block;
+        font-size: 2rem;
+        font-weight: 500;
+        margin-bottom: 20px;
+    }
+
+    &__description {
+        display: block;
+        font-weight: 400;
+    }
+
+    &__link {
+        display: block;
+    }
+}

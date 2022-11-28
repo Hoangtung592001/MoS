@@ -1,11 +1,12 @@
 import { Fragment } from 'react';
-import { SearchAndCarousel, FrequentlyViewItems } from '../../components';
-
+import { SearchAndCarousel, ProductCardList, CardList } from '../../components';
 export default function HomeContainer() {
     return (
         <Fragment>
             <SearchAndCarousel />
-            <FrequentlyViewItems />
+            <ProductCardList title='Frequently Viewed Items'/>
+            <ProductCardList title='Trending Items'/>
+            <CardList />
         </Fragment>
     );
 }
