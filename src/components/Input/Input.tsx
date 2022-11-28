@@ -1,13 +1,12 @@
 import './Input.scss';
 
 interface InputProps {
-    placeholder: string
+    type?: string;
+    placeholder: string;
 }
 
-function Input({ placeholder }: InputProps) {
-    return(
-        <input type="text" className='input' placeholder={placeholder}/>
-    )
+function Input({ type, placeholder }: InputProps) {
+    return <input type="text" className={type ? `input--${type} input` : 'input'} placeholder={placeholder} />;
 }
 
 export default Input;

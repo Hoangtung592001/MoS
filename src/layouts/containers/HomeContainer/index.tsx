@@ -1,10 +1,11 @@
 import { Fragment } from 'react';
-import SearchAndCarousel from '../SearchAndCarousel';
+import { SearchAndCarousel, FrequentlyViewItems } from '../../components';
 
 export default function HomeContainer() {
-    return(
+    return (
         <Fragment>
             <SearchAndCarousel />
+            <FrequentlyViewItems />
         </Fragment>
-    )
+    );
 }

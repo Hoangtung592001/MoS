@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Footer } from '../containers';
+import { Header, Footer } from '../components';
 import './DefaultLayout.scss';
 
 function DefaultLayout({ children }: any) {

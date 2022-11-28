@@ -6,5 +6,6 @@ export enum ButtonLinkTypes {
 }
 
 export enum InputTypes {
-    SEARCH = 'search'
+    SEARCH = 'search',
+    SEARCH_BY_FORM = 'form'
 }
