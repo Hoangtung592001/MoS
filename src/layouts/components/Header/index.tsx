@@ -27,7 +27,7 @@ function Header() {
                     <div className="header-nav-right">
                         <div className="header-nav-right__button">
                             <ButtonLink to="" type={ButtonLinkTypes.PRIMARY_BUTTON}>
-                                {localizations.signIn}
+                                {localizations.signin}
                             </ButtonLink>
                         </div>
                         <div className="header-nav-right__button">

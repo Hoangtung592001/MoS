@@ -1,6 +1,7 @@
 .card-item {
     display: flex;
     flex-direction: column;
+    box-shadow: 5px 10px #f1f1f1;
 }
 
 .card-item__image {
@@ -24,6 +25,7 @@
 .card-item-body {
     display: flex;
     flex-direction: column;
+    font-size: 1.8rem;
     &__title {
         display: block;
         font-size: 2rem;
@@ -34,9 +36,21 @@
     &__description {
         display: block;
         font-weight: 400;
+        margin-bottom: 30px;
     }
 
     &__link {
-        display: block;
+        display: flex;
+        align-items: center;
+        color: var(--primary-button-bg-color);
+        &__arrow {
+            display: block;
+            margin-left: 6px;
+            transition: all 0.25s linear;
+        }
+
+        &:hover &__arrow {
+            transform: translateX(5px);
+        }
     }
 }

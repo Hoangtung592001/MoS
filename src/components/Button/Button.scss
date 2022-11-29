@@ -1,0 +1,21 @@
+.button {
+    text-decoration: none;
+    color: var(--button-text-primary);
+    border: 1px solid var(--border-primary);
+    border-radius: 4px;
+    padding: 8px 12px;
+    position: relative;
+    font-weight: var(--font-weight-primary);
+    text-align: center;
+    font-size: 1.4rem;
+    display: block;
+    height: 100%;
+    white-space: nowrap;
+    cursor: pointer;
+    &--sign-in {
+        background-color: #00879a;
+        color: var(--white);
+        width: 100%;
+        font-size: 1.3rem;
+    }
+}

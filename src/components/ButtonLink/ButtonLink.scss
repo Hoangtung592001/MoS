@@ -55,4 +55,10 @@
         border-bottom-left-radius: 0px;
         height: 34px;
     }
+    
+    &--create-account {
+        background-color: #f1f3f5;
+        color: var(--black);
+        width: 100%;
+    }
 }

@@ -64,3 +64,43 @@ html *::-webkit-scrollbar {
 a {
     text-decoration: none;
 }
+
+ul {
+    list-style-type: none;
+}
+
+.display-flex {
+    display: flex;
+}
+
+.flex-direction {
+    &--column {
+        flex-direction: column;
+    }
+}
+
+.justify-content {
+    &--center {
+        justify-content: center;
+    }
+
+    &--space-between {
+        justify-content: space-between;
+    }
+}
+
+.display-block {
+    display: block;
+}
+
+.margin-auto {
+    margin: auto;
+}
+
+.align-items {
+    &--center {
+        align-items: center;
+    }
+}
+
+

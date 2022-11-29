@@ -5,3 +5,4 @@ export { default as Input } from './Input/Input';
 export { default as TextLink } from './TextLink';
 export { default as ProductCard } from './ProuductCard';
 export { default as CardItem } from './CardItem';
+export { default as Checkbox } from './Checkbox';

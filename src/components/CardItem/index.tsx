@@ -1,6 +1,6 @@
 import './CardItem.scss';
 import { Link } from 'react-router-dom';
-
+import { BsArrowRightShort } from 'react-icons/bs';
 interface CardListProps {
     url: string;
     title: string;
@@ -17,7 +17,10 @@ export default function CardItem({ url, title, description, textLink }: CardList
             <div className='card-item-body'>
                 <h4 className='card-item-body__title'>{title}</h4>
                 <span className='card-item-body__description'>{description}</span>
-                <Link to={url} className='card-item-body__link'>{textLink}</Link>
+                <Link to={url} className='card-item-body__link'>
+                    {textLink}
+                    <BsArrowRightShort className='card-item-body__link__arrow'/>
+                </Link>
             </div>
         </div>
     )
