@@ -5,3 +5,4 @@ export { default as ProductCardList } from './ProductCardList';
 export { default as CardList } from './CardList';
 export { default as SigninForm } from './SigninForm';
 export { default as SignupForm } from './SignupForm';
+export { default as BasketTable } from './BasketTable';

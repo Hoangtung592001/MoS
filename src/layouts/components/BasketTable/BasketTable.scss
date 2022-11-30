@@ -1,0 +1,22 @@
+.basket-table {
+    width: 100%;
+}
+
+.basket-table-row {
+    display: flex;
+    justify-content: space-between;
+    &__item1 {
+        width: 60%;
+        text-align: left;
+    }
+
+    &__item2 {
+        width: 20%;
+        text-align: left;
+    }
+
+    &__item3 {
+        width: 20%;
+        text-align: left;
+    }
+}

@@ -49,11 +49,28 @@ const localizations = {
     termsAndConditions: 'By using the Web site, you confirm that you have read, understood, and agreed to be bound by the Terms and Conditions.',
     email: 'Email',
     password: 'Password',
-    signinTermsAndConditions: 'By signing-in, you agree to the AbeBooks.com Privacy Policy and Terms & Conditions.',
+    signinTermsAndConditions: 'By signing-in, you agree to the AbeBooks.com ',
     keepMeSignedIn: 'Keep me signed in.',
     newToMosBooks: 'New to MoSBooks?',
     createYourMosBooksAccount: 'Create Your MoSBooks Account',
-    forgetPassword: 'Forgot your password?'
+    forgetPassword: 'Forgot your password?',
+    createAccount: 'Create account',
+    firstAndLastName: 'First and last name',
+    atLeast6Charaters: 'At least 6 characters',
+    yourName: 'Your Name',
+    reEnterPassword: 'Re-enter password',
+    alertPassword: 'Passwords must be at least 6 characters',
+    alreadyHaveeAnAccount: 'Already have an account?',
+    basketItems: 'Basket Items',
+    items: 'items',
+    item: 'item',
+    price: 'Price',
+    quantity: 'Quantity',
+    remove: 'Remove',
+    shipping: 'Shipping',
+    subTotal: 'SubTotal',
+    total: 'Toal',
+    seller: 'Seller'
 };
 
 export default localizations;
