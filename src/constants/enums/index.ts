@@ -7,12 +7,14 @@ export enum ButtonLinkTypes {
 }
 
 export enum ButtonTypes {
-    SIGNIN = 'sign-in'
+    SIGNIN = 'sign-in',
+    REMOVE = 'remove'
 }
 
 export enum InputTypes {
     SEARCH = 'search',
-    SEARCH_BY_FORM = 'form'
+    SEARCH_BY_FORM = 'form',
+    QUANTITY = 'quantity'
 }
 
 export enum TextLinkTypes {

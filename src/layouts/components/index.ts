@@ -6,3 +6,4 @@ export { default as CardList } from './CardList';
 export { default as SigninForm } from './SigninForm';
 export { default as SignupForm } from './SignupForm';
 export { default as BasketTable } from './BasketTable';
+export { default as BookIntro } from './BookIntro';

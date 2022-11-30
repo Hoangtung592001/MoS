@@ -1,6 +1,6 @@
-import { ButtonLinkTypes, InputTypes, ButtonTypes } from '~/constants/enums';
+import { InputTypes, ButtonTypes } from '~/constants/enums';
 import localizations from '~/constants/locallizations';
-import { ButtonLink, Input, TextLink, Checkbox, Button, Alert } from '~/components';
+import { Input, TextLink, Button, Alert } from '~/components';
 import { TextLinkTypes } from '~/constants/enums';
 import './SignupForm.scss';
 

@@ -87,6 +87,14 @@ ul {
     &--space-between {
         justify-content: space-between;
     }
+
+    &--right {
+        justify-content: right;
+    }
+
+    &--left {
+        justify-content: left;
+    }
 }
 
 .display-block {

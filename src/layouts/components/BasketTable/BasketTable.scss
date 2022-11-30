@@ -1,5 +1,7 @@
 .basket-table {
     width: 100%;
+    border-radius: 15px;
+    outline: 4px solid #c9d4d6;
 }
 
 .basket-table-row {
@@ -11,12 +13,90 @@
     }
 
     &__item2 {
-        width: 20%;
+        width: 10%;
         text-align: left;
     }
 
     &__item3 {
-        width: 20%;
+        width: 10%;
         text-align: left;
+    }
+
+    &__item4 {
+        width: 20%;
+    }
+}
+
+.basket-table-row-price {
+    &__each {
+        color: var(--abe-red);
+    }
+
+    &__total {
+        color: var(--black);
+        &--sub-total {
+            font-weight: 600;
+        }
+    }
+}
+
+.basket-table-row-item {
+    img {
+        width: 72px;
+    }
+}
+
+.basket-table-row-info {
+    margin-left: 20px;
+
+    &__title {
+        font-size: 1.8rem;
+    }
+}
+
+.basket-table-row-quantity {
+    span {
+        margin-left: 4px;
+        white-space: nowrap;
+    }
+}
+
+.basket-table-row-header {
+    background-color: #c9d4d6;
+    border: 3px solid #c9d4d6;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 2px 2px;
+}
+
+.basket-table-row-container {
+    padding-left: 18px;
+    padding-right: 18px;
+    border-bottom: 1px solid #c9d4d6;
+    padding-bottom: 20px;
+}
+
+.basket-table-row-quantity-container {
+    height: 25%;
+}
+
+.basket-table-row-shipping {
+    &__text {
+        margin-right: 15px;
+
+        &--sub-total {
+            font-weight: 600;
+        }
+    }
+}
+
+.basket-table-row-payment {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    &--sub-total {
+        border-bottom: 4px solid #c9d4d6;
+        padding-bottom: 20px;
     }
 }

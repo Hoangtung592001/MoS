@@ -7,3 +7,4 @@ export { default as ProductCard } from './ProuductCard';
 export { default as CardItem } from './CardItem';
 export { default as Checkbox } from './Checkbox';
 export { default as Alert } from './Alert';
+export { default as Rating } from './Rating';

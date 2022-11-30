@@ -70,7 +70,8 @@ const localizations = {
     shipping: 'Shipping',
     subTotal: 'SubTotal',
     total: 'Toal',
-    seller: 'Seller'
+    seller: 'Seller',
+    publishedBy: 'Published by'
 };
 
 export default localizations;
