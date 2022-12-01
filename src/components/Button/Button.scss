@@ -25,4 +25,14 @@
         display: flex;
         align-items: center;
     }
+
+    &--basket {
+        background-color: #dc2a2b;
+        padding: 10px 20px;
+        height: auto;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }

@@ -14,18 +14,12 @@ export default function Rating({ stars }: RatingProps) {
     }
 
     if (stars - floorStars >= 0.5) {
-        starIcons.push(<BsStarHalf />)
+        starIcons.push(<BsStarHalf />);
     }
 
-    while(starIcons.length != 5) {
+    while (starIcons.length !== 5) {
         starIcons.push(<BsStar />);
-    } 
+    }
 
-    return (
-        <div className='rating'>
-            {
-                starIcons.map(starIcon => starIcon)
-            }
-        </div>
-    )
+    return <div className="rating">{starIcons.map((starIcon) => starIcon)}</div>;
 }

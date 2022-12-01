@@ -8,7 +8,8 @@ export enum ButtonLinkTypes {
 
 export enum ButtonTypes {
     SIGNIN = 'sign-in',
-    REMOVE = 'remove'
+    REMOVE = 'remove',
+    ADDTOBASKET = 'basket'
 }
 
 export enum InputTypes {

@@ -71,7 +71,15 @@ const localizations = {
     subTotal: 'SubTotal',
     total: 'Toal',
     seller: 'Seller',
-    publishedBy: 'Published by'
+    publishedBy: 'Published by',
+    saveForLater: 'Save for Later',
+    from: 'From',
+    aboutThisItem: 'About This Item',
+    paymentMethods: 'Payment Methods',
+    buyNew: 'Buy New',
+    within: 'Within',
+    addToBasket: 'Add to basket',
+    dayReturnPolicy: 'Day Return Policy'
 };
 
 export default localizations;

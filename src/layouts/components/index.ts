@@ -7,3 +7,5 @@ export { default as SigninForm } from './SigninForm';
 export { default as SignupForm } from './SignupForm';
 export { default as BasketTable } from './BasketTable';
 export { default as BookIntro } from './BookIntro';
+export { default as BookDetails } from './BookDetails';
+export { default as PriceInfo } from './PriceInfo';

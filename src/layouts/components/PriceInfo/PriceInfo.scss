@@ -1,0 +1,51 @@
+.price-info {
+    border: 1px solid #ddd;
+    padding: 15px 10px;
+    width: 245px;
+    height: 30%;
+    &__header {
+        font-size: 1.8rem;
+        color: var(--grey);
+    }
+
+    &__price {
+        font-size: 2rem;
+        color: var(--abe-red);
+    }
+
+    &__where {
+        font-size: 1.6rem;
+        color: var(--grey);
+        display: block;
+    }
+
+    &__add-to-basket {
+        color: var(--white);
+    }
+}
+
+.price-info-shipping {
+    color: var(--grey);
+    font-weight: 600;
+
+    &__price {
+        font-weight: 400;
+        color: #900;
+    }
+}
+
+.price-info-link {
+    margin-bottom: 10px;
+    &--return {
+        text-align: center;
+    }
+}
+
+.price-info-button {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.price-info-button__icon {
+    margin-right: 5px;
+}
