@@ -1,0 +1,20 @@
+.book-intro-and-details-container {
+    
+}
+
+.book-intro-and-details-info {
+    flex: 7;
+}
+
+.book-intro-and-details-price {
+    flex: 3;
+    display: flex;
+    justify-content: center;
+}
+
+.book-intro-and-details-recomended-items {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--grey);
+    padding-bottom: 60px;
+}

@@ -1,0 +1,46 @@
+.book-details {
+    color: #4d4d4d;
+}
+
+.book-details-about-item {
+    padding: 20px 0px;
+    border-bottom: 1px solid var(--grey);
+}
+
+.book-details-about-item {
+    &__header {
+        font-weight: 600;
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+
+    &__content {
+        font-size: 1.5rem;
+    }
+}
+
+.book-details-characteristics {
+    padding: 20px 0px 10px 0px;
+    border-bottom: 1px solid var(--grey);
+    &__header {
+        font-size: 1.8rem;
+        padding-right: 40px;
+        white-space: nowrap;
+        flex: 2;
+    }
+}
+
+.book-details-characteristic {
+    flex: 7;
+    &__header {
+        font-size: 1.6rem;
+    }
+}
+
+.book-details-characteristic-content {
+    
+}
+
+.book-details-characteristic-container {
+    margin-bottom: 20px;
+}

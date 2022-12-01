@@ -79,7 +79,24 @@ const localizations = {
     buyNew: 'Buy New',
     within: 'Within',
     addToBasket: 'Add to basket',
-    dayReturnPolicy: 'Day Return Policy'
+    dayReturnPolicy: 'Day Return Policy',
+    myPurchases: 'My Purchases',
+    myEmails: 'My Emails',
+    myPersonalInfo: 'My Personal Info',
+    myWants: 'My Wants',
+    viewMyShoppingBasket: 'View My Shopping Basket',
+    viewMyEmails: 'View My Emails',
+    myNameEmailAndPassword: 'My name, email and password',
+    myAccountInfo: 'My Account Information',
+    myAddressBook: 'My Address Book',
+    manageMyCreditCards: 'Manage My Credit Cards',
+    listAndMaintainMyWants: 'List and Maintain My Wants',
+    myRecentlMatchedWants: 'My Recently Matched Wants',
+    learnMoreAboutWants: 'Learn More About Wants',
+    downloadMyWantsReport: 'Download My Wants Report',
+    moSBooksHelp: 'MoSBooks Help',
+    contactCustomerSupport: 'Contact Customer Support',
+    communityForums: 'Community Forums'
 };
 
 export default localizations;

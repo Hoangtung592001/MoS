@@ -3,7 +3,8 @@ const routes = {
     signin: '/signin',
     signup: '/signup',
     basket: '/basket',
-    bookDetails: '/BookDetails'
+    bookDetails: '/BookDetails',
+    myAccount: '/MyAccount'
 };
 
 export default routes;

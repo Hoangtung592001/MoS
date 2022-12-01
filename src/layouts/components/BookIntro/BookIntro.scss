@@ -1,5 +1,6 @@
 .book-intro {
-    
+    border-bottom: 1px solid var(--grey);
+    padding-bottom: 20px;;
 }
 
 .book-intro-image {
@@ -19,3 +20,75 @@
 .book-intro-details-characteristic {
     margin-right: 4px;
 }
+
+.book-intro-details {
+    &__text--grey {
+        font-size: 1.6rem;
+        font-weight: 600;
+    }
+
+    &__header {
+        font-weight: 400;
+        font-size: 2rem;
+    }
+
+    &__text--plain {
+        color: var(--grey);
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+        display: block;
+    }
+}
+
+.book-intro-details-later {
+    position: relative;
+    padding-left: 32px;
+    &__text {
+        font-size: 1.5rem;
+    }
+
+    &::before {
+        background-image: url('https://assets.prod.abebookscdn.com/cdn/com/images/Shared/icons/ic-save.png');
+        content: "";
+        height: 18px;
+        width: 18px;
+        display: block;
+        position: absolute;
+        top: 4px;
+        left: 0;
+        background-size: auto 16px;
+    }
+}
+
+.book-intro-details-seller {
+    position: relative;
+    padding-left: 32px;
+
+    &::before {
+        background-image: url('https://assets.prod.abebookscdn.com/cdn/com/images/Shared/icons/ic-store.png');
+        content: "";
+        height: 18px;
+        width: 18px;
+        display: block;
+        position: absolute;
+        top: 4px;
+        left: 0;
+        background-size: auto 16px;
+    }
+
+    &__location {
+        margin-right: 5px;
+    }
+}
+
+.book-intro-details-seller-time-start {
+    span:first-child {
+        font-weight: 600;
+        margin-right: 5px;
+    }
+
+    .book-intro-details__text--plain {
+        margin-bottom: 0px;
+    }
+}
+

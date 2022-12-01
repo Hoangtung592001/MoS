@@ -10,12 +10,12 @@ export default function BookIntro() {
                 <img src="https://pictures.abebooks.com/isbn/9781411423411-us.jpg" alt="Book Image" />
             </div>
             <div className="book-intro-details">
-                <h4>How to Write a Research Paper [Paperback] sparknotes-editors</h4>
+                <h4 className='book-intro-details__header'>How to Write a Research Paper [Paperback] sparknotes-editors</h4>
                 <TextLink type={TextLinkTypes.BLUE}>
                     <span className="book-intro-details__text--grey">UNITED STATES NAVAL ACADEMY</span>
                 </TextLink>
                 <Rating stars={3.5} />
-                <span>{localizations.publishedBy} Sparknotes, 1963</span>
+                <span className='book-intro-details__text--plain'>{localizations.publishedBy} Sparknotes, 1963</span>
                 <div className="display-flex book-intro-details-characteristics">
                     <div className="book-intro-details-characteristic">
                         <TextBox text="NEW" />
@@ -27,18 +27,27 @@ export default function BookIntro() {
                         <TextBox text="SOFT COVER" />
                     </div>
                 </div>
-                <TextLink>
-                    <span>{localizations.saveForLater}</span>
-                </TextLink>
-                <div>
+                <div className='book-intro-details-later'>
+                    <TextLink type={TextLinkTypes.BLUE}>
+                        <span className='book-intro-details-later__text'>{localizations.saveForLater}</span>
+                    </TextLink>
+                </div>
+                <div className='book-intro-details-seller'>
                     <div>
-                        <span>{localizations.from}</span>
-                        <TextLink>
+                        <span className='book-intro-details-seller__location'>{localizations.from}</span>
+                        <TextLink type={TextLinkTypes.BLUE}>
                             <span>BennettBooksLtd (LOS ANGELES, CA, U.S.A.)</span>
                         </TextLink>
                     </div>
-                    <div>MoSBooks Seller Since April 17, 2008</div>
-                    <span>{localizations.quantity}: 1</span>
+                    <div className='book-intro-details-seller-time-start display-flex align-items--center'>
+                        <span>
+                            MoSBooks Seller Since
+                        </span>
+                        <span className='book-intro-details__text--plain'>
+                            April 17, 2008
+                        </span>
+                    </div>
+                    <span className='book-intro-details__text--plain'>{localizations.quantity}: 1</span>
                 </div>
             </div>
         </div>

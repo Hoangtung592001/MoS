@@ -9,3 +9,4 @@ export { default as Checkbox } from './Checkbox';
 export { default as Alert } from './Alert';
 export { default as Rating } from './Rating';
 export { default as TextBox } from './TextBox';
+export { default as TextLinkBox } from './TextLinkBox';
