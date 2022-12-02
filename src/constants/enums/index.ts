@@ -3,7 +3,9 @@ export enum ButtonLinkTypes {
     SECONDARY_BUTTON = 'secondary',
     TERTIARY_BUTTON = 'tertiary',
     QUATERNARY_BUTTON = 'quaternary',
-    CREATE_ACCOUNT = 'create-account'
+    CREATE_ACCOUNT = 'create-account',
+    BACK_SECURITY = 'back-security',
+    EDIT_SECURITY = 'edit-security'
 }
 
 export enum ButtonTypes {

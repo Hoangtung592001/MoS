@@ -4,7 +4,11 @@ const routes = {
     signup: '/signup',
     basket: '/basket',
     bookDetails: '/BookDetails',
-    myAccount: '/MyAccount'
+    myAccount: '/MyAccount',
+    security: '/Security',
+    changeEmail: '/Security/ChangeEmail',
+    changeName: '/Security/ChangeName',
+    changePassword: '/Security/ChangePassword'
 };
 
 export default routes;

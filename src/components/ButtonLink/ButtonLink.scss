@@ -61,4 +61,23 @@
         color: var(--black);
         width: 100%;
     }
+
+    &--back-security {
+        background-color: #0095a7;
+        color: var(--white);
+        padding: 5px 4px;
+        border: 1px solid var(--black);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        &:hover {
+            background-color: #007686;
+        }
+    }
+
+    &--edit-security {
+        padding: 5px 20px;
+        background-color: #ebedf0;
+    }
 }

@@ -96,7 +96,16 @@ const localizations = {
     downloadMyWantsReport: 'Download My Wants Report',
     moSBooksHelp: 'MoSBooks Help',
     contactCustomerSupport: 'Contact Customer Support',
-    communityForums: 'Community Forums'
+    communityForums: 'Community Forums',
+    changeEmailAddress: 'Change your email address',
+    currentEmailAddress: 'Current email address:',
+    enterOTP: 'Enter the new email address you would like to associate with your account below. We will send a One Time Password (OTP) to that address.',
+    newEmailAddress: 'New Email Address',
+    newName: 'New Name',
+    continue: 'Continue',
+    changeName: 'Change your name',
+    changePassword: 'Change password',
+    saveChangeName: 'If you want to change the name associated with your AbeBooks customer account, you may do so below. Be sure to click the Save Changes button when you are done.'
 };
 
 export default localizations;

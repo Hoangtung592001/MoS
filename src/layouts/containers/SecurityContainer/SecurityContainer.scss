@@ -1,0 +1,17 @@
+.security-container-inner {
+    &__header {
+        font-size: 3rem;
+        font-weight: 500;
+        color: var(--grey);
+    }
+}
+
+.security-container-inner {
+    width: 350px;
+}
+
+.security-container-inner-done {
+    width: 15%;
+    margin-top: 20px;
+    margin-left: 20px;
+}

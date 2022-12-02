@@ -10,3 +10,8 @@ export { default as BookIntro } from './BookIntro';
 export { default as BookDetails } from './BookDetails';
 export { default as PriceInfo } from './PriceInfo';
 export { default as SecurityInfo } from './SecurityInfo';
+export { default as HeaderIcon } from './HeaderIcon';
+export { default as ChangeEmailForm } from './ChangeEmailForm';
+export { default as ChangeNameForm } from './ChangeNameForm';
+export { default as ChangePasswordForm } from './ChangePasswordForm';
+ 
