@@ -1,0 +1,30 @@
+.description {
+    background-color: var(--white);
+    border-top-right-radius: 20px;
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-right: 40px;
+    max-width: 85%;
+}
+
+.description-title {
+    color: var(--black);
+    font-size: 4rem;
+    margin-bottom: 10px;
+}
+
+.description-content {
+    color: var(--grey);
+    font-size: 1.7rem;
+    margin-bottom: 20px;
+}
+
+.description-link {
+    margin-top: 10px;
+}
+
+.description-link {
+    &__text {
+        font-size: 1.5rem;
+    }
+}

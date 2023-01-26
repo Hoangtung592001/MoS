@@ -10,3 +10,4 @@ export { default as Alert } from './Alert';
 export { default as Rating } from './Rating';
 export { default as TextBox } from './TextBox';
 export { default as TextLinkBox } from './TextLinkBox';
+export { default as Description } from './Description';

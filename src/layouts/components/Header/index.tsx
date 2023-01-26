@@ -36,7 +36,7 @@ function Header() {
                             </ButtonLink>
                         </div>
                         <div className="header-nav-right__button">
-                            <ButtonLink to="" type={ButtonLinkTypes.PRIMARY_BUTTON}>
+                            <ButtonLink to="" type={ButtonLinkTypes.PRIMARY_BUTTON} isBasket={true} numberOfItems={2}>
                                 <span className="header-nav-right__button-inner">
                                     {localizations.basket}
                                     <BiCartAlt className="header-nav-right__icon" />

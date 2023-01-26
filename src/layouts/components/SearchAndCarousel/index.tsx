@@ -2,7 +2,7 @@ import './SearchAndCarousel.scss';
 import localizations from '~/constants/locallizations';
 import { ButtonLink, Input } from '~/components';
 import { ButtonLinkTypes, InputTypes } from '~/constants/enums';
-
+import Slider from '../Carousel';
 export default function SearchAndCarousel() {
     return (
         <div className="search-and-carousel">
@@ -36,7 +36,7 @@ export default function SearchAndCarousel() {
                 </div>
             </div>
             <div className="carousel">
-                <h1>Carousel</h1>
+                <Slider />
             </div>
         </div>
     );

@@ -15,6 +15,17 @@
         border: 1px solid var(--border-button-hover);
     }
 
+    &__number-items {
+        position: absolute;
+        background-color: #c7142c;
+        border-radius: 5px;
+        width: 20px;
+        height: 20px;
+        top: -15px;
+        right: -4px;
+        color: var(--white);
+    }
+
     &--secondary {
         padding: 8px 27px;
         font-weight: var(--font-weight-secondary);

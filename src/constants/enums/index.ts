@@ -11,7 +11,8 @@ export enum ButtonLinkTypes {
 export enum ButtonTypes {
     SIGNIN = 'sign-in',
     REMOVE = 'remove',
-    ADDTOBASKET = 'basket'
+    ADDTOBASKET = 'basket',
+    NEXT_SLIDER = 'next-slide'
 }
 
 export enum InputTypes {

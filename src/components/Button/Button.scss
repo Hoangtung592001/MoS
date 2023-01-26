@@ -35,4 +35,15 @@
         align-items: center;
         justify-content: center;
     }
+
+    &--next-slide {
+        color: var(--white);
+        border-radius: 50%;
+        background-color: #00879a;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px 6px;
+    }
 }

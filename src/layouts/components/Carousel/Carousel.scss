@@ -1,0 +1,27 @@
+.slider {
+    position: relative;
+    &__prev-button {
+        position: absolute;
+        right: 30px;
+    }
+
+    &__next-button {
+        position: absolute;
+        right: 0;
+    }
+}
+
+.slider-container {
+
+}
+
+.slider-items {
+    &__img {
+        border-radius: 20px;
+    }
+}
+
+.slider-description {
+    position: absolute;
+    margin-top: -120px;
+}
