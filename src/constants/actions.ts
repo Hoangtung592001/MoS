@@ -1,0 +1,8 @@
+const GLOBAL_TYPES = {
+    SIGN_IN: "SIGN_IN",
+    SIGN_UP: "SIGN_UP",
+    REMOVE_ERROR: "REMOVE_ERROR",
+    RAISE_ERROR: "RAISE_ERROR"
+};
+
+export default GLOBAL_TYPES;

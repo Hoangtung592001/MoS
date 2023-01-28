@@ -9,7 +9,7 @@ export default function ChangeNameForm() {
         <div className="sign-in">
             <div className="sign-in-container margin-auto display-flex flex-direction--column align-items--center">
                 <div className="sign-in-form display-flex flex-direction--column">
-                    <h4 className="sign-in__header">{localizations.}</h4>
+                    <h4 className="sign-in__header">{localizations.changeName}</h4>
                     <div className='sign-in-form-container'>
                         <div className="sign-in-form-container">
                             <div className='change-email-container-text'>
