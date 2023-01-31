@@ -21,19 +21,19 @@ export default function SignupForm() {
                                 <label htmlFor="" className="search-form-input__label">
                                     {localizations.yourName}
                                 </label>
-                                <Input type={InputTypes.SEARCH} placeholder={localizations.firstAndLastName} />
+                                <Input inputType={InputTypes.SEARCH} placeholder={localizations.firstAndLastName} />
                             </div>
                             <div className="sign-in-form-input">
                                 <label htmlFor="" className="search-form-input__label">
                                     {localizations.email}
                                 </label>
-                                <Input type={InputTypes.SEARCH} />
+                                <Input inputType={InputTypes.SEARCH} />
                             </div>
                             <div className="sign-in-form-input">
                                 <label htmlFor="" className="search-form-input__label">
                                     {localizations.password}
                                 </label>
-                                <Input type={InputTypes.SEARCH} placeholder={localizations.atLeast6Charaters} />
+                                <Input inputType={InputTypes.SEARCH} placeholder={localizations.atLeast6Charaters} />
                                 <Alert>
                                     <span className="sign-up-form-input__alert">{localizations.alertPassword}</span>
                                 </Alert>
@@ -42,7 +42,7 @@ export default function SignupForm() {
                                 <label htmlFor="" className="search-form-input__label">
                                     {localizations.reEnterPassword}
                                 </label>
-                                <Input type={InputTypes.SEARCH} />
+                                <Input inputType={InputTypes.SEARCH} />
                             </div>
                             <div className="sign-in-form-submit">
                                 <Button type={ButtonTypes.SIGNIN}>

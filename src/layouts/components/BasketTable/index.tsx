@@ -35,7 +35,7 @@ export default function BasketTable() {
                     </td>
                     <td className="basket-table-row__item3 basket-table-row-quantity">
                         <div className='basket-table-row-quantity-container display-flex align-items--center'>
-                            <Input type={InputTypes.QUANTITY}/>
+                            <Input inputType={InputTypes.QUANTITY}/>
                             <span>{`(of 1)`}</span>
                         </div>
                     </td>
@@ -101,7 +101,7 @@ export default function BasketTable() {
                     </td>
                     <td className="basket-table-row__item3 basket-table-row-quantity">
                         <div className='basket-table-row-quantity-container display-flex align-items--center'>
-                            <Input type={InputTypes.QUANTITY}/>
+                            <Input inputType={InputTypes.QUANTITY}/>
                             <span>{`(of 1)`}</span>
                         </div>
                     </td>

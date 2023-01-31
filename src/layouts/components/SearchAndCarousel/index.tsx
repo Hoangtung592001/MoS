@@ -14,19 +14,19 @@ export default function SearchAndCarousel() {
                         <label htmlFor="" className="search-form-input__label">
                             {localizations.author}
                         </label>
-                        <Input type={InputTypes.SEARCH_BY_FORM} placeholder={localizations.searchByAuthor} />
+                        <Input inputType={InputTypes.SEARCH_BY_FORM} placeholder={localizations.searchByAuthor} />
                     </div>
                     <div className="search-form-input">
                         <label htmlFor="" className="search-form-input__label">
                             {localizations.title}
                         </label>
-                        <Input type={InputTypes.SEARCH_BY_FORM} placeholder={localizations.searchByTitle} />
+                        <Input inputType={InputTypes.SEARCH_BY_FORM} placeholder={localizations.searchByTitle} />
                     </div>
                     <div className="search-form-input">
                         <label htmlFor="" className="search-form-input__label">
                             {localizations.keywordOrISBN}
                         </label>
-                        <Input type={InputTypes.SEARCH_BY_FORM} placeholder={localizations.searchByKeywordOrISBN} />
+                        <Input inputType={InputTypes.SEARCH_BY_FORM} placeholder={localizations.searchByKeywordOrISBN} />
                     </div>
                     <div className="search-form-submit">
                         <ButtonLink to="" type={ButtonLinkTypes.SECONDARY_BUTTON}>

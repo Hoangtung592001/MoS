@@ -26,7 +26,7 @@ export default function ChangeEmailForm() {
                                 <label htmlFor="" className="search-form-input__label">
                                     {localizations.newEmailAddress}
                                 </label>
-                                <Input type={InputTypes.SEARCH}/>
+                                <Input inputType={InputTypes.SEARCH}/>
                             </div>
                             <div className="sign-in-form-submit">
                                 <ButtonLink to="" type={ButtonLinkTypes.BACK_SECURITY}>

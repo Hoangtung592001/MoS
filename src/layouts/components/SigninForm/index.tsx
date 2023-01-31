@@ -3,8 +3,18 @@ import localizations from '~/constants/locallizations';
 import { ButtonLink, Input, TextLink, Checkbox, Button } from '~/components';
 import { TextLinkTypes } from '~/constants/enums';
 import './SigninForm.scss';
+import { useState } from 'react';
+import { SignInRequest } from '~/redux/actions/userAction';
+import { useAppDispatch, useAppSelector } from '~/hooks';
+import actionCreators from '~/redux';
+import { bindActionCreators } from 'redux';
 
 export default function SigninForm() {
+    const dispatch = useAppDispatch();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const { signIn } = bindActionCreators(actionCreators, dispatch);
+
     return (
         <div className="sign-in">
             <div className="sign-in-container margin-auto display-flex flex-direction--column align-items--center">
@@ -17,7 +27,7 @@ export default function SigninForm() {
                                 <label htmlFor="" className="search-form-input__label">
                                     {localizations.email}
                                 </label>
-                                <Input type={InputTypes.SEARCH} placeholder={localizations.searchByAuthor} />
+                                <Input inputType={InputTypes.SEARCH} placeholder={localizations.enterEmail} value={email} onChange={({ target }: any) => setEmail(target.value)} />
                             </div>
                             <div className="sign-in-form-input">
                                 <div className='sign-in-form-input-container display-flex justify-content--space-between'>
@@ -30,10 +40,20 @@ export default function SigninForm() {
                                         </span>
                                     </TextLink>
                                 </div>
-                                <Input type={InputTypes.SEARCH} placeholder={localizations.searchByAuthor} />
+                                <Input inputType={InputTypes.SEARCH} placeholder={localizations.enterPassword} type="password" value={password} onChange={({ target }: any) => setPassword(target.value)} />
                             </div>
                             <div className="sign-in-form-submit">
-                                <Button type={ButtonTypes.SIGNIN}>
+                                <Button 
+                                    type={ButtonTypes.SIGNIN}
+                                    onClick={() => {
+                                        const user: SignInRequest = {
+                                            username: email,
+                                            password: password
+                                        };
+
+                                        signIn(user);
+                                    }}
+                                >
                                     <span className="sign-in-form__submit-text">{localizations.signin}</span>
                                 </Button>
                             </div>

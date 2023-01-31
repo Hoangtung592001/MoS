@@ -3,7 +3,7 @@ import { BiCartAlt, BiSearchAlt2 } from 'react-icons/bi';
 import localizations from '~/constants/locallizations';
 import { ButtonLinkTypes } from '~/constants/enums';
 import './Header.scss';
-
+import routes from '~/config/routes';
 function Header() {
     return (
         <div className="header">
@@ -26,7 +26,7 @@ function Header() {
                     </div>
                     <div className="header-nav-right">
                         <div className="header-nav-right__button">
-                            <ButtonLink to="" type={ButtonLinkTypes.PRIMARY_BUTTON}>
+                            <ButtonLink to={routes.signin} type={ButtonLinkTypes.PRIMARY_BUTTON}>
                                 {localizations.signin}
                             </ButtonLink>
                         </div>

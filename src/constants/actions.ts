@@ -1,8 +1,8 @@
-const GLOBAL_TYPES = {
-    SIGN_IN: "SIGN_IN",
-    SIGN_UP: "SIGN_UP",
-    REMOVE_ERROR: "REMOVE_ERROR",
-    RAISE_ERROR: "RAISE_ERROR"
+enum GLOBAL_TYPES {
+    SIGN_IN = "signin",
+    SIGN_UP = "signup",
+    REMOVE_ERROR = "remove error",
+    RAISE_ERROR = "raise error"
 };
 
 export default GLOBAL_TYPES;

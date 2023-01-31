@@ -105,7 +105,9 @@ const localizations = {
     continue: 'Continue',
     changeName: 'Change your name',
     changePassword: 'Change password',
-    saveChangeName: 'If you want to change the name associated with your AbeBooks customer account, you may do so below. Be sure to click the Save Changes button when you are done.'
+    saveChangeName: 'If you want to change the name associated with your AbeBooks customer account, you may do so below. Be sure to click the Save Changes button when you are done.',
+    enterEmail: 'Enter Email',
+    enterPassword: 'Enter Password'
 };
 
 export default localizations;
