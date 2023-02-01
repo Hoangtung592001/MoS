@@ -1,8 +1,7 @@
-import { removeError } from './action-creators/errorActionCreator';
 import { signIn, signUp } from './action-creators/userActionCreator';
-
+import { removeErrorAction } from './action-creators/errorActionCreator';
 const actionCreators = {
-    removeError: removeError,
+    removeErrorAction: removeErrorAction,
     signIn: signIn,
     signUp: signUp
 };

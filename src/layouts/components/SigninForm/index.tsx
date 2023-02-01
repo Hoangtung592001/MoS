@@ -14,6 +14,10 @@ export default function SigninForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const { signIn } = bindActionCreators(actionCreators, dispatch);
+    const { accessToken } = useAppSelector(state => state.user.token);
+    const { errors } = useAppSelector(state => state.user);
+    console.log(accessToken);
+    console.log(errors);
 
     return (
         <div className="sign-in">

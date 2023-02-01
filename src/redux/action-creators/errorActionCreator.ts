@@ -1,10 +1,10 @@
 import GLOBAL_TYPES from "~/constants/actions";
 import { Action } from '../actions/errorAction';
 import { Dispatch } from "redux"
+import { removeError } from "../reducers/errorReducer";
 
-export const removeError = (exceptionId: string) => async (dispatch: Dispatch<Action>) => {
-    dispatch({
-      type: GLOBAL_TYPES.REMOVE_ERROR,
-      payload: exceptionId
-    });
-  };
+export const removeErrorAction = (exceptionId: string) => async (dispatch: any) => {
+  dispatch(removeError(exceptionId));
+};
+
+// export const 

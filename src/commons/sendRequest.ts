@@ -7,13 +7,10 @@ export const FETCH_TYPES = {
     DELETE: "DELETE"
 }
 
-export async function fetchAsync(url: string, method: string, token = "", data = {}) {
-    const response = await axios({
+export async function fetchAsync<T>(url: string, method: string, data = {}) {
+    const response = await axios<T>({
         url: url,
         method: method,
-        headers: {
-            Authorization: `Bearer ${token ? token : ""}`,
-        },
         data: data
     })
 
