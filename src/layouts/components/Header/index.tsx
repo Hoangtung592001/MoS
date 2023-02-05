@@ -7,6 +7,7 @@ import routes from '~/config/routes';
 import { useAppDispatch, useAppSelector } from '~/hooks';
 import { bindActionCreators } from 'redux';
 import actionCreators from '~/redux';
+import config from '~/config';
 function Header() {
     const { accessToken } = useAppSelector(state => state.user.token);
     const dispatch = useAppDispatch();
@@ -17,7 +18,11 @@ function Header() {
             <div className="header-container">
                 <div className="header-nav">
                     <div className="header-nav-left">
-                        <TextLink>{localizations.shopName}</TextLink>
+                        <img 
+                            src="https://m.media-amazon.com/images/G/01/abebooks/site/abebooks-logo._CB451365245_.png" 
+                            alt="MoSBooks" 
+                            className='sign-in__logo'
+                        />
                     </div>
                     <div className="header-nav-middle">
                         <div className="header-nav-middle__input">
@@ -47,12 +52,12 @@ function Header() {
                             }
                         </div>
                         <div className="header-nav-right__button">
-                            <ButtonLink to="" type={ButtonLinkTypes.PRIMARY_BUTTON}>
+                            <ButtonLink to={routes.myAccount} type={ButtonLinkTypes.PRIMARY_BUTTON}>
                                 {localizations.myAccount}
                             </ButtonLink>
                         </div>
                         <div className="header-nav-right__button">
-                            <ButtonLink to="" type={ButtonLinkTypes.PRIMARY_BUTTON} isBasket={true} numberOfItems={2}>
+                            <ButtonLink to={routes.basket} type={ButtonLinkTypes.PRIMARY_BUTTON} isBasket={true} numberOfItems={2}>
                                 <span className="header-nav-right__button-inner">
                                     {localizations.basket}
                                     <BiCartAlt className="header-nav-right__icon" />
