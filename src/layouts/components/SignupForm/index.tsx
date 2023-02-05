@@ -3,16 +3,19 @@ import localizations from '~/constants/locallizations';
 import { Input, TextLink, Button, Alert } from '~/components';
 import { TextLinkTypes } from '~/constants/enums';
 import './SignupForm.scss';
-
+import { Link } from 'react-router-dom';
+import routes from '~/config/routes';
 export default function SignupForm() {
     return (
         <div className="sign-in">
             <div className="sign-in-container margin-auto display-flex flex-direction--column align-items--center">
-                <img
-                    src="https://m.media-amazon.com/images/G/01/abebooks/site/abebooks-logo._CB451365245_.png"
-                    alt="MoSBooks"
-                    className="sign-in__logo"
-                />
+                <Link to={routes.home}>
+                    <img
+                        src="https://m.media-amazon.com/images/G/01/abebooks/site/abebooks-logo._CB451365245_.png"
+                        alt="MoSBooks"
+                        className="sign-in__logo"
+                    />
+                </Link>
                 <div className="sign-in-form display-flex flex-direction--column">
                     <h4 className="sign-in__header">{localizations.createAccount}</h4>
                     <div className="sign-in-form-container">
@@ -63,8 +66,8 @@ export default function SignupForm() {
                             </div>
                             <div className="sign-in-form-input">
                                 <span>{localizations.alreadyHaveeAnAccount}</span>
-                                <TextLink type={TextLinkTypes.BLUE}>
-                                    <span>Sign On</span>
+                                <TextLink type={TextLinkTypes.BLUE} to={routes.signin}>
+                                    <span>{localizations.signin}</span>
                                 </TextLink>
                             </div>
                         </div>

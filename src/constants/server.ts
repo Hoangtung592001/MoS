@@ -5,5 +5,11 @@ export const SERVICE_URL = {
     },
     EXCEPTION: {
         GET: "https://localhost:5001/Exception/{ExceptionId}"
+    },
+    BOOKS: {
+        FREQUENTLY_VIEW_ITEMS: "https://localhost:5001/Book/FrequentlyViewedItems",
+        RECOMMENDED_ITEMS: "https://localhost:5001/Book/RecommendedItems",
+        RECENTLY_VIEWED_ITEMS: "https://localhost:5001/Book/RecentlyViewedItem",
+        GET_BOOK_DETAILS: "https://localhost:5001/Book/GetBookDetails/{BookId}",
     }
 }

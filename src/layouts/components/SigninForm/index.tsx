@@ -8,9 +8,10 @@ import { SignInRequest } from '~/redux/actions/userAction';
 import { useAppDispatch, useAppSelector } from '~/hooks';
 import actionCreators from '~/redux';
 import { bindActionCreators } from 'redux';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import config from '~/config';
 import ErrorBox from '../ErrorBox';
+import routes from '~/config/routes';
 export default function SigninForm() {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
@@ -30,7 +31,9 @@ export default function SigninForm() {
     return (
         <div className="sign-in">
             <div className="sign-in-container margin-auto display-flex flex-direction--column align-items--center">
-                <img src="https://m.media-amazon.com/images/G/01/abebooks/site/abebooks-logo._CB451365245_.png" alt="MoSBooks" className='sign-in__logo'/>
+                <Link to={routes.home}>
+                    <img src="https://m.media-amazon.com/images/G/01/abebooks/site/abebooks-logo._CB451365245_.png" alt="MoSBooks" className='sign-in__logo'/>
+                </Link>
                 {
                     errors ?
                     <div className='sign-in-error'>
@@ -91,7 +94,7 @@ export default function SigninForm() {
                                 </span>
                             </div>
                             <div className="sign-in-form-submit">
-                                <ButtonLink to="" type={ButtonLinkTypes.CREATE_ACCOUNT}>
+                                <ButtonLink to={routes.signup} type={ButtonLinkTypes.CREATE_ACCOUNT}>
                                     <span className="sign-in-form__submit-text">{localizations.createYourMosBooksAccount}</span>
                                 </ButtonLink>
                             </div>

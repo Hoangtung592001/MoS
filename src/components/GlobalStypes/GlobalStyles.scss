@@ -98,6 +98,10 @@ ul {
     &--left {
         justify-content: left;
     }
+
+    &--space-around {
+        justify-content: space-around;
+    }
 }
 
 .display-block {

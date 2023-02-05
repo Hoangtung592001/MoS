@@ -2,7 +2,20 @@ import localizations from '~/constants/locallizations';
 import './BasketTable.scss';
 import { TextLink, Input, Button } from '~/components';
 import { TextLinkTypes, ButtonTypes, InputTypes } from '~/constants/enums';
+import { useNavigate } from 'react-router-dom';
+import { useAppSelector } from '~/hooks';
+import { useEffect } from 'react';
+import routes from '~/config/routes';
 export default function BasketTable() {
+    const naviate = useNavigate();
+    const { accessToken } = useAppSelector(state => state.user.token);
+    
+    useEffect(() => {
+        if (!accessToken) {
+            naviate(routes.signin);
+        }
+    }, []);
+
     return (
         <table className="basket-table">
             <tr className="basket-table-row basket-table-row-header">

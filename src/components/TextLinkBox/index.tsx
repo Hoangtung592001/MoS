@@ -10,7 +10,7 @@ interface TextLinkBoxProps {
 
 export default function TextLinkBox({ to, text, type }: TextLinkBoxProps) {
     return (
-        <Link to={to} className={`${type ? 'text-link-box--type text-link-box' : 'text-link-box'} display-block`}>
+        <Link to={to} className={`${type ? `text-link-box--${type} text-link-box` : 'text-link-box'} display-block`}>
             <span className='text-link-box__text'>
                 {text}
             </span>

@@ -87,6 +87,7 @@ const localizations = {
     myWants: 'My Wants',
     viewMyShoppingBasket: 'View My Shopping Basket',
     viewMyEmails: 'View My Emails',
+    viewMyPurchases: 'View My Purchases',
     myNameEmailAndPassword: 'My name, email and password',
     myAccountInfo: 'My Account Information',
     myAddressBook: 'My Address Book',
@@ -109,7 +110,9 @@ const localizations = {
     saveChangeName: 'If you want to change the name associated with your AbeBooks customer account, you may do so below. Be sure to click the Save Changes button when you are done.',
     enterEmail: 'Enter Email',
     enterPassword: 'Enter Password',
-    warningHeader: 'There was a problem'
+    warningHeader: 'There was a problem',
+    frequentlyViewedItems: 'Frequently Viewed Items',
+    trendingItems: 'Trending Items'
 };
 
 export default localizations;

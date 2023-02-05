@@ -1,12 +1,15 @@
 .card-item {
     display: flex;
     flex-direction: column;
-    box-shadow: 5px 10px #f1f1f1;
+    box-shadow: 0 20px 30px 0 rgba(0,0,0,0.1);
+    border-radius: 15px;
 }
 
 .card-item__image {
+    border-radius: 15px;
     display: flex;
     img {
+        border-radius: 15px;
         object-fit: contain;
     }
 }
@@ -26,9 +29,10 @@
     display: flex;
     flex-direction: column;
     font-size: 1.8rem;
+    padding: 30px 20px;
     &__title {
         display: block;
-        font-size: 2rem;
+        font-size: 1.8rem;
         font-weight: 500;
         margin-bottom: 20px;
     }
@@ -43,6 +47,7 @@
         display: flex;
         align-items: center;
         text-decoration: none;
+        font-size: 1.6rem;
         color: var(--primary-button-bg-color);
         &__arrow {
             display: block;

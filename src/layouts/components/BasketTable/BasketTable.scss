@@ -7,6 +7,7 @@
 .basket-table-row {
     display: flex;
     justify-content: space-between;
+    font-size: 1.5rem;
     &__item1 {
         width: 60%;
         text-align: left;
@@ -29,10 +30,12 @@
 
 .basket-table-row-price {
     &__each {
+        font-size: 1.6rem;
         color: var(--abe-red);
     }
 
     &__total {
+        font-size: 1.6rem;
         color: var(--black);
         &--sub-total {
             font-weight: 600;
@@ -48,6 +51,7 @@
 
 .basket-table-row-info {
     margin-left: 20px;
+    font-size: 1.4rem;
 
     &__title {
         font-size: 1.8rem;
@@ -80,10 +84,12 @@
 
 .basket-table-row-quantity-container {
     height: 25%;
+    font-size: 1.6rem;
 }
 
 .basket-table-row-shipping {
     &__text {
+        font-size: 1.6rem;
         margin-right: 15px;
 
         &--sub-total {

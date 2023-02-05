@@ -7,7 +7,7 @@ import routes from '~/config/routes';
 import { useAppDispatch, useAppSelector } from '~/hooks';
 import { bindActionCreators } from 'redux';
 import actionCreators from '~/redux';
-import config from '~/config';
+import { Link } from 'react-router-dom';
 function Header() {
     const { accessToken } = useAppSelector(state => state.user.token);
     const dispatch = useAppDispatch();
@@ -18,11 +18,13 @@ function Header() {
             <div className="header-container">
                 <div className="header-nav">
                     <div className="header-nav-left">
-                        <img 
-                            src="https://m.media-amazon.com/images/G/01/abebooks/site/abebooks-logo._CB451365245_.png" 
-                            alt="MoSBooks" 
-                            className='sign-in__logo'
-                        />
+                        <Link to={routes.home}>
+                            <img 
+                                src="https://m.media-amazon.com/images/G/01/abebooks/site/abebooks-logo._CB451365245_.png" 
+                                alt="MoSBooks" 
+                                className='sign-in__logo'
+                            />
+                        </Link>
                     </div>
                     <div className="header-nav-middle">
                         <div className="header-nav-middle__input">

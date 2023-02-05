@@ -15,7 +15,7 @@ export default function BookIntroAndDetailsContainer() {
                 </div>
             </div>
             <div className='book-intro-and-details-recomended-items'>
-                <ProductCardList title='Frequently Viewed Items'/>
+                <ProductCardList title='Frequently Viewed Items' items={[]}/>
             </div>
         </Fragment>
     );

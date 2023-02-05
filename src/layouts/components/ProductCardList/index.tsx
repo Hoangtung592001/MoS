@@ -1,46 +1,33 @@
 import React from 'react';
 import { ProductCard } from '~/components';
+import { ProductItem } from '~/constants/interfaces';
 import './ProductCardList.scss';
 
 interface FrequentlyViewedItemsProps {
     title: string;
+    items: Array<ProductItem>
 }
 
-export default function FrequentlyViewedItems({ title }: FrequentlyViewedItemsProps) {
+export default function FrequentlyViewedItems({ title, items }: FrequentlyViewedItemsProps) {
     return (
         <div className='product-card-container'>
             <h1 className='product-card__title'>{title}</h1>
-            <ul className='product-card-list'>
-                <li>
-                    <ProductCard url='https://pictures.abebooks.com/inventory/md/md30844371354.jpg' title='The Lord of the Rings Banner poster, Art by Barbara Remington
-The Lord of the Rings Banner poster, Art by Barbara Remington
-The Lord of the Rings Banner poster, Art by Barbara Remington
-' author='J.R.R. Tolkien' to='https://www.google.com' />
-                </li>
-                <li>
-                    <ProductCard url='https://pictures.abebooks.com/inventory/md/md31312053904.jpg' title='The Lord of the Rings Banner poster, Art by Barbara Remington
-The Lord of the Rings Banner poster, Art by Barbara Remington
-The Lord of the Rings Banner poster, Art by Barbara Remington
-' author='J.R.R. Tolkien' to='https://www.google.com' />
-                </li>
-                <li>
-                    <ProductCard url='https://pictures.abebooks.com/inventory/md/md30844371354.jpg' title='The Lord of the Rings Banner poster, Art by Barbara Remington
-The Lord of the Rings Banner poster, Art by Barbara Remington
-The Lord of the Rings Banner poster, Art by Barbara Remington
-' author='J.R.R. Tolkien' to='https://www.google.com' />
-                </li>
-                <li>
-                    <ProductCard url='https://pictures.abebooks.com/inventory/md/md30844371354.jpg' title='The Lord of the Rings Banner poster, Art by Barbara Remington
-The Lord of the Rings Banner poster, Art by Barbara Remington
-The Lord of the Rings Banner poster, Art by Barbara Remington
-' author='J.R.R. Tolkien' to='https://www.google.com' />
-                </li>
-                <li>
-                    <ProductCard url='https://pictures.abebooks.com/inventory/md/md30844371354.jpg' title='The Lord of the Rings Banner poster, Art by Barbara Remington
-The Lord of the Rings Banner poster, Art by Barbara Remington
-The Lord of the Rings Banner poster, Art by Barbara Remington
-' author='J.R.R. Tolkien' to='https://www.google.com' />
-                </li>
+            <ul className='product-card-list justify-content--space-around'>
+                {
+                    items.map(item=> {
+                        return (
+                            <li key={item.id} className='product-card-list__item'>
+                                <ProductCard
+                                    url={item.bookImage.url} 
+                                    title={item.title} 
+                                    author={item.author.name} 
+                                    to='https://www.google.com' 
+                                />
+                            </li>
+                        )
+                    })
+                }
+                
             </ul>
         </div>
     ) 
