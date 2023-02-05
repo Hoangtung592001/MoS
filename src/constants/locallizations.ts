@@ -1,6 +1,7 @@
 const localizations = {
     shopName: 'MoSBook',
     signin: 'Sign In',
+    signOut: 'Sign out',
     myAccount: 'My Account',
     basket: 'Basket',
     help: 'Help',
@@ -107,7 +108,8 @@ const localizations = {
     changePassword: 'Change password',
     saveChangeName: 'If you want to change the name associated with your AbeBooks customer account, you may do so below. Be sure to click the Save Changes button when you are done.',
     enterEmail: 'Enter Email',
-    enterPassword: 'Enter Password'
+    enterPassword: 'Enter Password',
+    warningHeader: 'There was a problem'
 };
 
 export default localizations;

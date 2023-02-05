@@ -9,9 +9,9 @@ interface ButtonProps {
     numberOfItems?: number;
 }
 
-function Button({ to, type = '', isBasket, numberOfItems, children }: ButtonProps) {
+function Button({ to, type = '', isBasket, numberOfItems, children, ...props }: any) {
     return (
-        <Link to={to} className={type ? `button-link--${type} button-link` : 'button-link'}>
+        <Link to={to} className={type ? `button-link--${type} button-link` : 'button-link'} {...props}>
             {children}
             {isBasket ? <span className="button-link__number-items">{numberOfItems}</span> : null}
         </Link>

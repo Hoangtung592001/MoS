@@ -3,26 +3,42 @@ import localizations from '~/constants/locallizations';
 import { ButtonLink, Input, TextLink, Checkbox, Button } from '~/components';
 import { TextLinkTypes } from '~/constants/enums';
 import './SigninForm.scss';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { SignInRequest } from '~/redux/actions/userAction';
 import { useAppDispatch, useAppSelector } from '~/hooks';
 import actionCreators from '~/redux';
 import { bindActionCreators } from 'redux';
-
+import { useNavigate } from "react-router-dom";
+import config from '~/config';
+import ErrorBox from '../ErrorBox';
 export default function SigninForm() {
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { signIn } = bindActionCreators(actionCreators, dispatch);
     const { accessToken } = useAppSelector(state => state.user.token);
+    const { isLoading } = useAppSelector(state => state.user);
     const { errors } = useAppSelector(state => state.user);
-    console.log(accessToken);
-    console.log(errors);
+    const { signIn } = bindActionCreators(actionCreators, dispatch);
+    
+    useEffect(() => {
+        if (!isLoading && accessToken) {
+            navigate(config.routes.home);
+        }
+    }, [isLoading]);
 
     return (
         <div className="sign-in">
             <div className="sign-in-container margin-auto display-flex flex-direction--column align-items--center">
                 <img src="https://m.media-amazon.com/images/G/01/abebooks/site/abebooks-logo._CB451365245_.png" alt="MoSBooks" className='sign-in__logo'/>
+                {
+                    errors ?
+                    <div className='sign-in-error'>
+                        <ErrorBox message={errors.description}/>
+                    </div>
+                    :
+                    null
+                }
                 <div className="sign-in-form display-flex flex-direction--column">
                     <h4 className="sign-in__header">{localizations.signin}</h4>
                     <div className='sign-in-form-container'>

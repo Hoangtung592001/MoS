@@ -4,7 +4,14 @@ import localizations from '~/constants/locallizations';
 import { ButtonLinkTypes } from '~/constants/enums';
 import './Header.scss';
 import routes from '~/config/routes';
+import { useAppDispatch, useAppSelector } from '~/hooks';
+import { bindActionCreators } from 'redux';
+import actionCreators from '~/redux';
 function Header() {
+    const { accessToken } = useAppSelector(state => state.user.token);
+    const dispatch = useAppDispatch();
+    const { signOut } = bindActionCreators(actionCreators, dispatch);
+
     return (
         <div className="header">
             <div className="header-container">
@@ -26,9 +33,18 @@ function Header() {
                     </div>
                     <div className="header-nav-right">
                         <div className="header-nav-right__button">
-                            <ButtonLink to={routes.signin} type={ButtonLinkTypes.PRIMARY_BUTTON}>
-                                {localizations.signin}
-                            </ButtonLink>
+                            {
+                                !accessToken ?
+                                <ButtonLink to={routes.signin} type={ButtonLinkTypes.PRIMARY_BUTTON}>
+                                    {localizations.signin}
+                                </ButtonLink>
+                                :
+                                <ButtonLink to={routes.home} type={ButtonLinkTypes.PRIMARY_BUTTON} onClick={() => {
+                                    signOut();
+                                }}>
+                                    {localizations.signOut}
+                                </ButtonLink>
+                            }
                         </div>
                         <div className="header-nav-right__button">
                             <ButtonLink to="" type={ButtonLinkTypes.PRIMARY_BUTTON}>

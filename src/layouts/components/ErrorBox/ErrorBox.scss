@@ -1,0 +1,24 @@
+.error-box {
+    border: 1px solid var(--error-red);
+    border-radius: 4px;
+    padding: 14px 18px;
+    color: var(--error-red);
+}
+
+.error-box-icon {
+    font-size: 3rem;
+    margin-right: 20px;
+    color: var(--error-red);
+    font-weight: 400;
+}
+
+.error-box-content {
+    &__header {
+        font-weight: 400;
+    }
+
+    &__message {
+        font-size: 1.3rem;
+        color: var(--black);
+    }
+}

@@ -19,6 +19,7 @@
 }
 
 .sign-in-form {
+    width: 100%;
     border: 1px solid var(--black);
     padding: 20px 26px;
 }
@@ -59,4 +60,9 @@
 
 .sign-in-form-submit {
     margin-bottom: 20px;
+}
+
+.sign-in-error {
+    width: 100%;
+    margin-bottom: 15px;
 }
