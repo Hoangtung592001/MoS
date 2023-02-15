@@ -3,11 +3,19 @@ import { TextLink, Button } from '~/components';
 import { SlBasket } from 'react-icons/sl';
 import { ButtonTypes, TextLinkTypes } from '~/constants/enums';
 import './PriceInfo.scss';
-export default function PriceInfo() {
+
+interface PriceInfoProps {
+    price: number;
+    bookId: string;
+    onAddToBasket: any
+}
+export default function PriceInfo(props: PriceInfoProps) {
+
+    
     return (
         <div className="price-info">
             <h4 className="price-info__header">{localizations.buyNew}</h4>
-            <h4 className="price-info__price">US$ 60.53</h4>
+            <h4 className="price-info__price">US$ {props.price}</h4>
             <span className="price-info-shipping">
                 {localizations.shipping}: <span className="price-info-shipping__price">US$ 5.55</span>
             </span>
@@ -18,10 +26,10 @@ export default function PriceInfo() {
                 </TextLink>
             </div>
             <div className="price-info-button">
-                <Button type={ButtonTypes.ADDTOBASKET}>
+                <Button type={ButtonTypes.ADDTOBASKET} onClick={props.onAddToBasket}>
                     <span className="price-info__add-to-basket">
                         <SlBasket className="price-info-button__icon" />
-                        Add to basket
+                        {localizations.addToBasket}
                     </span>
                 </Button>
             </div>

@@ -112,7 +112,12 @@ const localizations = {
     enterPassword: 'Enter Password',
     warningHeader: 'There was a problem',
     frequentlyViewedItems: 'Frequently Viewed Items',
-    trendingItems: 'Trending Items'
+    trendingItems: 'Trending Items',
+    emptyBasket: 'Your shopping basket is empty',
+    errorTitleModal: 'Error occured!',
+    errorContent: 'There are some unknown errors!',
+    successTitleModal: 'Success!',
+    bookSuccessfullyContent: 'This book is added to you basket!'
 };
 
 export default localizations;

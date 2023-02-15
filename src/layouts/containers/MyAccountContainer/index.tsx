@@ -5,14 +5,17 @@ import './MyAccountContainer.scss';
 import { useNavigate } from "react-router-dom";
 import routes from "~/config/routes";
 import { useEffect } from 'react';
+import Cookies from 'universal-cookie';
+import { accessTokenKey } from "~/constants";
 
 export default function MyAccountContainer() {
-    const naviate = useNavigate();
-    const { accessToken } = useAppSelector(state => state.user.token);
+    const navigate = useNavigate();
+    const cookies = new Cookies();
+    const accessToken = cookies.get(accessTokenKey);
     
     useEffect(() => {
         if (!accessToken) {
-            naviate(routes.signin);
+            navigate(routes.signin);
         }
     }, []);
 

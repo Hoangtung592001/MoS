@@ -8,11 +8,21 @@ import { useAppDispatch, useAppSelector } from '~/hooks';
 import { bindActionCreators } from 'redux';
 import actionCreators from '~/redux';
 import { Link } from 'react-router-dom';
+import Cookies from 'universal-cookie';
+import { accessTokenKey } from '~/constants';
+import { useEffect } from 'react';
 function Header() {
-    const { accessToken } = useAppSelector(state => state.user.token);
+    const cookies = new Cookies();
+    const accessToken = cookies.get(accessTokenKey);
     const dispatch = useAppDispatch();
-    const { signOut } = bindActionCreators(actionCreators, dispatch);
+    const { signOut, getBasketTotalItems } = bindActionCreators(actionCreators, dispatch);
+    const { basketTotal } = useAppSelector(state => state.basketReducer);
 
+    useEffect(() => {
+        if (accessToken) {
+            getBasketTotalItems(accessToken);
+        }
+    }, [])
     return (
         <div className="header">
             <div className="header-container">
@@ -48,6 +58,7 @@ function Header() {
                                 :
                                 <ButtonLink to={routes.home} type={ButtonLinkTypes.PRIMARY_BUTTON} onClick={() => {
                                     signOut();
+                                    window.location.reload();
                                 }}>
                                     {localizations.signOut}
                                 </ButtonLink>
@@ -59,7 +70,7 @@ function Header() {
                             </ButtonLink>
                         </div>
                         <div className="header-nav-right__button">
-                            <ButtonLink to={routes.basket} type={ButtonLinkTypes.PRIMARY_BUTTON} isBasket={true} numberOfItems={2}>
+                            <ButtonLink to={routes.basket} type={ButtonLinkTypes.PRIMARY_BUTTON} isBasket={true} numberOfItems={basketTotal}>
                                 <span className="header-nav-right__button-inner">
                                     {localizations.basket}
                                     <BiCartAlt className="header-nav-right__icon" />

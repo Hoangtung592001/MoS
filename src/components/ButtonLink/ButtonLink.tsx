@@ -13,7 +13,7 @@ function Button({ to, type = '', isBasket, numberOfItems, children, ...props }: 
     return (
         <Link to={to} className={type ? `button-link--${type} button-link` : 'button-link'} {...props}>
             {children}
-            {isBasket ? <span className="button-link__number-items">{numberOfItems}</span> : null}
+            {isBasket && numberOfItems > 0 ? <span className="button-link__number-items">{numberOfItems}</span> : null}
         </Link>
     );
 }

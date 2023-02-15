@@ -16,3 +16,16 @@ export async function fetchAsync<T>(url: string, method: string, data = {}) {
 
     return response;
 }
+
+export async function fetchAsyncWithAuthentitaion<T>(url: string, method: string, accessToken: string, data = {}) {
+    const response = await axios<T>({
+        url: url,
+        method: method,
+        data: data,
+        headers: {
+            Authorization: `Bearer ${accessToken}`
+        }
+    })
+
+    return response;
+}

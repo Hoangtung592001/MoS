@@ -5,3 +5,9 @@ export const GetExceptionUrl = (exceptionId: string) => {
     
     return url.replace("{ExceptionId}", exceptionId);
 }
+
+export const GetBookDetailsUrl = (bookId: string) => {
+    const url = SERVICE_URL.BOOKS.GET_BOOK_DETAILS;
+
+    return url.replace("{BookId}", bookId);
+}

@@ -1,13 +1,18 @@
-import { Exception } from "./interfaces";
+import Cookies from 'universal-cookie';
+import { accessTokenKey, months } from '~/constants';
 
-export function pushError(errors: Array<Exception>, error: Exception) {
-    const isErrorExisted = errors.find(exception => exception.id === error.id);
+export const getAccessTokenFromCookies = () => {
+    const cookies = new Cookies();
+    const accessToken = cookies.get(accessTokenKey);
 
-    if (isErrorExisted) {
-        return errors;
+    return accessToken;
+}
+
+export const getDateTime = (date: Date) => {
+    if (date) {
+        date = new Date(date);
+        return `${months[date.getMonth()]} ${date.getDay()}, ${date.getFullYear()}`
     }
 
-    errors.push(error);
-
-    return errors;
+    return null;
 }

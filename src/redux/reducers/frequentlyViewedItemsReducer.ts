@@ -1,4 +1,3 @@
-import { ActionType, Exception } from "~/commons/interfaces";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ProductItem } from "~/constants/interfaces";
 
@@ -11,7 +10,7 @@ const initialState : InitialStateInterface = {
 }
 
 export const frequentlyViewedItemsSlice = createSlice({
-  name: 'error',
+  name: 'frequentlyViewedItems',
   initialState: initialState,
   reducers: {
     get: (state, action: PayloadAction<Array<ProductItem>>) => {
