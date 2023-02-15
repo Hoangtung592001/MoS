@@ -2,6 +2,7 @@ import config from '~/config';
 import { FooterOnly, HeaderIcon } from '~/layouts';
 
 import { HomeContainer, SigninContainer, SignupContainer, BasketContainer, BookIntroAndDetailsContainer, MyAccountContainer, SecurityContainer, ChangeEmailContainer, ChangeNameContainer, ChangePasswordContainer } from '~/layouts/containers';
+import ShippingAddressContainer from '~/layouts/containers/ShippingAddressContainer';
 
 interface Route {
     path: string;
@@ -20,6 +21,7 @@ const publicRoutes: Route[] = [
     { path: config.routes.changeEmail, component: ChangeEmailContainer, layout: HeaderIcon },
     { path: config.routes.changeName, component: ChangeNameContainer, layout: HeaderIcon },
     { path: config.routes.changePassword, component: ChangePasswordContainer, layout: HeaderIcon },
+    { path: config.routes.shippingAddress, component: ShippingAddressContainer, layout: HeaderIcon },
 ];
 
 export { publicRoutes };

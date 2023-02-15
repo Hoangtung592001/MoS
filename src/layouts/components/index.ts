@@ -15,4 +15,5 @@ export { default as ChangeEmailForm } from './ChangeEmailForm';
 export { default as ChangeNameForm } from './ChangeNameForm';
 export { default as ChangePasswordForm } from './ChangePasswordForm';
 export { default as ErrorBox } from './ErrorBox';
+export { default as ShippingAddressForm } from './ShippingAddressForm';
  

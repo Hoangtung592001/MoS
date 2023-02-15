@@ -117,7 +117,9 @@ const localizations = {
     errorTitleModal: 'Error occured!',
     errorContent: 'There are some unknown errors!',
     successTitleModal: 'Success!',
-    bookSuccessfullyContent: 'This book is added to you basket!'
+    bookSuccessfullyContent: 'This book is added to you basket!',
+    shippingAddress: 'Shipping Address',
+    addAndEditAddress: 'Add/Edit Address'
 };
 
 export default localizations;
