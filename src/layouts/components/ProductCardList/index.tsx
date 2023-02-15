@@ -1,5 +1,6 @@
 import React from 'react';
 import { ProductCard } from '~/components';
+import { getBookDetailsRoute } from '~/config/routes';
 import { ProductItem } from '~/constants/interfaces';
 import './ProductCardList.scss';
 
@@ -14,6 +15,8 @@ export default function FrequentlyViewedItems({ title, items }: FrequentlyViewed
             <h1 className='product-card__title'>{title}</h1>
             <ul className='product-card-list justify-content--space-around'>
                 {
+                    items !== null
+                    ?
                     items.map(item=> {
                         return (
                             <li key={item.id} className='product-card-list__item'>
@@ -21,11 +24,13 @@ export default function FrequentlyViewedItems({ title, items }: FrequentlyViewed
                                     url={item.bookImage.url} 
                                     title={item.title} 
                                     author={item.author.name} 
-                                    to='https://www.google.com' 
+                                    to={getBookDetailsRoute(item.id)}
                                 />
                             </li>
                         )
                     })
+                    : 
+                    null
                 }
                 
             </ul>

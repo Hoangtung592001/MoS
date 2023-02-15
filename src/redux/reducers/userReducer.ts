@@ -1,13 +1,12 @@
 import GLOBAL_TYPES from "../../constants/actions";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { Exception } from "~/commons/interfaces";
-import { pushError } from "~/commons/commonUsedFunctions";
 import { BaseResponse, ExceptionResponse } from "~/commons/response";
 import { SignInData, SignInRequest } from "../actions/userAction";
 import { SERVICE_URL } from "~/constants/server";
 import { fetchAsync, FETCH_TYPES } from "~/commons/sendRequest";
 import { GetExceptionUrl } from "~/commons/URLs";
 import { signIn } from "../action-creators/userActionCreator";
+import { Exception } from "~/constants/interfaces";
 
 interface initialStateInterface {
     isLoading: boolean,

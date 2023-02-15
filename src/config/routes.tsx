@@ -3,12 +3,18 @@ const routes = {
     signin: '/signin',
     signup: '/signup',
     basket: '/basket',
-    bookDetails: '/BookDetails',
+    bookDetails: '/BookDetails/:bookId',
     myAccount: '/MyAccount',
     security: '/Security',
     changeEmail: '/Security/ChangeEmail',
     changeName: '/Security/ChangeName',
     changePassword: '/Security/ChangePassword'
 };
+
+export const getBookDetailsRoute = (bookId: string) => {
+    const route = routes.bookDetails;
+
+    return route.replace(":bookId", bookId);
+}
 
 export default routes;

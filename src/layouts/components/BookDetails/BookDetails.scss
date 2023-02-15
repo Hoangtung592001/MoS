@@ -20,7 +20,7 @@
 }
 
 .book-details-characteristics {
-    padding: 20px 0px 10px 0px;
+    padding: 20px 0px 20px 0px;
     border-bottom: 1px solid var(--grey);
     &__header {
         font-size: 1.8rem;
@@ -34,11 +34,13 @@
     flex: 7;
     &__header {
         font-size: 1.6rem;
+        margin-bottom: 10px;
     }
 }
 
 .book-details-characteristic-content {
-    
+    font-size: 1.4rem;
+    margin-bottom: 20px;
 }
 
 .book-details-characteristic-container {

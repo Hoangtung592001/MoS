@@ -1,12 +1,24 @@
 import './BookDetails.scss';
 import localizations from '~/constants/locallizations';
+import { Fragment } from 'react';
 
-export default function BookDetails() {
+interface BookDetailsProps {
+    description: string;
+    title: string;
+    publisher: string;
+    publishedAt: Date;
+    bookCondition: string;
+    bookDetails: any;
+}
+
+export default function BookDetails(props: BookDetailsProps) {
+    const subTitles = Object.keys(props.bookDetails);
+
     return (
         <div className='book-details'>
             <div className='book-details-about-item'>
                 <h4 className='book-details-about-item__header'>{localizations.aboutThisItem}</h4>
-                <span className='book-details-about-item__content'>New. In shrink wrap. Looks like an interesting title!. Seller Inventory # Q-1411423410</span>
+                <span className='book-details-about-item__content'>{props.description}</span>
             </div>
             <div className='book-details-characteristics display-flex'>
                 <h4 className='book-details-characteristics__header'>Bibliographic Details</h4>
@@ -14,16 +26,59 @@ export default function BookDetails() {
                     <div className='book-details-characteristic-container'>
                         <h4 className='book-details-characteristic__header'>Synopsis:</h4>
                         <div className='book-details-characteristic-content display-flex flex-direction--column'>
-                            <span>Title: How to Write a Research Paper [Paperback] ...</span>
-                            <span>Publisher: Sparknotes</span>
-                            <span>Publication Date: 1963</span>
-                            <span>Binding: Soft cover</span>
-                            <span>Book Condition: New.</span>
+                            <span>Title: {props.title}</span>
+                            <span>Publisher: {props.publisher}</span>
+                            <span>Publication Date: {new Date(props.publishedAt).getFullYear()}</span>
+                            <span>Book Condition: {props.bookCondition}</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className='book-details-characteristics display-flex'>
+            {
+                subTitles.map((title, index) => {
+                    const subItems = Object.keys(props.bookDetails[title]).filter(title => title !== "value");
+                    return (
+                        <div className='book-details-characteristics display-flex' key={index}>
+                            <h4 className='book-details-characteristics__header'>{title}</h4>
+
+                            <div className='book-details-characteristic'>
+                                {
+                                    props.bookDetails[title]["value"] ?
+                                    <Fragment>
+                                        <div className='book-details-characteristic-container'>
+                                            <div className='book-details-characteristic-content display-flex flex-direction--column'>
+                                                <span>{props.bookDetails[title]["value"]}</span>
+                                            </div>
+                                        </div>
+                                    </Fragment>
+                                    : null
+                                }
+
+                                {
+                                    subItems.map((item: any) => {
+                                        return (
+                                            <Fragment>
+                                                <h4 className='book-details-characteristic__header'>{item}:</h4>
+                                                <div className='book-details-characteristic-content display-flex flex-direction--column'>
+                                                    <span>{props.bookDetails[title][item]}</span>
+                                                </div>
+                                            </Fragment>
+                                        )
+                                    })
+                                }
+                                {/* <div className='book-details-characteristic-container'>
+                                    <h4 className='book-details-characteristic__header'>Synopsis:</h4>
+                                    <div className='book-details-characteristic-content display-flex flex-direction--column'>
+                                        <span>Used. Very Good conditions. May have soft reading marks and name of the previous owner.</span>
+                                        <span>"About this title" may belong to another edition of this title.</span>
+                                    </div>
+                                </div> */}
+                            </div>
+                        </div>
+                    )
+                })
+            }
+            {/* <div className='book-details-characteristics display-flex'>
                 <h4 className='book-details-characteristics__header'>About this title</h4>
                 <div className='book-details-characteristic'>
                     <div className='book-details-characteristic-container'>
@@ -34,8 +89,8 @@ export default function BookDetails() {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className='book-details-characteristics display-flex'>
+            </div> */}
+            {/* <div className='book-details-characteristics display-flex'>
                 <h4 className='book-details-characteristics__header'>Store Description</h4>
                 <div className='book-details-characteristic'>
                     <div className='book-details-characteristic-container'>
@@ -45,7 +100,7 @@ export default function BookDetails() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
             <div className='book-details-characteristics display-flex'>
                 <h4 className='book-details-characteristics__header'>{localizations.paymentMethods}</h4>
                 <div className='book-details-characteristic'>

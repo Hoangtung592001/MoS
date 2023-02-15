@@ -106,3 +106,39 @@
         padding-bottom: 20px;
     }
 }
+
+.basket-table__empty-message {
+    font-size: 1.4rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.basket-total {
+    margin-top: 30px;
+}
+
+.basket-total-button {
+    flex: 1;
+    display: flex;
+    justify-content: right;
+
+    &--first {
+        flex: 2;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.basket-total-total {
+    font-size: 1.6rem;
+    font-weight: 500;
+    right: 20px;
+    &__message {
+
+    }
+
+    &__price {
+        color: var(--error-red);
+        margin-left: 7px;
+    }
+}

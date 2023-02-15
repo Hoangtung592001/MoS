@@ -1,6 +1,6 @@
 import GLOBAL_TYPES from "../../constants/actions";
-import { ActionType, Exception } from "~/commons/interfaces";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Exception } from "~/constants/interfaces";
 
 interface InitialStateInterface {
   errors: Array<Exception>

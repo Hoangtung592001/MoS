@@ -14,3 +14,40 @@ export interface ProductItem {
     author: Author;
     bookImage: BookImage;
 }
+
+export interface Exception {
+    id: string;
+    exceptionMessageType: string;
+    description: string;
+}
+
+export interface Order {
+
+}
+
+export interface Publisher {
+    id: string;
+    name: string;
+}
+
+export interface BookCondition {
+    id: string;
+    name: string;
+}
+
+export interface Book {
+    id: string;
+    title: string;
+    authorId: string;
+    author: Author;
+    publisherId: string;
+    publisher: Publisher;
+    bookConditionId: number;
+    quantity: number;
+    price: number;
+    sellOfRate: number;
+    edition: number;
+    bookImage: BookImage
+}
+
+

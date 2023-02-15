@@ -3,28 +3,35 @@ import './BookIntro.scss';
 import localizations from '~/constants/locallizations';
 import { TextLink, TextBox } from '~/components';
 import { TextLinkTypes } from '~/constants/enums';
-export default function BookIntro() {
+import { getDateTime } from '~/commons/commonUsedFunctions';
+
+interface BookIntroParams {
+    title: string; 
+    author: string;
+    publisher: string;
+    quantity: number; 
+    publishedAt: Date;
+    bookCondition: string;
+}
+
+export default function BookIntro(props: BookIntroParams) {
+    const publishIntro = `${localizations.publishedBy} ${props.publisher} ${getDateTime(props.publishedAt)}`;
+
     return (
         <div className="book-intro display-flex">
             <div className="book-intro-image">
                 <img src="https://pictures.abebooks.com/isbn/9781411423411-us.jpg" alt="Book Image" />
             </div>
             <div className="book-intro-details">
-                <h4 className='book-intro-details__header'>How to Write a Research Paper [Paperback] sparknotes-editors</h4>
+                <h4 className='book-intro-details__header'>{props.title}</h4>
                 <TextLink type={TextLinkTypes.BLUE}>
-                    <span className="book-intro-details__text--grey">UNITED STATES NAVAL ACADEMY</span>
+                    <span className="book-intro-details__text--grey">{props.author}</span>
                 </TextLink>
                 <Rating stars={3.5} />
-                <span className='book-intro-details__text--plain'>{localizations.publishedBy} Sparknotes, 1963</span>
+                <span className='book-intro-details__text--plain'>{publishIntro}</span>
                 <div className="display-flex book-intro-details-characteristics">
                     <div className="book-intro-details-characteristic">
-                        <TextBox text="NEW" />
-                    </div>
-                    <div className="book-intro-details-characteristic">
-                        <TextBox text="CONDITION: NEW" />
-                    </div>
-                    <div className="book-intro-details-characteristic">
-                        <TextBox text="SOFT COVER" />
+                        <TextBox text={props.bookCondition} />
                     </div>
                 </div>
                 <div className='book-intro-details-later'>
@@ -47,7 +54,7 @@ export default function BookIntro() {
                             April 17, 2008
                         </span>
                     </div>
-                    <span className='book-intro-details__text--plain'>{localizations.quantity}: 1</span>
+                    <span className='book-intro-details__text--plain'>{localizations.quantity}: {props.quantity}</span>
                 </div>
             </div>
         </div>
