@@ -119,7 +119,15 @@ const localizations = {
     successTitleModal: 'Success!',
     bookSuccessfullyContent: 'This book is added to you basket!',
     shippingAddress: 'Shipping Address',
-    addAndEditAddress: 'Add/Edit Address'
+    addAndEditAddress: 'Add/Edit Address',
+    fullName: 'Full name (First and Last name)',
+    addressLine1: 'Address Line 1',
+    addressLine2: 'Address Line 2',
+    country: 'Country',
+    zipAndPostCode: 'Zip/Postal Code',
+    city: 'City',
+    telephone: 'Telephone',
+    shipToThisAddress: 'Ship to this address'
 };
 
 export default localizations;

@@ -34,5 +34,25 @@
     &__label {
         font-size: 1.4rem;
         margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+        &--required {
+            margin-left: 5px;
+            color: var(--abe-red);
+        }
+    }
+
+    .shipping-address-submit {
+        width: 30%;
+
+        &__text {
+            color: var(--white);
+            font-size: 1.4rem;
+        }
+    }
+
+    &:last-child {
+        margin-bottom: 20px;
+        margin-top: 20px;
     }
 }

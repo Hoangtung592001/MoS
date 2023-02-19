@@ -7,7 +7,7 @@ import routes from '~/config/routes';
 import { useAppDispatch, useAppSelector } from '~/hooks';
 import { bindActionCreators } from 'redux';
 import actionCreators from '~/redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import { accessTokenKey } from '~/constants';
 import { useEffect } from 'react';
@@ -17,6 +17,7 @@ function Header() {
     const dispatch = useAppDispatch();
     const { signOut, getBasketTotalItems } = bindActionCreators(actionCreators, dispatch);
     const { basketTotal } = useAppSelector(state => state.basketReducer);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (accessToken) {
@@ -58,6 +59,7 @@ function Header() {
                                 :
                                 <ButtonLink to={routes.home} type={ButtonLinkTypes.PRIMARY_BUTTON} onClick={() => {
                                     signOut();
+                                    navigate(routes.home);
                                     window.location.reload();
                                 }}>
                                     {localizations.signOut}
