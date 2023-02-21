@@ -18,7 +18,8 @@ export enum ButtonTypes {
 export enum InputTypes {
     SEARCH = 'search',
     SEARCH_BY_FORM = 'form',
-    QUANTITY = 'quantity'
+    QUANTITY = 'quantity',
+    ADDRESS_FORM = 'address-form'
 }
 
 export enum TextLinkTypes {

@@ -44,10 +44,12 @@ const localizations = {
     instagram: 'Instagram',
     youtube: 'Youtube',
     podcast: 'Podcase',
-    copyRight: '© 1996 - 2022 AbeBooks Inc. All Rights Reserved. AbeBooks, the AbeBooks logo, AbeBooks.com, "Passion for books." and "Passion for books. Books for your passion." are registered trademarks with the Registered US Patent & Trademark Office.',
+    copyRight:
+        '© 1996 - 2022 AbeBooks Inc. All Rights Reserved. AbeBooks, the AbeBooks logo, AbeBooks.com, "Passion for books." and "Passion for books. Books for your passion." are registered trademarks with the Registered US Patent & Trademark Office.',
     backToTop: 'Back to top',
     joinOurAffiliateProgram: 'Join Our Affiliate Program',
-    termsAndConditions: 'By using the Web site, you confirm that you have read, understood, and agreed to be bound by the Terms and Conditions.',
+    termsAndConditions:
+        'By using the Web site, you confirm that you have read, understood, and agreed to be bound by the Terms and Conditions.',
     email: 'Email',
     password: 'Password',
     signinTermsAndConditions: 'By signing-in, you agree to the AbeBooks.com ',
@@ -101,13 +103,15 @@ const localizations = {
     communityForums: 'Community Forums',
     changeEmailAddress: 'Change your email address',
     currentEmailAddress: 'Current email address:',
-    enterOTP: 'Enter the new email address you would like to associate with your account below. We will send a One Time Password (OTP) to that address.',
+    enterOTP:
+        'Enter the new email address you would like to associate with your account below. We will send a One Time Password (OTP) to that address.',
     newEmailAddress: 'New Email Address',
     newName: 'New Name',
     continue: 'Continue',
     changeName: 'Change your name',
     changePassword: 'Change password',
-    saveChangeName: 'If you want to change the name associated with your AbeBooks customer account, you may do so below. Be sure to click the Save Changes button when you are done.',
+    saveChangeName:
+        'If you want to change the name associated with your AbeBooks customer account, you may do so below. Be sure to click the Save Changes button when you are done.',
     enterEmail: 'Enter Email',
     enterPassword: 'Enter Password',
     warningHeader: 'There was a problem',
@@ -117,7 +121,17 @@ const localizations = {
     errorTitleModal: 'Error occured!',
     errorContent: 'There are some unknown errors!',
     successTitleModal: 'Success!',
-    bookSuccessfullyContent: 'This book is added to you basket!'
+    bookSuccessfullyContent: 'This book is added to you basket!',
+    shippingAddress: 'Shipping Address',
+    addAndEditAddress: 'Add/Edit Address',
+    fullName: 'Full name (First and Last name)',
+    addressLine: 'Address Line ',
+    addressLine2: 'Address Line 2',
+    country: 'Country',
+    zipAndPostCode: 'Zip/Postal Code',
+    city: 'City',
+    telephone: 'Telephone',
+    shipToThisAddress: 'Ship to this address',
 };
 
 export default localizations;

@@ -8,7 +8,9 @@ const routes = {
     security: '/Security',
     changeEmail: '/Security/ChangeEmail',
     changeName: '/Security/ChangeName',
-    changePassword: '/Security/ChangePassword'
+    changePassword: '/Security/ChangePassword',
+    shippingAddress: '/ShippingAddress',
+    googleMap: '/GoogleMap'
 };
 
 export const getBookDetailsRoute = (bookId: string) => {

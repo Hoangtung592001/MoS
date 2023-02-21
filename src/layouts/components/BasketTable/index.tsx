@@ -146,7 +146,7 @@ export default function BasketTable() {
                     </div>
                 </div>
                 <div className='basket-total-button'>
-                    <ButtonLink>
+                    <ButtonLink to={routes.shippingAddress}>
                         <span>
                             Proceed to Checkout
                         </span>
