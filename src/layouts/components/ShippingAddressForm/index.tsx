@@ -4,7 +4,24 @@ import localizations from '~/constants/locallizations';
 import GoogleMap from '../GoogleMap';
 import './ShippingAddressForm.scss';
 
-export default function ShippingAddressForm() {
+interface ShippingAddressFormProps {
+    fullName: string | undefined;
+    setFullname: any;
+    addressLine: string | undefined;
+    setAddressline: any;
+    telephone: string | undefined;
+    setTelephone: any;
+    length: number | undefined;
+    setLength: any;
+    longitude: number | undefined;
+    setLongitude: any;
+    latitude: number | undefined;
+    setLatitude: any;
+    shippingFee: number | undefined;
+    setShippingFee: any;
+}
+
+export default function ShippingAddressForm(props: ShippingAddressFormProps) {
     return (
         <div className="shipping-address-form">
             <h2 className="shipping-address-form__title">{localizations.shippingAddress}</h2>
@@ -18,52 +35,40 @@ export default function ShippingAddressForm() {
                             {localizations.fullName}
                             <span className="shipping-address-input__label--required">*</span>
                         </label>
-                        <Input inputType={InputTypes.ADDRESS_FORM} />
+                        <Input
+                            inputType={InputTypes.ADDRESS_FORM}
+                            value={props.fullName}
+                            onChange={(e: any) => props.setFullname(e.target.value)}
+                        />
                     </div>
                     <div className="shipping-address-input">
                         <label htmlFor="" className="shipping-address-input__label">
-                            {localizations.addressLine1}
+                            {localizations.addressLine}
                             <span className="shipping-address-input__label--required">*</span>
                         </label>
-                        <Input inputType={InputTypes.ADDRESS_FORM} />
+                        <Input
+                            inputType={InputTypes.ADDRESS_FORM}
+                            value={props.addressLine}
+                            onChange={(e: any) => props.setAddressline(e.target.value)}
+                        />
                     </div>
                     <div className="shipping-address-input">
-                        <label htmlFor="" className="shipping-address-input__label">
-                            {localizations.addressLine2}
-                            <span className="shipping-address-input__label--required">*</span>
-                        </label>
-                        <Input inputType={InputTypes.ADDRESS_FORM} />
-                    </div>
-                    <div className="shipping-address-input">
-                        <GoogleMap />
-                    </div>
-                    <div className="shipping-address-input">
-                        <label htmlFor="" className="shipping-address-input__label">
-                            {localizations.country}
-                            <span className="shipping-address-input__label--required">*</span>
-                        </label>
-                        <Input inputType={InputTypes.ADDRESS_FORM} />
-                    </div>
-                    <div className="shipping-address-input">
-                        <label htmlFor="" className="shipping-address-input__label">
-                            {localizations.zipAndPostCode}
-                            <span className="shipping-address-input__label--required">*</span>
-                        </label>
-                        <Input inputType={InputTypes.ADDRESS_FORM} />
-                    </div>
-                    <div className="shipping-address-input">
-                        <label htmlFor="" className="shipping-address-input__label">
-                            {localizations.city}
-                            <span className="shipping-address-input__label--required">*</span>
-                        </label>
-                        <Input inputType={InputTypes.ADDRESS_FORM} />
+                        <GoogleMap
+                            setLongitude={props.setLongitude}
+                            setLatitude={props.setLatitude}
+                            setLength={props.setLength}
+                        />
                     </div>
                     <div className="shipping-address-input">
                         <label htmlFor="" className="shipping-address-input__label">
                             {localizations.telephone}
                             <span className="shipping-address-input__label--required">*</span>
                         </label>
-                        <Input inputType={InputTypes.ADDRESS_FORM} />
+                        <Input
+                            inputType={InputTypes.ADDRESS_FORM}
+                            value={props.telephone}
+                            onChange={(e: any) => props.setTelephone(e.target.value)}
+                        />
                     </div>
                     <div className="shipping-address-input">
                         <div className="shipping-address-submit">

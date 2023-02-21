@@ -7,12 +7,22 @@ import './Map.scss';
 type LatLngLiteral = google.maps.LatLngLiteral;
 type DirectionsResult = google.maps.DirectionsResult;
 type MapOptions = google.maps.MapOptions;
-export default function Map() {
-    // const [office, setOffice] = useState<LatLngLiteral>();
+
+type PlacesProps = {
+    setLatLngLength: (position: google.maps.LatLngLiteral, length: number) => void;
+};
+
+export default function Map({ setLatLngLength }: PlacesProps) {
     const mapRef = useRef<GoogleMap>();
     const center = useMemo<LatLngLiteral>(() => ({ lat: 21.06351, lng: 106.08988 }), []);
     const [directions, setDirections] = useState<DirectionsResult>();
     const [currentPosition, setCurrentPosition] = useState<LatLngLiteral>();
+
+    currentPosition &&
+        directions &&
+        directions.routes[0].legs[0].distance?.value &&
+        setLatLngLength(currentPosition, directions.routes[0].legs[0].distance?.value);
+
     const options = useMemo<MapOptions>(
         () => ({
             disableDefaultUI: true,
@@ -83,12 +93,12 @@ export default function Map() {
             </div>
             <div className="map-body">
                 <GoogleMap
-                    zoom={10}
+                    zoom={20}
                     center={center}
                     mapContainerClassName="map-container"
                     options={options}
                     onLoad={onLoad}
-                    // onClick={onMapClick}
+                    onClick={onMapClick}
                 >
                     {/* {directions && (
                         <DirectionsRenderer

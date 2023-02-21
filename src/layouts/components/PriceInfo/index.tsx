@@ -10,8 +10,6 @@ interface PriceInfoProps {
     onAddToBasket: any
 }
 export default function PriceInfo(props: PriceInfoProps) {
-
-    
     return (
         <div className="price-info">
             <h4 className="price-info__header">{localizations.buyNew}</h4>
