@@ -82,7 +82,7 @@ export default function Map({ setLatLngLength }: PlacesProps) {
     return (
         <div className="map">
             <div className="map-controls">
-                <h1>Commute</h1>
+                <h1 className="map-controls__title">Search your address</h1>
                 <Places
                     setOffice={(position) => {
                         setCurrentPosition(position);

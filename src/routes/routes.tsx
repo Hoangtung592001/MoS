@@ -1,7 +1,20 @@
 import config from '~/config';
 import { FooterOnly, HeaderIcon } from '~/layouts';
 
-import { HomeContainer, SigninContainer, SignupContainer, BasketContainer, BookIntroAndDetailsContainer, MyAccountContainer, SecurityContainer, ChangeEmailContainer, ChangeNameContainer, ChangePasswordContainer } from '~/layouts/containers';
+import {
+    HomeContainer,
+    SigninContainer,
+    SignupContainer,
+    BasketContainer,
+    BookIntroAndDetailsContainer,
+    MyAccountContainer,
+    SecurityContainer,
+    ChangeEmailContainer,
+    ChangeNameContainer,
+    ChangePasswordContainer,
+    PaymentOptionsContainer,
+    ReviewOrderContainer,
+} from '~/layouts/containers';
 import GoogleMapContainer from '~/layouts/containers/GoogleMapContainer';
 import ShippingAddressContainer from '~/layouts/containers/ShippingAddressContainer';
 
@@ -24,6 +37,8 @@ const publicRoutes: Route[] = [
     { path: config.routes.changePassword, component: ChangePasswordContainer, layout: HeaderIcon },
     { path: config.routes.shippingAddress, component: ShippingAddressContainer, layout: HeaderIcon },
     { path: config.routes.googleMap, component: GoogleMapContainer, layout: HeaderIcon },
+    { path: config.routes.paymentOptions, component: PaymentOptionsContainer, layout: HeaderIcon },
+    { path: config.routes.reviewOrder, component: ReviewOrderContainer, layout: HeaderIcon },
 ];
 
 export { publicRoutes };

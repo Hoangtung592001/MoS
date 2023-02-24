@@ -132,6 +132,11 @@ const localizations = {
     city: 'City',
     telephone: 'Telephone',
     shipToThisAddress: 'Ship to this address',
+    cardNumber: 'Card Number',
+    expirationDate: 'Expiration Date',
+    nameOnCreditCard: 'Name on Credit Card',
+    saveThisPayment: 'Save this payment method for huture purchases',
+    saveAndContinue: 'Save and Continue',
 };
 
 export default localizations;

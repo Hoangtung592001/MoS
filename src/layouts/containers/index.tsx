@@ -8,3 +8,5 @@ export { default as SecurityContainer } from './SecurityContainer';
 export { default as ChangeEmailContainer } from './ChangeEmailContainer';
 export { default as ChangeNameContainer } from './ChangeNameContainer';
 export { default as ChangePasswordContainer } from './ChangePasswordContainer';
+export { default as PaymentOptionsContainer } from './PaymentOptionsContainer';
+export { default as ReviewOrderContainer } from './ReviewOrderContainer';

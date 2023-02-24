@@ -12,7 +12,8 @@ export enum ButtonTypes {
     SIGNIN = 'sign-in',
     REMOVE = 'remove',
     ADDTOBASKET = 'basket',
-    NEXT_SLIDER = 'next-slide'
+    NEXT_SLIDER = 'next-slide',
+    USE_SAVED_CARD = 'saved-card',
 }
 
 export enum InputTypes {

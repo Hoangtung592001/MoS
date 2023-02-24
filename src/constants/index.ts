@@ -12,5 +12,17 @@ export const months = [
     'September',
     'October',
     'November',
-    'December'
-]
+    'December',
+];
+
+export enum PaymenOptionTypeDescriptions {
+    Cash = 1,
+    Visa = 2,
+}
+
+export enum RequestStatus {
+    Nothing = 0,
+    Pending = 1,
+    Fulfilled = 2,
+    Rejected = 3,
+}

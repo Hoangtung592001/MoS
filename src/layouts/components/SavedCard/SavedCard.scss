@@ -1,0 +1,21 @@
+.saved-card-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    align-items: center;
+
+    &__item {
+        flex: 5;
+    }
+
+    &__item-button {
+        flex: 1;
+        display: flex;
+        justify-content: right;
+    }
+}
+
+.saved-card {
+    border: 1px solid #ccc;
+    padding: 10px 10px 10px 20px;
+}
