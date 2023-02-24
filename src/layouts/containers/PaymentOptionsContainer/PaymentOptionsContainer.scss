@@ -1,0 +1,46 @@
+.payment-options-selections {
+    width: 35%;
+}
+
+.payment-options-container {
+    width: 90%;
+    margin: auto;
+}
+
+.payment-options {
+    &__title {
+        font-weight: 600;
+        font-size: 1.9rem;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+
+    &__saved-card-title {
+        margin-bottom: 20px;
+    }
+}
+
+.payment-options-visa {
+    width: 50%;
+    margin-top: 20px;
+}
+
+.payment-options-cash {
+    width: 50%;
+    margin-top: 20px;
+}
+
+.payment-options-submit {
+    width: 15%;
+    margin-top: 20px;
+
+    &__text {
+        color: var(--white);
+    }
+}
+
+.payment-options-saved-cards {
+    width: 40%;
+    margin-bottom: 20px;
+}

@@ -10,7 +10,9 @@ const routes = {
     changeName: '/Security/ChangeName',
     changePassword: '/Security/ChangePassword',
     shippingAddress: '/ShippingAddress',
-    googleMap: '/GoogleMap'
+    googleMap: '/GoogleMap',
+    paymentOptions: '/PaymentOptions',
+    reviewOrder: '/ReviewOrder',
 };
 
 export const getBookDetailsRoute = (bookId: string) => {

@@ -3,6 +3,9 @@ import { removeErrorAction } from './action-creators/errorActionCreator';
 import { getFrequentlyViewedItems } from './action-creators/frequentlyViewedItemsActionCreator';
 import { addToBasket, getBasket, getBasketTotalItems } from './action-creators/basketActionCreator';
 import { getBookDetails } from './action-creators/bookDetailsActionCreator';
+import { getPaymentOptionTypeDescriptions } from './action-creators/paymentOptionTypeDescriptionActionCreator';
+import { getPaymentOptions, resetPaymentOption, setPaymentOption } from './action-creators/paymenOptionsActionCreator';
+import { getSavedAddress } from './action-creators/addressActionCreator';
 const actionCreators = {
     removeErrorAction: removeErrorAction,
     signIn: signIn,
@@ -12,7 +15,12 @@ const actionCreators = {
     getBasket: getBasket,
     getBookDetails: getBookDetails,
     addToBasket: addToBasket,
-    getBasketTotalItems: getBasketTotalItems
+    getBasketTotalItems: getBasketTotalItems,
+    getPaymentOptionTypeDescriptions: getPaymentOptionTypeDescriptions,
+    getSavedAddress: getSavedAddress,
+    getPaymentOptions: getPaymentOptions,
+    setPaymentOption: setPaymentOption,
+    resetPaymentOption: resetPaymentOption,
 };
 
 export default actionCreators;

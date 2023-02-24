@@ -22,4 +22,10 @@ export const SERVICE_URL = {
     ADDRESS: {
         GET: 'https://localhost:5001/Address',
     },
+    PAYMENT_OPTION_TYPE_DESCRIPTION: {
+        GET: 'https://localhost:5001/Payment/PaymentOptionTypeDescription',
+    },
+    PAYMENT_OPTION: {
+        GET: 'https://localhost:5001/Payment/PaymentOption',
+    },
 };

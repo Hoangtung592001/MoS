@@ -50,4 +50,27 @@ export interface Book {
     bookImage: BookImage
 }
 
+export interface PaymentOptionTypeDescription {
+    id: string;
+    name: string;
+    description: string;
+}
 
+export interface PaymentOption {
+    id: string;
+    cardNumber: string;
+    expiryDate: Date;
+    nameOnCard: string;
+    paymentOptionTypeDescriptionId: number;
+    paymentOptionTypeDescription: PaymentOptionTypeDescription;
+}
+
+export interface Address {
+    id: string;
+    fullName: string;
+    addressLine: string;
+    telephone: string;
+    longitude: number;
+    latitude: number;
+    distance: number;
+}
