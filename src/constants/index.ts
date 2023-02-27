@@ -26,3 +26,7 @@ export enum RequestStatus {
     Fulfilled = 2,
     Rejected = 3,
 }
+
+export const orderStatuses = ['', 'PREPARING', 'PREPARED', 'DELIVERING', 'DELIVERED'];
+
+export const VietNamId = 245;

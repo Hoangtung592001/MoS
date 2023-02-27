@@ -27,18 +27,7 @@ export default function BasketTable() {
     const basket = useAppSelector((state) => state.basketReducer.basket);
 
     const onProceedToCheckout = useCallback(() => {
-        navigate(routes.shippingAddress, {
-            state: {
-                bookItems: basket.basketItems.map((item) => {
-                    const bookItem: BookItem = {
-                        id: item.bookId,
-                        quantity: item.book.quantity,
-                    };
-
-                    return bookItem;
-                }),
-            },
-        });
+        navigate(routes.shippingAddress);
     }, []);
 
     useEffect(() => {

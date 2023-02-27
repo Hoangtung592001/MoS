@@ -21,11 +21,19 @@ export const SERVICE_URL = {
     },
     ADDRESS: {
         GET: 'https://localhost:5001/Address',
+        GET_BY_ID: 'https://localhost:5001/Address/{addressId}',
     },
     PAYMENT_OPTION_TYPE_DESCRIPTION: {
         GET: 'https://localhost:5001/Payment/PaymentOptionTypeDescription',
     },
     PAYMENT_OPTION: {
         GET: 'https://localhost:5001/Payment/PaymentOption',
+        GET_BY_ID: 'https://localhost:5001/Payment/PaymentOption/{paymentOptionId}',
+    },
+    COUNTRY: {
+        GET: 'https://localhost:5001/Country',
+    },
+    SHIPPING: {
+        GET: 'https://localhost:5001/Shipping/{addressId}',
     },
 };

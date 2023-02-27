@@ -1,9 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { BaseResponse } from '~/commons/response';
 import { fetchAsync, fetchAsyncWithAuthentitaion, FETCH_TYPES } from '~/commons/sendRequest';
+import { GetPaymentOptionByIdUrl } from '~/commons/URLs';
 import { Order, PaymentOption } from '~/constants/interfaces';
 import { SERVICE_URL } from '~/constants/server';
-import { get, makeOriginal } from '../reducers/paymenOptionsReducer';
+import { get, getById, makeOriginal } from '../reducers/paymenOptionsReducer';
 
 export interface SetPaymentOptionReq {
     cardNumber: string;
@@ -50,3 +51,17 @@ export const setPaymentOption = createAsyncThunk('PaymentOptions/Set', async (pr
         return thunkApi.rejectWithValue(false);
     }
 });
+
+export const getPaymentOptionById = (accessToken: string, paymentOptionId: string) => async (dispatch: any) => {
+    const response = await fetchAsyncWithAuthentitaion<BaseResponse<PaymentOption>>(
+        GetPaymentOptionByIdUrl(paymentOptionId),
+        FETCH_TYPES.GET,
+        accessToken,
+    );
+
+    if (response.data.success) {
+        const data = response.data;
+
+        dispatch(getById(data.data));
+    }
+};

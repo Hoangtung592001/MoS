@@ -132,11 +132,15 @@ const localizations = {
     city: 'City',
     telephone: 'Telephone',
     shipToThisAddress: 'Ship to this address',
-    cardNumber: 'Card Number',
+    cardNumber: 'Credit Card Number',
     expirationDate: 'Expiration Date',
     nameOnCreditCard: 'Name on Credit Card',
     saveThisPayment: 'Save this payment method for huture purchases',
     saveAndContinue: 'Save and Continue',
+    paymentInfo: 'Payment Info',
+    cardDescription: 'Card Description',
+    enterCreditCardSecurityCode: 'Please enter your credit card security code',
+    itemSummary: 'Item Summary',
 };
 
 export default localizations;

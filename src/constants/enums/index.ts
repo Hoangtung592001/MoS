@@ -20,9 +20,14 @@ export enum InputTypes {
     SEARCH = 'search',
     SEARCH_BY_FORM = 'form',
     QUANTITY = 'quantity',
-    ADDRESS_FORM = 'address-form'
+    ADDRESS_FORM = 'address-form',
+    SECURITY_CODE = 'security-code',
+}
+
+export enum SelectTypes {
+    ADDRESS_FORM = 'address-form',
 }
 
 export enum TextLinkTypes {
-    BLUE = 'blue'
+    BLUE = 'blue',
 }

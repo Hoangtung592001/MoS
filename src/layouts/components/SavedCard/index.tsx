@@ -5,9 +5,10 @@ import './SavedCard.scss';
 
 type SavedCardProps = {
     paymentOptions: Array<PaymentOption>;
+    onUse: (paymentOptionId: string) => void;
 };
 
-export default function SavedCard({ paymentOptions }: SavedCardProps) {
+export default function SavedCard({ paymentOptions, onUse }: SavedCardProps) {
     return (
         <div className="saved-card">
             <div className="saved-card-row">
@@ -26,7 +27,12 @@ export default function SavedCard({ paymentOptions }: SavedCardProps) {
                             {new Date(paymentOption.expiryDate).getFullYear()}
                         </h5>
                         <div className="saved-card-row__item saved-card-row__item-button">
-                            <Button type={ButtonTypes.USE_SAVED_CARD}>
+                            <Button
+                                type={ButtonTypes.USE_SAVED_CARD}
+                                onClick={(e: any) => {
+                                    onUse(paymentOption.id);
+                                }}
+                            >
                                 <span>Use</span>
                             </Button>
                         </div>

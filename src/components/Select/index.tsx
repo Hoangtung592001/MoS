@@ -12,15 +12,21 @@ export interface SelectItem {
     value: string;
 }
 
-export default function Select({ label, isRequired, items, ...props }: any) {
+export default function Select({ label, isRequired, items, selectType, ...props }: any) {
     return (
         <div className="select display-flex flex-direction--column">
-            <label className="select__label">
-                {label}
-                {isRequired ? <span className="select__label--required">*</span> : null}
-            </label>
-            <select className="select__content" {...props}>
-                {items.length > 0 &&
+            {label && (
+                <label className="select__label">
+                    {label}
+                    {isRequired ? <span className="select__label--required">*</span> : null}
+                </label>
+            )}
+            <select
+                className={`${selectType ? `select__content--${selectType} select__content` : 'select__content'}`}
+                {...props}
+            >
+                {items &&
+                    items.length > 0 &&
                     items.map((item: any, index: any) => {
                         return (
                             <option key={index} value={item.id}>

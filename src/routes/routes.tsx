@@ -16,6 +16,7 @@ import {
     ReviewOrderContainer,
 } from '~/layouts/containers';
 import GoogleMapContainer from '~/layouts/containers/GoogleMapContainer';
+import MyPurchasesContainer from '~/layouts/containers/MyPurchasesContainer';
 import ShippingAddressContainer from '~/layouts/containers/ShippingAddressContainer';
 
 interface Route {
@@ -39,6 +40,7 @@ const publicRoutes: Route[] = [
     { path: config.routes.googleMap, component: GoogleMapContainer, layout: HeaderIcon },
     { path: config.routes.paymentOptions, component: PaymentOptionsContainer, layout: HeaderIcon },
     { path: config.routes.reviewOrder, component: ReviewOrderContainer, layout: HeaderIcon },
+    { path: config.routes.myPurchases, component: MyPurchasesContainer },
 ];
 
 export { publicRoutes };
