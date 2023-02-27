@@ -7,6 +7,9 @@ import bookDetailsReducer from "./bookDetailsReducer";
 import paymentOptionTypeDescriptionReducer from './paymentOptionTypeDescriptionReducer';
 import paymenOptionsReducer from './paymenOptionsReducer';
 import addressReducer from './addressReducer';
+import countryReducer from './countryReducer';
+import shippingReducer from './shippingReducer';
+import orderReducer from './orderReducer';
 export default combineReducers({
     user: userReducer,
     error: errorReducer,
@@ -16,4 +19,7 @@ export default combineReducers({
     paymentOptionTypeDescriptionReducer: paymentOptionTypeDescriptionReducer,
     paymenOptionsReducer: paymenOptionsReducer,
     addressReducer: addressReducer,
+    countryReducer: countryReducer,
+    shippingReducer: shippingReducer,
+    orderReducer: orderReducer,
 });

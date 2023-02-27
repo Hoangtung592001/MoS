@@ -1,5 +1,6 @@
 import { useState, useMemo, useCallback, useRef, useEffect } from 'react';
 import { GoogleMap, Marker, DirectionsRenderer, Circle, MarkerClusterer } from '@react-google-maps/api';
+import { GoogleMap as TypeGoogleMap } from '@react-google-maps/api';
 import Places from './places';
 import Distance from './distance';
 import './Map.scss';
@@ -10,13 +11,14 @@ type MapOptions = google.maps.MapOptions;
 
 type PlacesProps = {
     setLatLngLength: (position: google.maps.LatLngLiteral, length: number) => void;
+    setCurrentPosition: React.Dispatch<React.SetStateAction<google.maps.LatLngLiteral | undefined>>;
+    currentPosition: google.maps.LatLngLiteral | undefined;
+    mapRef: React.MutableRefObject<TypeGoogleMap | undefined>;
 };
 
-export default function Map({ setLatLngLength }: PlacesProps) {
-    const mapRef = useRef<GoogleMap>();
+export default function Map({ setLatLngLength, currentPosition, setCurrentPosition, mapRef }: PlacesProps) {
     const center = useMemo<LatLngLiteral>(() => ({ lat: 21.06351, lng: 106.08988 }), []);
     const [directions, setDirections] = useState<DirectionsResult>();
-    const [currentPosition, setCurrentPosition] = useState<LatLngLiteral>();
 
     currentPosition &&
         directions &&
@@ -27,32 +29,14 @@ export default function Map({ setLatLngLength }: PlacesProps) {
         () => ({
             disableDefaultUI: true,
             clickableIcons: false,
-            mapId: '3780d017bd19fd59',
+            // mapId: '3780d017bd19fd59',
         }),
         [],
     );
+
     const onLoad = useCallback((map: any) => {
         mapRef.current = map;
     }, []);
-
-    // const houses = useMemo(() => currentPosition && generateHouses(currentPosition), [currentPosition]);
-    // const fetchDirection = (house: LatLngLiteral) => {
-    //     if (!currentPosition) return;
-
-    //     const service = new google.maps.DirectionsService();
-    //     service.route(
-    //         {
-    //             origin: center,
-    //             destination: currentPosition,
-    //             travelMode: google.maps.TravelMode.DRIVING,
-    //         },
-    //         (result, status) => {
-    //             if (status === 'OK' && result) {
-    //                 setDirections(result);
-    //             }
-    //         },
-    //     );
-    // };
 
     useEffect(() => {
         if (!currentPosition) return;
@@ -81,7 +65,7 @@ export default function Map({ setLatLngLength }: PlacesProps) {
 
     return (
         <div className="map">
-            <div className="map-controls">
+            {/* <div className="map-controls">
                 <h1 className="map-controls__title">Search your address</h1>
                 <Places
                     setOffice={(position) => {
@@ -90,7 +74,7 @@ export default function Map({ setLatLngLength }: PlacesProps) {
                     }}
                 />
                 {directions && <Distance leg={directions.routes[0].legs[0]} />}
-            </div>
+            </div> */}
             <div className="map-body">
                 <GoogleMap
                     zoom={20}
@@ -100,44 +84,15 @@ export default function Map({ setLatLngLength }: PlacesProps) {
                     onLoad={onLoad}
                     onClick={onMapClick}
                 >
-                    {/* {directions && (
-                        <DirectionsRenderer
-                            directions={directions}
-                            options={{
-                                polylineOptions: {
-                                    zIndex: 50,
-                                    strokeColor: '#1976D2',
-                                    strokeWeight: 5,
-                                },
-                            }}
-                        />
-                    )} */}
                     {currentPosition && (
                         <>
                             <Marker
                                 icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
                                 position={currentPosition}
                             />
-                            {/* <MarkerClusterer>
-                                {(clusterer) => (
-                                    <>
-                                        {houses &&
-                                            houses.map((house) => (
-                                                <Marker
-                                                    key={house.lat}
-                                                    position={house}
-                                                    clusterer={clusterer}
-                                                    onClick={() => {
-                                                        fetchDirection(house);
-                                                    }}
-                                                />
-                                            ))}
-                                    </>
-                                )}
-                            </MarkerClusterer> */}
-                            <Circle center={currentPosition} radius={15000} options={closeOptions} />
+                            {/* <Circle center={currentPosition} radius={15000} options={closeOptions} />
                             <Circle center={currentPosition} radius={30000} options={middleOptions} />
-                            <Circle center={currentPosition} radius={45000} options={farOptions} />
+                            <Circle center={currentPosition} radius={45000} options={farOptions} /> */}
                         </>
                     )}
                 </GoogleMap>

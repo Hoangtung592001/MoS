@@ -13,8 +13,8 @@ import { getAccessTokenFromCookies } from '~/commons/commonUsedFunctions';
 import { useLocation, useNavigate } from 'react-router-dom';
 import routes from '~/config/routes';
 import SavedCard from '~/layouts/components/SavedCard';
-import { BookItem } from '~/layouts/components/BasketTable';
 import { SetPaymentOptionReq } from '~/redux/action-creators/paymenOptionsActionCreator';
+
 export default function PaymentOptionsContainer() {
     const [cardNumber, setCardNumber] = useState<string>();
     const [expirationDate, setExpirationDate] = useState<Date>();
@@ -30,7 +30,6 @@ export default function PaymentOptionsContainer() {
     const navigate = useNavigate();
     const location = useLocation();
     const addressId = location.state?.addressId;
-    const bookItems: Array<BookItem> = location.state?.bookItems;
     const paymentOptionTypeDescriptions = useAppSelector(
         (state) => state.paymentOptionTypeDescriptionReducer.paymentOptionTypeDescriptions,
     );
@@ -50,14 +49,26 @@ export default function PaymentOptionsContainer() {
         [paymentOptionTypeDescriptions],
     );
 
+    const onNavigate = useCallback((paymentOptionId: string, addressId: string) => {
+        navigate(routes.reviewOrder, {
+            state: {
+                paymentOptionId: paymentOptionId,
+                addressId: addressId,
+            },
+        });
+    }, []);
+
+    const onUse = useCallback(
+        (paymentOptionId: string) => {
+            onNavigate(paymentOptionId, addressId);
+        },
+        [addressId],
+    );
+
     useEffect(() => {
         if (status == RequestStatus.Fulfilled && newPaymentOptionId) {
             resetPaymentOption();
-            navigate(routes.home, {
-                state: {
-                    paymentOptionId: newPaymentOptionId,
-                },
-            });
+            onNavigate(newPaymentOptionId, addressId);
         }
     }, [status, newPaymentOptionId]);
 
@@ -90,12 +101,10 @@ export default function PaymentOptionsContainer() {
         if (!accessToken) {
             navigate(routes.signin);
         }
-        if (!addressId || !bookItems) {
+        if (!addressId) {
             navigate(routes.basket);
         }
     }, []);
-
-    let paymentOption = null;
 
     return (
         <div className="payment-options-container">
@@ -104,7 +113,7 @@ export default function PaymentOptionsContainer() {
                 <>
                     <h3 className="payment-options__saved-card-title">Saved Card</h3>
                     <div className="payment-options-saved-cards">
-                        <SavedCard paymentOptions={paymentOptions} />
+                        <SavedCard paymentOptions={paymentOptions} onUse={onUse} />
                     </div>
                 </>
             )}

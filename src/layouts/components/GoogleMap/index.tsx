@@ -1,26 +1,25 @@
-import { useLoadScript } from '@react-google-maps/api';
+import { GoogleMap as TypeGoogleMap } from '@react-google-maps/api';
 import Map from '../Map';
 
 interface GoogleMapProps {
-    setLongitude: any;
-    setLatitude: any;
     setLength: any;
+    isGoogleMapLoaded: boolean;
+    setCurrentPosition: React.Dispatch<React.SetStateAction<google.maps.LatLngLiteral | undefined>>;
+    currentPosition: google.maps.LatLngLiteral | undefined;
+    mapRef: React.MutableRefObject<TypeGoogleMap | undefined>;
 }
 
 function GoogleMap(props: GoogleMapProps) {
-    const { isLoaded } = useLoadScript({
-        googleMapsApiKey: 'AIzaSyBNK_XlyBPvM1UhqKTq04d8AHx5qWOOdso',
-        libraries: ['places'],
-    });
-
-    if (!isLoaded) return <div>Loading...</div>;
+    if (!props.isGoogleMapLoaded) return <div>Loading...</div>;
     return (
         <Map
             setLatLngLength={(position: google.maps.LatLngLiteral, length: number) => {
-                props.setLatitude(position.lat);
-                props.setLongitude(position.lng);
+                props.setCurrentPosition(position);
                 props.setLength(length);
             }}
+            currentPosition={props.currentPosition}
+            setCurrentPosition={props.setCurrentPosition}
+            mapRef={props.mapRef}
         />
     );
 }

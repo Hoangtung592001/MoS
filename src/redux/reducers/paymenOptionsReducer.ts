@@ -7,12 +7,14 @@ interface InitialStateInterface {
     paymentOptions: Array<PaymentOption>;
     status: number;
     newPaymentOptionId: string;
+    currentPaymentOption: PaymentOption | null;
 }
 
 const initialState: InitialStateInterface = {
     paymentOptions: [],
     status: RequestStatus.Nothing,
     newPaymentOptionId: '',
+    currentPaymentOption: null,
 };
 
 export const paymentOptionsSlice = createSlice({
@@ -21,6 +23,9 @@ export const paymentOptionsSlice = createSlice({
     reducers: {
         get: (state, action: PayloadAction<Array<PaymentOption>>) => {
             state.paymentOptions = action.payload;
+        },
+        getById: (state, action: PayloadAction<PaymentOption>) => {
+            state.currentPaymentOption = action.payload;
         },
         makeOriginal: (state) => {
             state.status = RequestStatus.Nothing;
@@ -42,6 +47,6 @@ export const paymentOptionsSlice = createSlice({
     },
 });
 
-export const { get, makeOriginal } = paymentOptionsSlice.actions;
+export const { get, makeOriginal, getById } = paymentOptionsSlice.actions;
 
 export default paymentOptionsSlice.reducer;

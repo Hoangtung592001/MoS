@@ -13,6 +13,7 @@ const routes = {
     googleMap: '/GoogleMap',
     paymentOptions: '/PaymentOptions',
     reviewOrder: '/ReviewOrder',
+    myPurchases: '/MyPurchases',
 };
 
 export const getBookDetailsRoute = (bookId: string) => {
