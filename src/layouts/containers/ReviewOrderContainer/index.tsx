@@ -8,7 +8,7 @@ import { RequestStatus } from '~/constants';
 import { InputTypes, TextLinkTypes } from '~/constants/enums';
 import localizations from '~/constants/locallizations';
 import { useAppDispatch, useAppSelector } from '~/hooks';
-import PaymentReview from '~/layouts/components/PaymentReview';
+import VisaReview from '~/layouts/components/VisaReview';
 import ShippingAddressReview from '~/layouts/components/ShippingAddressReview';
 import actionCreators from '~/redux';
 import { SetOrderReq } from '~/redux/action-creators/orderActionCreator';
@@ -81,7 +81,7 @@ export default function ReviewOrderContainer() {
                             />
                         </div>
                         <div className="review-order-info-payment">
-                            <PaymentReview
+                            <VisaReview
                                 title={localizations.paymentInfo}
                                 creditCardNumber={currentPaymentOption.cardNumber}
                                 cardDescription={currentPaymentOption.paymentOptionTypeDescription.name}

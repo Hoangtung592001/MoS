@@ -1,7 +1,7 @@
 import { signIn, signUp, signOut } from './action-creators/userActionCreator';
 import { removeErrorAction } from './action-creators/errorActionCreator';
 import { getFrequentlyViewedItems } from './action-creators/frequentlyViewedItemsActionCreator';
-import { addToBasket, getBasket, getBasketTotalItems } from './action-creators/basketActionCreator';
+import { addToBasket, getBasket, getBasketTotalItems, resetBasket } from './action-creators/basketActionCreator';
 import { getBookDetails } from './action-creators/bookDetailsActionCreator';
 import { getPaymentOptionTypeDescriptions } from './action-creators/paymentOptionTypeDescriptionActionCreator';
 import {
@@ -38,6 +38,7 @@ const actionCreators = {
     setOrder: setOrder,
     resetOrder: resetOrder,
     getOrders: getOrders,
+    resetBasket: resetBasket,
 };
 
 export default actionCreators;

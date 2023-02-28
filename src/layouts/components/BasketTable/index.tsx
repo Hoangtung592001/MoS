@@ -92,29 +92,13 @@ export default function BasketTable() {
                                     <div className="basket-table-row-payment">
                                         <tr className="basket-table-row">
                                             <td className="basket-table-row__item1 basket-table-row-shipping display-flex justify-content--right">
-                                                <span className="basket-table-row-shipping__text">
-                                                    {localizations.shipping}
-                                                </span>
-                                            </td>
-                                            <td className="basket-table-row__item2 basket-table-row-price">
-                                                <span className="basket-table-row-price__total">US$ 9.99</span>
-                                            </td>
-                                            <td className="basket-table-row__item3"></td>
-                                            <td className="basket-table-row__item4"></td>
-                                        </tr>
-                                    </div>
-                                    <div className="basket-table-row-payment">
-                                        {/* basket-table-row-payment if it is the last row. Otherwise, 
-                                                    basket-table-row-payment--sub-total basket-table-row-payment */}
-                                        <tr className="basket-table-row">
-                                            <td className="basket-table-row__item1 basket-table-row-shipping display-flex justify-content--right">
                                                 <span className="basket-table-row-shipping__text--sub-total basket-table-row-shipping__text">
                                                     {localizations.subTotal}
                                                 </span>
                                             </td>
                                             <td className="basket-table-row__item2 basket-table-row-price">
                                                 <span className="basket-table-row-price__total--sub-total basket-table-row-shipping__text">
-                                                    US$ {Math.round((item.book.price + 9.99) * 100) / 100}
+                                                    US$ {item.book.price}
                                                 </span>
                                             </td>
                                             <td className="basket-table-row__item3"></td>

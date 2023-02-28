@@ -14,6 +14,7 @@ import { Country } from '~/redux/reducers/countryReducer';
 import { SelectItem } from '~/components/Select';
 import usePlacesAutocomplete, { ClearSuggestions, SetValue, Status } from 'use-places-autocomplete';
 import { GoogleMap as TypeGoogleMap } from '@react-google-maps/api';
+import { RequestStatus } from '~/constants';
 interface ShippingAddressFormProps {
     fullName: string | undefined;
     setFullname: any;
@@ -42,6 +43,7 @@ interface ShippingAddressFormProps {
     currentPosition: google.maps.LatLngLiteral | undefined;
     mapRef: React.MutableRefObject<TypeGoogleMap | undefined>;
     onSubmit: () => void;
+    setAddressStatus: number;
 }
 
 export default function ShippingAddressForm(props: ShippingAddressFormProps) {
@@ -148,7 +150,11 @@ export default function ShippingAddressForm(props: ShippingAddressFormProps) {
                     </div>
                     <div className="shipping-address-input">
                         <div className="shipping-address-submit">
-                            <Button type={ButtonTypes.ADDTOBASKET} onClick={props.onSubmit}>
+                            <Button
+                                type={ButtonTypes.ADDTOBASKET}
+                                onClick={props.onSubmit}
+                                isLoading={props.setAddressStatus == RequestStatus.Pending}
+                            >
                                 <span className="shipping-address-submit__text">{localizations.shipToThisAddress}</span>
                             </Button>
                         </div>
