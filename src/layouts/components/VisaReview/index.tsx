@@ -9,14 +9,13 @@ type ShippingAddressReviewProps = {
     title: string;
 };
 
-export default function PaymentReview({
+export default function VisaReview({
     title,
     creditCardNumber,
     cardDescription,
     expirtaionDate,
 }: ShippingAddressReviewProps) {
     const convertedExpirationDate = new Date(expirtaionDate);
-    console.log(convertedExpirationDate);
     return (
         <div className="shipping-address-review">
             <h3 className="shipping-address-review__title">{title}</h3>

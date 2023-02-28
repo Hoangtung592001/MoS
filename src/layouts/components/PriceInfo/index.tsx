@@ -7,7 +7,8 @@ import './PriceInfo.scss';
 interface PriceInfoProps {
     price: number;
     bookId: string;
-    onAddToBasket: any
+    onAddToBasket: any;
+    isLoading: boolean;
 }
 export default function PriceInfo(props: PriceInfoProps) {
     return (
@@ -24,7 +25,7 @@ export default function PriceInfo(props: PriceInfoProps) {
                 </TextLink>
             </div>
             <div className="price-info-button">
-                <Button type={ButtonTypes.ADDTOBASKET} onClick={props.onAddToBasket}>
+                <Button type={ButtonTypes.ADDTOBASKET} onClick={props.onAddToBasket} isLoading={props.isLoading}>
                     <span className="price-info__add-to-basket">
                         <SlBasket className="price-info-button__icon" />
                         {localizations.addToBasket}

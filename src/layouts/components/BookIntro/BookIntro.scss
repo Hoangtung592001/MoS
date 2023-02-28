@@ -4,8 +4,11 @@
 }
 
 .book-intro-image {
+    display: flex;
+    align-items: center;
     img {
-        height: 300px;
+        max-height: 300px;
+        width: 200px;
     }
 }
 
