@@ -16,9 +16,9 @@ export default function SavedAddress({ savedAddresses, onUse }: SavedAddressProp
                 <h5 className="saved-card-row__item">Telephone</h5>
                 <h5 className="saved-card-row__item saved-card-row__item-button"></h5>
             </div>
-            {savedAddresses.map((savedAddress) => {
+            {savedAddresses.map((savedAddress, index) => {
                 return (
-                    <div className="saved-card-row">
+                    <div className="saved-card-row" key={index}>
                         <h5 className="saved-card-row__item">{savedAddress.fullName}</h5>
                         <h5 className="saved-card-row__item">{savedAddress.addressLine}</h5>
                         <h5 className="saved-card-row__item">{savedAddress.telephone}</h5>

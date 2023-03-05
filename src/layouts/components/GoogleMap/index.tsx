@@ -7,6 +7,7 @@ interface GoogleMapProps {
     setCurrentPosition: React.Dispatch<React.SetStateAction<google.maps.LatLngLiteral | undefined>>;
     currentPosition: google.maps.LatLngLiteral | undefined;
     mapRef: React.MutableRefObject<TypeGoogleMap | undefined>;
+    setIsCurrentPositionValid: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function GoogleMap(props: GoogleMapProps) {
@@ -14,6 +15,7 @@ function GoogleMap(props: GoogleMapProps) {
     return (
         <Map
             setLatLngLength={(position: google.maps.LatLngLiteral, length: number) => {
+                props.setIsCurrentPositionValid(true);
                 props.setCurrentPosition(position);
                 props.setLength(length);
             }}

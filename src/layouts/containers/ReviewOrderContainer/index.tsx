@@ -1,10 +1,10 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { getAccessTokenFromCookies } from '~/commons/commonUsedFunctions';
+import { checkTokenExpiry, getAccessTokenFromCookies } from '~/commons/commonUsedFunctions';
 import { Button, Input, TextLink } from '~/components';
 import routes from '~/config/routes';
-import { RequestStatus } from '~/constants';
+import { CashPaymentOptionId, RequestStatus } from '~/constants';
 import { InputTypes, TextLinkTypes } from '~/constants/enums';
 import localizations from '~/constants/locallizations';
 import { useAppDispatch, useAppSelector } from '~/hooks';
@@ -13,6 +13,8 @@ import ShippingAddressReview from '~/layouts/components/ShippingAddressReview';
 import actionCreators from '~/redux';
 import { SetOrderReq } from '~/redux/action-creators/orderActionCreator';
 import './ReviewOrderContainer.scss';
+import CashReview from '~/layouts/components/CashReview';
+import jwtDecode from 'jwt-decode';
 export default function ReviewOrderContainer() {
     const location = useLocation();
     const dispatch = useAppDispatch();
@@ -27,17 +29,26 @@ export default function ReviewOrderContainer() {
     const { getBasket, getShippingFee, setOrder, resetOrder } = bindActionCreators(actionCreators, dispatch);
     const basket = useAppSelector((state) => state.basketReducer.basket);
     const { status, newOrderId } = useAppSelector((state) => state.orderReducer);
+    const [securityCode, setSecurityCode] = useState<string>('');
+    const [IsSecurityCodeValid, setIsSecurityCodeValid] = useState<boolean>(true);
 
     useEffect(() => {
         if (status == RequestStatus.Fulfilled && newOrderId) {
             resetOrder();
-            navigate(routes.home);
+            navigate(routes.congratulations, {
+                state: {
+                    orderId: newOrderId,
+                },
+            });
         }
     }, [status, newOrderId]);
 
     useEffect(() => {
         if (!accessToken) {
             navigate(routes.home);
+        } else {
+            const tokenExpire = checkTokenExpiry(accessToken);
+            if (tokenExpire) navigate(routes.signin);
         }
         if (!addressId || !paymentOptionId) {
             navigate(routes.basket);
@@ -47,7 +58,9 @@ export default function ReviewOrderContainer() {
     useEffect(() => {
         if (addressId && paymentOptionId) {
             getAddressById(accessToken, addressId);
-            getPaymentOptionById(accessToken, paymentOptionId);
+            if (paymentOptionId !== CashPaymentOptionId) {
+                getPaymentOptionById(accessToken, paymentOptionId);
+            }
             getBasket(accessToken);
             getShippingFee(accessToken, addressId);
         }
@@ -81,12 +94,20 @@ export default function ReviewOrderContainer() {
                             />
                         </div>
                         <div className="review-order-info-payment">
-                            <VisaReview
-                                title={localizations.paymentInfo}
-                                creditCardNumber={currentPaymentOption.cardNumber}
-                                cardDescription={currentPaymentOption.paymentOptionTypeDescription.name}
-                                expirtaionDate={currentPaymentOption.expiryDate}
-                            />
+                            {paymentOptionId === CashPaymentOptionId ? (
+                                <CashReview title={localizations.paymentInfo} />
+                            ) : (
+                                <VisaReview
+                                    title={localizations.paymentInfo}
+                                    creditCardNumber={currentPaymentOption.cardNumber}
+                                    cardDescription={currentPaymentOption.paymentOptionTypeDescription.name}
+                                    expirtaionDate={currentPaymentOption.expiryDate}
+                                    securityCode={securityCode}
+                                    setSecurityCode={setSecurityCode}
+                                    IsSecurityCodeValid={IsSecurityCodeValid}
+                                    setIsSecurityCodeValid={setIsSecurityCodeValid}
+                                />
+                            )}
                         </div>
                     </>
                 )}
@@ -101,10 +122,10 @@ export default function ReviewOrderContainer() {
                             <th className="basket-table-row__item2">{localizations.price}</th>
                             <th className="basket-table-row__item3">{localizations.quantity}</th>
                         </tr>
-                        {basket.basketItems.map((item) => {
+                        {basket.basketItems.map((item, index) => {
                             return (
                                 <>
-                                    <div className="basket-table-row-container">
+                                    <div className="basket-table-row-container" key={index}>
                                         <tr className="basket-table-row">
                                             <td className="basket-table-row__item1 basket-table-row-item display-flex">
                                                 <div className="basket-table-row-info display-flex flex-direction--column">
@@ -188,11 +209,15 @@ export default function ReviewOrderContainer() {
                         <div className="basket-total-button">
                             <Button
                                 onClick={(e: any) => {
-                                    const basketItemIDs = basket.basketItems.map((basketItem) => {
-                                        return basketItem.id;
-                                    });
+                                    if (!securityCode) {
+                                        setIsSecurityCodeValid(false);
+                                    } else {
+                                        const basketItemIDs = basket.basketItems.map((basketItem) => {
+                                            return basketItem.id;
+                                        });
 
-                                    onSubmit(basketItemIDs, addressId, paymentOptionId, accessToken);
+                                        onSubmit(basketItemIDs, addressId, paymentOptionId, accessToken);
+                                    }
                                 }}
                                 isLoading={status == RequestStatus.Pending}
                             >

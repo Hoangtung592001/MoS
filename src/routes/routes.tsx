@@ -15,6 +15,7 @@ import {
     PaymentOptionsContainer,
     ReviewOrderContainer,
 } from '~/layouts/containers';
+import CongratulationsContainer from '~/layouts/containers/CongratulationsContainer';
 import GoogleMapContainer from '~/layouts/containers/GoogleMapContainer';
 import MyPurchasesContainer from '~/layouts/containers/MyPurchasesContainer';
 import ShippingAddressContainer from '~/layouts/containers/ShippingAddressContainer';
@@ -41,6 +42,7 @@ const publicRoutes: Route[] = [
     { path: config.routes.paymentOptions, component: PaymentOptionsContainer, layout: HeaderIcon },
     { path: config.routes.reviewOrder, component: ReviewOrderContainer, layout: HeaderIcon },
     { path: config.routes.myPurchases, component: MyPurchasesContainer },
+    { path: config.routes.congratulations, component: CongratulationsContainer },
 ];
 
 export { publicRoutes };

@@ -8,17 +8,21 @@ import { useAppDispatch, useAppSelector } from '~/hooks';
 import { bindActionCreators } from 'redux';
 import actionCreators from '~/redux';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { PaymenOptionTypeDescriptions, RequestStatus } from '~/constants';
-import { getAccessTokenFromCookies } from '~/commons/commonUsedFunctions';
+import { CashPaymentOptionId, PaymenOptionTypeDescriptions, RequestStatus } from '~/constants';
+import { checkTokenExpiry, getAccessTokenFromCookies, hideCardNumber } from '~/commons/commonUsedFunctions';
 import { useLocation, useNavigate } from 'react-router-dom';
 import routes from '~/config/routes';
 import SavedCard from '~/layouts/components/SavedCard';
 import { SetPaymentOptionReq } from '~/redux/action-creators/paymenOptionsActionCreator';
+import jwtDecode from 'jwt-decode';
 
 export default function PaymentOptionsContainer() {
     const [cardNumber, setCardNumber] = useState<string>();
+    const [isCardNumberValid, setIsCardNumberValid] = useState<boolean>(true);
     const [expirationDate, setExpirationDate] = useState<Date>();
+    const [isExpirationDateValid, setIsExpirationDateValid] = useState<boolean>(true);
     const [nameOnCreditCard, setNameOnCreditCard] = useState<string>();
+    const [isNameOnCreditCardValid, setIsNameOnCreditCardValid] = useState<boolean>(true);
     const dispatch = useAppDispatch();
     const { getPaymentOptionTypeDescriptions, getPaymentOptions, resetPaymentOption } = bindActionCreators(
         actionCreators,
@@ -75,6 +79,18 @@ export default function PaymentOptionsContainer() {
     const { setPaymentOption } = bindActionCreators(actionCreators, dispatch);
 
     const onSaveCard = () => {
+        if (currentPaymentOption == PaymenOptionTypeDescriptions.Visa) {
+            if (!cardNumber) {
+                setIsCardNumberValid(false);
+            }
+            if (!expirationDate) {
+                setIsExpirationDateValid(false);
+            }
+            if (!nameOnCreditCard) {
+                setIsNameOnCreditCardValid(false);
+            }
+        }
+
         if (
             cardNumber &&
             expirationDate &&
@@ -82,13 +98,15 @@ export default function PaymentOptionsContainer() {
             currentPaymentOption == PaymenOptionTypeDescriptions.Visa
         ) {
             const setPaymentReq: SetPaymentOptionReq = {
-                cardNumber: cardNumber,
-                expirationDate: expirationDate,
+                cardNumber: hideCardNumber(cardNumber),
+                expiryDate: new Date(expirationDate),
                 nameOnCreditCard: nameOnCreditCard,
                 paymentOptionTypeDescriptionId: PaymenOptionTypeDescriptions.Visa,
                 accessToken: accessToken,
             };
             setPaymentOption(setPaymentReq);
+        } else if (currentPaymentOption == PaymenOptionTypeDescriptions.Cash) {
+            onNavigate(CashPaymentOptionId, addressId);
         }
     };
 
@@ -100,7 +118,11 @@ export default function PaymentOptionsContainer() {
     useEffect(() => {
         if (!accessToken) {
             navigate(routes.signin);
+        } else {
+            const tokenExpire = checkTokenExpiry(accessToken);
+            if (tokenExpire) navigate(routes.signin);
         }
+
         if (!addressId) {
             navigate(routes.basket);
         }
@@ -137,6 +159,12 @@ export default function PaymentOptionsContainer() {
                         setExpirationDate={setExpirationDate}
                         nameOnCreditCard={nameOnCreditCard}
                         setNameOnCreditCard={setNameOnCreditCard}
+                        isCardNumberValid={isCardNumberValid}
+                        setIsCardNumberValid={setIsCardNumberValid}
+                        isExpirationDateValid={isExpirationDateValid}
+                        setIsExpirationDateValid={setIsExpirationDateValid}
+                        isNameOnCreditCardValid={isNameOnCreditCardValid}
+                        setIsNameOnCreditCardValid={setIsNameOnCreditCardValid}
                     />
                 </div>
             ) : currentPaymentOption == PaymenOptionTypeDescriptions.Cash ? (

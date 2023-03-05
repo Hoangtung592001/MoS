@@ -1,0 +1,22 @@
+.congratulations {
+    display: flex;
+    flex-direction: column;
+
+    &__title {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+    }
+
+    &__message {
+        font-size: 1.5rem;
+    }
+
+    &__seller {
+        font-size: 1.5rem;
+
+        &--orderId {
+            color: var(--error-red);
+            margin-right: 5px;
+        }
+    }
+}

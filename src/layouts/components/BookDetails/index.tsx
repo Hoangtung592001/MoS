@@ -38,34 +38,30 @@ export default function BookDetails(props: BookDetailsProps) {
                 subTitles.map((title, index) => {
                     const subItems = Object.keys(props.bookDetails[title]).filter(title => title !== "value");
                     return (
-                        <div className='book-details-characteristics display-flex' key={index}>
-                            <h4 className='book-details-characteristics__header'>{title}</h4>
+                        <div className="book-details-characteristics display-flex" key={index}>
+                            <h4 className="book-details-characteristics__header">{title}</h4>
 
-                            <div className='book-details-characteristic'>
-                                {
-                                    props.bookDetails[title]["value"] ?
+                            <div className="book-details-characteristic">
+                                {props.bookDetails[title]['value'] ? (
                                     <Fragment>
-                                        <div className='book-details-characteristic-container'>
-                                            <div className='book-details-characteristic-content display-flex flex-direction--column'>
-                                                <span>{props.bookDetails[title]["value"]}</span>
+                                        <div className="book-details-characteristic-container">
+                                            <div className="book-details-characteristic-content display-flex flex-direction--column">
+                                                <span>{props.bookDetails[title]['value']}</span>
                                             </div>
                                         </div>
                                     </Fragment>
-                                    : null
-                                }
+                                ) : null}
 
-                                {
-                                    subItems.map((item: any) => {
-                                        return (
-                                            <Fragment>
-                                                <h4 className='book-details-characteristic__header'>{item}:</h4>
-                                                <div className='book-details-characteristic-content display-flex flex-direction--column'>
-                                                    <span>{props.bookDetails[title][item]}</span>
-                                                </div>
-                                            </Fragment>
-                                        )
-                                    })
-                                }
+                                {subItems.map((item: any, key) => {
+                                    return (
+                                        <Fragment key={key}>
+                                            <h4 className="book-details-characteristic__header">{item}:</h4>
+                                            <div className="book-details-characteristic-content display-flex flex-direction--column">
+                                                <span>{props.bookDetails[title][item]}</span>
+                                            </div>
+                                        </Fragment>
+                                    );
+                                })}
                                 {/* <div className='book-details-characteristic-container'>
                                     <h4 className='book-details-characteristic__header'>Synopsis:</h4>
                                     <div className='book-details-characteristic-content display-flex flex-direction--column'>
@@ -75,7 +71,7 @@ export default function BookDetails(props: BookDetailsProps) {
                                 </div> */}
                             </div>
                         </div>
-                    )
+                    );
                 })
             }
             {/* <div className='book-details-characteristics display-flex'>

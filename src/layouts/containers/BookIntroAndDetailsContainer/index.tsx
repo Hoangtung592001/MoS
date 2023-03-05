@@ -6,11 +6,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { bindActionCreators } from 'redux';
 import actionCreators from '~/redux';
-import { getAccessTokenFromCookies } from '~/commons/commonUsedFunctions';
+import { checkTokenExpiry, getAccessTokenFromCookies } from '~/commons/commonUsedFunctions';
 import { AddToBasket } from '~/redux/action-creators/basketActionCreator';
 import routes from '~/config/routes';
 import Cookies from 'universal-cookie';
 import { accessTokenKey, RequestStatus } from '~/constants';
+import jwtDecode from 'jwt-decode';
 export default function BookIntroAndDetailsContainer() {
     const bookDetails = useAppSelector((state) => state.bookDetailsReducer.bookDetails);
     const cookies = new Cookies();
@@ -37,6 +38,10 @@ export default function BookIntroAndDetailsContainer() {
 
         if (!accessToken) {
             navigate(routes.signin);
+        } else {
+            const tokenExpire = checkTokenExpiry(accessToken);
+            if (tokenExpire) 
+                navigate(routes.signin);
         }
     };
 

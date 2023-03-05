@@ -8,7 +8,7 @@ import { get, getById, makeOriginal } from '../reducers/paymenOptionsReducer';
 
 export interface SetPaymentOptionReq {
     cardNumber: string;
-    expirationDate: Date;
+    expiryDate: Date;
     nameOnCreditCard: string;
     paymentOptionTypeDescriptionId: number;
     accessToken: string;

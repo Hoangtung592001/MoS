@@ -1,8 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { BaseResponse } from "~/commons/response";
 import { fetchAsync, fetchAsyncWithAuthentitaion, FETCH_TYPES } from "~/commons/sendRequest";
-import { Book, Exception } from "~/constants/interfaces";
-import { SERVICE_URL } from "~/constants/server";
+import { getDeleteBasketItemUrl } from '~/commons/URLs';
+import { Book, Exception } from '~/constants/interfaces';
+import { SERVICE_URL } from '~/constants/server';
 import { get, getBasketTotal, makeOriginal } from '../reducers/basketReducer';
 
 interface BasketItem {
@@ -22,6 +23,11 @@ export interface AddToBasket {
     quantity: number;
     accessToken: string;
 }
+
+export type RemoveItem = {
+    basketItemId: string;
+    accessToken: string;
+};
 
 export const getBasket = (accessToken: string) => async (dispatch: any) => {
     const response = await fetchAsyncWithAuthentitaion<BaseResponse<Basket>>(
@@ -74,3 +80,20 @@ export const addToBasket = createAsyncThunk('Basket/AddToBasket', async (props: 
 export const resetBasket = () => (dispatch: any) => {
     dispatch(makeOriginal());
 };
+
+export const removeItemFromBasket = createAsyncThunk('Basket/RemoveItem', async (props: RemoveItem, thunkApi) => {
+    try {
+        const { accessToken, basketItemId } = props;
+        const response = await fetchAsyncWithAuthentitaion<any>(
+            getDeleteBasketItemUrl(basketItemId),
+            FETCH_TYPES.DELETE,
+            accessToken,
+        );
+
+        if (response.status == 200) {
+            return thunkApi.fulfillWithValue(1);
+        }
+    } catch (e) {
+        return thunkApi.rejectWithValue(1);
+    }
+});

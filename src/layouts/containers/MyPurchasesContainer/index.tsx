@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import actionCreators from '~/redux';
 import { useEffect } from 'react';
-import { getAccessTokenFromCookies } from '~/commons/commonUsedFunctions';
+import { checkTokenExpiry, getAccessTokenFromCookies } from '~/commons/commonUsedFunctions';
 import { useNavigate } from 'react-router-dom';
 import routes from '~/config/routes';
 import { useAppSelector } from '~/hooks';
@@ -12,6 +12,7 @@ import OrderItem from '~/layouts/components/OrderItem';
 import './MyPurchasesContainer.scss';
 import { BiStore } from 'react-icons/bi';
 import { BsShieldCheck } from 'react-icons/bs';
+import jwtDecode from 'jwt-decode';
 export default function MyPurchasesContainer() {
     const dispatch = useDispatch();
     const { getOrders } = bindActionCreators(actionCreators, dispatch);
@@ -21,16 +22,20 @@ export default function MyPurchasesContainer() {
 
     useEffect(() => {
         if (!accessToken) {
-            navigate(routes.home);
+            navigate(routes.signin);
         } else {
-            getOrders(accessToken);
+            const tokenExpire = checkTokenExpiry(accessToken);
+            if (tokenExpire) navigate(routes.signin);
+            else {
+                getOrders(accessToken);
+            }
         }
     }, []);
 
     return (
         <div className="my-purchases-container display-flex flex-direction--column">
             <h3 className="my-purchases-container__title">{localizations.myPurchases}</h3>
-            {items.map((item) => {
+            {items.map((item, index) => {
                 let totalCost = 0;
                 const orderAt = new Date(item.createdAt);
 
@@ -40,7 +45,7 @@ export default function MyPurchasesContainer() {
 
                 totalCost += item.shippingFee;
                 return (
-                    <div className="my-purchases-container-order">
+                    <div className="my-purchases-container-order" key={index}>
                         <div className="my-purchases-container-order-intro display-flex justify-content--space-between">
                             <div className="my-purchases-container-order-intro-shop-name display-flex align-items--center">
                                 <BiStore className="my-purchases-container-order-intro-shop-name__icon" />
@@ -56,9 +61,9 @@ export default function MyPurchasesContainer() {
                             </div>
                         </div>
                         <div className="my-purchases-container-order-details display-flex flex-direction--column">
-                            {item.orderDetails.map((orderDetail) => {
+                            {item.orderDetails.map((orderDetail, index) => {
                                 return (
-                                    <div className="my-purchases-container-order-details-item">
+                                    <div className="my-purchases-container-order-details-item" key={index}>
                                         <OrderItem
                                             bookId={orderDetail.basketItem.book.id}
                                             imgUrl={orderDetail.basketItem.book.bookImage.url}
