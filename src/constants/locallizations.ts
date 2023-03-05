@@ -126,6 +126,7 @@ const localizations = {
     addAndEditAddress: 'Add/Edit Address',
     fullName: 'Full name (First and Last name)',
     addressLine: 'Address Line ',
+    searchAddess: 'Search your address',
     addressLine2: 'Address Line 2',
     country: 'Country',
     zipAndPostCode: 'Zip/Postal Code',
@@ -141,6 +142,15 @@ const localizations = {
     cardDescription: 'Card Description',
     enterCreditCardSecurityCode: 'Please enter your credit card security code',
     itemSummary: 'Item Summary',
+    paymentType: 'Payment Type',
+    thankYou: 'Thank you!',
+    thankYouMessage:
+        "We're happy that you found the books you wanted! A confirmation of your order including the Sales Order Number is being e-mailed to you. The bookseller may contact you to personally confirm your order or to arrange payment if you chose a method other than credit card. If your order is subject to applicable taxes, the book seller will also provide more information.",
+    orderNumberMessage: 'Your sales order number is {orderNumber}.',
+    orderNumberGuildline:
+        'Use this number to track your purchases and be sure to include it in any e-mail you send to the book seller',
+    errorModalTitle: 'Ooops!',
+    errorModalContent: 'There is no item in your basket!',
 };
 
 export default localizations;

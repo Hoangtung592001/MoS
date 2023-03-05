@@ -7,6 +7,8 @@ import routes from "~/config/routes";
 import { useEffect } from 'react';
 import Cookies from 'universal-cookie';
 import { accessTokenKey } from "~/constants";
+import jwtDecode from 'jwt-decode';
+import { checkTokenExpiry } from '~/commons/commonUsedFunctions';
 
 export default function MyAccountContainer() {
     const navigate = useNavigate();
@@ -16,6 +18,10 @@ export default function MyAccountContainer() {
     useEffect(() => {
         if (!accessToken) {
             navigate(routes.signin);
+        } else {
+            const tokenExpire = checkTokenExpiry(accessToken);
+            if (tokenExpire) 
+                navigate(routes.signin);
         }
     }, []);
 

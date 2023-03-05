@@ -1,16 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RequestStatus } from '~/constants';
 import { Exception, ProductItem } from '~/constants/interfaces';
-import { addToBasket, Basket } from '../action-creators/basketActionCreator';
+import { addToBasket, Basket, removeItemFromBasket } from '../action-creators/basketActionCreator';
 
 interface InitialStateInterface {
     basket: Basket;
     basketTotal: number;
     status: number;
+    removeItemStatus: number;
 }
 
 const initialState: InitialStateInterface = {
     status: RequestStatus.Nothing,
+    removeItemStatus: RequestStatus.Nothing,
     basket: {
         basketItems: [],
         orderTotal: 0,
@@ -30,6 +32,7 @@ export const basketSlice = createSlice({
         },
         makeOriginal: (state) => {
             state.status = RequestStatus.Nothing;
+            state.removeItemStatus = RequestStatus.Nothing;
         },
     },
     extraReducers(builder) {
@@ -43,6 +46,18 @@ export const basketSlice = createSlice({
 
         builder.addCase(addToBasket.rejected, (state) => {
             state.status = RequestStatus.Rejected;
+        });
+
+        builder.addCase(removeItemFromBasket.pending, (state) => {
+            state.removeItemStatus = RequestStatus.Pending;
+        });
+
+        builder.addCase(removeItemFromBasket.fulfilled, (state) => {
+            state.removeItemStatus = RequestStatus.Fulfilled;
+        });
+
+        builder.addCase(removeItemFromBasket.rejected, (state) => {
+            state.removeItemStatus = RequestStatus.Rejected;
         });
     },
 });

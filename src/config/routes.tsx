@@ -14,6 +14,7 @@ const routes = {
     paymentOptions: '/PaymentOptions',
     reviewOrder: '/ReviewOrder',
     myPurchases: '/MyPurchases',
+    congratulations: '/Congratulations',
 };
 
 export const getBookDetailsRoute = (bookId: string) => {

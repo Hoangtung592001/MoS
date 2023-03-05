@@ -12,7 +12,13 @@ import InputDropdown, { InputDropdownItem } from '~/components/InputDropdown';
 import Select from '~/components/Select';
 import { Country } from '~/redux/reducers/countryReducer';
 import { SelectItem } from '~/components/Select';
-import usePlacesAutocomplete, { ClearSuggestions, SetValue, Status } from 'use-places-autocomplete';
+import usePlacesAutocomplete, {
+    ClearSuggestions,
+    getGeocode,
+    getLatLng,
+    SetValue,
+    Status,
+} from 'use-places-autocomplete';
 import { GoogleMap as TypeGoogleMap } from '@react-google-maps/api';
 import { RequestStatus } from '~/constants';
 interface ShippingAddressFormProps {
@@ -30,20 +36,20 @@ interface ShippingAddressFormProps {
     countries: Array<Country>;
     countryId: number;
     setCountryId: React.Dispatch<React.SetStateAction<number>>;
-    ready: boolean;
-    value: string;
-    setValue: SetValue;
-    status: Status;
-    data: google.maps.places.AutocompletePrediction[];
-    clearSuggestions: ClearSuggestions;
-    handleSelectPlace: (val: string) => Promise<void>;
-    selectPlaceItems: Array<InputDropdownItem>;
     isGoogleMapLoaded: boolean;
     setCurrentPosition: React.Dispatch<React.SetStateAction<google.maps.LatLngLiteral | undefined>>;
     currentPosition: google.maps.LatLngLiteral | undefined;
     mapRef: React.MutableRefObject<TypeGoogleMap | undefined>;
     onSubmit: () => void;
     setAddressStatus: number;
+    isFullnameValid: boolean;
+    isAddressLineValid: boolean;
+    isTelephoneValid: boolean;
+    isCurrentPositionValid: boolean;
+    setIsFullnameValid: React.Dispatch<React.SetStateAction<boolean>>;
+    setIsAddresslineValid: React.Dispatch<React.SetStateAction<boolean>>;
+    setIsTelephoneValid: React.Dispatch<React.SetStateAction<boolean>>;
+    setIsCurrentPositionValid: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function ShippingAddressForm(props: ShippingAddressFormProps) {
@@ -65,6 +71,35 @@ export default function ShippingAddressForm(props: ShippingAddressFormProps) {
             },
         });
     }, []);
+
+    const {
+        ready,
+        value,
+        setValue,
+        suggestions: { status, data },
+        clearSuggestions,
+    } = usePlacesAutocomplete();
+
+    const handleSelectPlace = async (val: string) => {
+        setValue(val, false);
+        clearSuggestions();
+
+        const result = await getGeocode({ address: val });
+        const { lat, lng } = await getLatLng(result[0]);
+        const position: google.maps.LatLngLiteral = { lat: lat, lng: lng };
+        props.setCurrentPosition(position);
+        props.mapRef.current?.panTo(position);
+        props.setIsCurrentPositionValid(true);
+    };
+
+    const selectPlaceItems: Array<InputDropdownItem> = data.map(({ place_id, description }) => {
+        const item: InputDropdownItem = {
+            id: place_id,
+            value: description,
+        };
+
+        return item;
+    });
 
     return (
         <div className="shipping-address-form">
@@ -89,19 +124,12 @@ export default function ShippingAddressForm(props: ShippingAddressFormProps) {
                         </label>
                         <Input
                             inputType={InputTypes.ADDRESS_FORM}
+                            isValid={props.isFullnameValid}
                             value={props.fullName}
-                            onChange={(e: any) => props.setFullname(e.target.value)}
-                        />
-                    </div>
-                    <div className="shipping-address-input">
-                        <label htmlFor="" className="shipping-address-input__label">
-                            {localizations.addressLine}
-                            <span className="shipping-address-input__label--required">*</span>
-                        </label>
-                        <Input
-                            inputType={InputTypes.ADDRESS_FORM}
-                            value={props.addressLine}
-                            onChange={(e: any) => props.setAddressline(e.target.value)}
+                            onChange={(e: any) => {
+                                props.setFullname(e.target.value);
+                                props.setIsFullnameValid(true);
+                            }}
                         />
                     </div>
                     <div className="shipping-address-input">
@@ -121,22 +149,43 @@ export default function ShippingAddressForm(props: ShippingAddressFormProps) {
                             {localizations.addressLine}
                             <span className="shipping-address-input__label--required">*</span>
                         </label>
-                        <InputDropdown
-                            handleSelect={props.handleSelectPlace}
-                            value={props.value}
-                            setValue={props.setValue}
-                            selectItems={props.selectPlaceItems}
+                        <Input
+                            inputType={InputTypes.ADDRESS_FORM}
+                            isValid={props.isAddressLineValid}
+                            value={props.addressLine}
+                            onChange={(e: any) => {
+                                props.setAddressline(e.target.value);
+                                props.setIsAddresslineValid(true);
+                            }}
                         />
                     </div>
                     <div className="shipping-address-input">
-                        <GoogleMap
-                            currentPosition={props.currentPosition}
-                            setLength={props.setLength}
-                            isGoogleMapLoaded={props.isGoogleMapLoaded}
-                            setCurrentPosition={props.setCurrentPosition}
-                            mapRef={props.mapRef}
+                        <label htmlFor="" className="shipping-address-input__label">
+                            {localizations.searchAddess}
+                            <span className="shipping-address-input__label--required">*</span>
+                        </label>
+                        <InputDropdown
+                            handleSelect={handleSelectPlace}
+                            value={value}
+                            setValue={setValue}
+                            selectItems={selectPlaceItems}
+                            autoComplete="off"
+                            disabled={!ready}
+                            isValid={props.isCurrentPositionValid}
                         />
                     </div>
+                    {props.isGoogleMapLoaded && (
+                        <div className="shipping-address-input">
+                            <GoogleMap
+                                currentPosition={props.currentPosition}
+                                setLength={props.setLength}
+                                isGoogleMapLoaded={props.isGoogleMapLoaded}
+                                setCurrentPosition={props.setCurrentPosition}
+                                mapRef={props.mapRef}
+                                setIsCurrentPositionValid={props.setIsCurrentPositionValid}
+                            />
+                        </div>
+                    )}
                     <div className="shipping-address-input">
                         <label htmlFor="" className="shipping-address-input__label">
                             {localizations.telephone}
@@ -144,8 +193,12 @@ export default function ShippingAddressForm(props: ShippingAddressFormProps) {
                         </label>
                         <Input
                             inputType={InputTypes.ADDRESS_FORM}
+                            isValid={props.isTelephoneValid}
                             value={props.telephone}
-                            onChange={(e: any) => props.setTelephone(e.target.value)}
+                            onChange={(e: any) => {
+                                props.setTelephone(e.target.value);
+                                props.setIsTelephoneValid(true);
+                            }}
                         />
                     </div>
                     <div className="shipping-address-input">

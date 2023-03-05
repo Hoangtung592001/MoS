@@ -6,7 +6,6 @@ type ReviewContainerProps = {
 };
 
 export default function Review({ title, content }: ReviewContainerProps) {
-    console.log(content);
     function isValidCodon(value: string): value is keyof typeof content {
         return value in content;
     }

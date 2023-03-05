@@ -18,6 +18,7 @@ export const SERVICE_URL = {
     BASKET: {
         GET: 'https://localhost:5001/Basket',
         GET_TOTAL: 'https://localhost:5001/Basket/BasketTotal',
+        DELETE: 'https://localhost:5001/Basket/{basketItemId}',
     },
     ADDRESS: {
         GET: 'https://localhost:5001/Address',
@@ -35,5 +36,8 @@ export const SERVICE_URL = {
     },
     SHIPPING: {
         GET: 'https://localhost:5001/Shipping/{addressId}',
+    },
+    SEARCH_BOOK: {
+        GET: 'https://localhost:5001/Search?limit=5',
     },
 };

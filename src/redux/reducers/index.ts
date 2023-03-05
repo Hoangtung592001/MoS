@@ -10,6 +10,7 @@ import addressReducer from './addressReducer';
 import countryReducer from './countryReducer';
 import shippingReducer from './shippingReducer';
 import orderReducer from './orderReducer';
+import searchBookReducer from './searchBookReducer';
 export default combineReducers({
     user: userReducer,
     error: errorReducer,
@@ -22,4 +23,5 @@ export default combineReducers({
     countryReducer: countryReducer,
     shippingReducer: shippingReducer,
     orderReducer: orderReducer,
+    searchBookReducer: searchBookReducer,
 });

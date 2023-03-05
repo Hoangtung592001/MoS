@@ -1,16 +1,17 @@
-import { SERVICE_URL } from "~/constants/server"
+import localizations from '~/constants/locallizations';
+import { SERVICE_URL } from '~/constants/server';
 
 export const GetExceptionUrl = (exceptionId: string) => {
     const url = SERVICE_URL.EXCEPTION.GET;
-    
-    return url.replace("{ExceptionId}", exceptionId);
-}
+
+    return url.replace('{ExceptionId}', exceptionId);
+};
 
 export const GetBookDetailsUrl = (bookId: string) => {
     const url = SERVICE_URL.BOOKS.GET_BOOK_DETAILS;
 
-    return url.replace("{BookId}", bookId);
-}
+    return url.replace('{BookId}', bookId);
+};
 
 export const GetAddressByIdUrl = (addressId: string) => {
     const url = SERVICE_URL.ADDRESS.GET_BY_ID;
@@ -32,4 +33,16 @@ export const getShippingFeeByIdUrl = (addressId: string) => {
 
 export const redirectToBookDetailByBookId = (bookId: string) => {
     return `/BookDetails/${bookId}`;
+};
+
+export const getOrderNumberMessage = (orderId: string) => {
+    const message = localizations.orderNumberMessage;
+
+    return message.replace('{orderNumber}', orderId);
+};
+
+export const getDeleteBasketItemUrl = (basketItemId: string) => {
+    const url = SERVICE_URL.BASKET.DELETE;
+
+    return url.replace('{basketItemId}', basketItemId);
 };

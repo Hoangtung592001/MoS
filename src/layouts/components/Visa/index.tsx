@@ -13,6 +13,12 @@ type VisaProps = {
     setExpirationDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
     nameOnCreditCard: string | undefined;
     setNameOnCreditCard: React.Dispatch<React.SetStateAction<string | undefined>>;
+    isCardNumberValid: boolean;
+    setIsCardNumberValid: React.Dispatch<React.SetStateAction<boolean>>;
+    isExpirationDateValid: boolean;
+    setIsExpirationDateValid: React.Dispatch<React.SetStateAction<boolean>>;
+    isNameOnCreditCardValid: boolean;
+    setIsNameOnCreditCardValid: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function Visa({
@@ -24,6 +30,12 @@ export default function Visa({
     setExpirationDate,
     nameOnCreditCard,
     setNameOnCreditCard,
+    isCardNumberValid,
+    setIsCardNumberValid,
+    isExpirationDateValid,
+    setIsExpirationDateValid,
+    isNameOnCreditCardValid,
+    setIsNameOnCreditCardValid,
 }: VisaProps) {
     return (
         <div className="visa">
@@ -35,7 +47,11 @@ export default function Visa({
                 <Input
                     inputType={InputTypes.ADDRESS_FORM}
                     value={cardNumber}
-                    onChange={(e: any) => setCardNumber(e.target.value)}
+                    onChange={(e: any) => {
+                        setCardNumber(e.target.value);
+                        setIsCardNumberValid(true);
+                    }}
+                    isValid={isCardNumberValid}
                 />
             </div>
             <div className="visa-input--expiry visa-input">
@@ -45,10 +61,14 @@ export default function Visa({
                 </label>
                 <Input
                     inputType={InputTypes.ADDRESS_FORM}
-                    type="date"
+                    type="month"
                     placeholder="MM / YY"
                     value={expirationDate}
-                    onChange={(e: any) => setExpirationDate(e.target.value)}
+                    onChange={(e: any) => {
+                        setExpirationDate(e.target.value);
+                        setIsExpirationDateValid(true);
+                    }}
+                    isValid={isExpirationDateValid}
                 />
             </div>
             <div className="visa-input">
@@ -59,7 +79,11 @@ export default function Visa({
                 <Input
                     inputType={InputTypes.ADDRESS_FORM}
                     value={nameOnCreditCard}
-                    onChange={(e: any) => setNameOnCreditCard(e.target.value)}
+                    onChange={(e: any) => {
+                        setNameOnCreditCard(e.target.value);
+                        setIsNameOnCreditCardValid(true);
+                    }}
+                    isValid={isNameOnCreditCardValid}
                 />
             </div>
             <div className="visa-save display-flex align-items--center">
