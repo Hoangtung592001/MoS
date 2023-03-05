@@ -17,6 +17,16 @@ export async function fetchAsync<T>(url: string, method: string, data = {}) {
     return response;
 }
 
+export async function FetchAsync<T>(url: string, method: string, data = {}) {
+    const response = await axios<T>({
+        url: url,
+        method: method,
+        data: data,
+    });
+
+    return response;
+}
+
 export async function fetchAsyncWithAuthentitaion<T>(url: string, method: string, accessToken: string, data = {}) {
     const response = await axios<T>({
         url: url,

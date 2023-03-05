@@ -22,10 +22,7 @@ function Header() {
     const cookies = new Cookies();
     const accessToken = cookies.get(accessTokenKey);
     const [isTokenExpired, setIsTokenExpired] = useState<boolean>(false);
-    if (accessToken) {
-        const tokenExpire = checkTokenExpiry(accessToken);
-        if (tokenExpire) setIsTokenExpired(true);
-    }
+    
     const dispatch = useAppDispatch();
     const { signOut, getBasketTotalItems } = bindActionCreators(actionCreators, dispatch);
     const { basketTotal } = useAppSelector((state) => state.basketReducer);
@@ -55,6 +52,10 @@ function Header() {
     useEffect(() => {
         if (accessToken) {
             getBasketTotalItems(accessToken);
+        }
+        if (accessToken) {
+            const tokenExpire = checkTokenExpiry(accessToken);
+            if (tokenExpire) setIsTokenExpired(true);
         }
     }, []);
     return (
@@ -92,7 +93,7 @@ function Header() {
                     </div>
                     <div className="header-nav-right">
                         <div className="header-nav-right__button">
-                            {!isTokenExpired ? (
+                            {isTokenExpired ? (
                                 <ButtonLink to={routes.signin} type={ButtonLinkTypes.PRIMARY_BUTTON}>
                                     {localizations.signin}
                                 </ButtonLink>
