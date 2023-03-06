@@ -5,31 +5,32 @@ import { Book } from '~/redux/action-creators/searchBookActionCreator';
 import { FETCH_TYPES } from '~/commons/sendRequest';
 import { SERVICE_URL } from '~/constants/server';
 
-export default function useBookSearch(query: string) {
-    const [books, setBooks] = useState<Array<Book>>([]);
+export default function useChangeBasketItemQuantity(itemId: string, quantity: number) {
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
 
     useEffect(() => {
-        setBooks([]);
-    }, [query]);
-
-    useEffect(() => {
+        setLoading(true);
+        setError(false);
         let cancel: any;
         axios<BaseResponse<Array<Book>>>({
-            method: FETCH_TYPES.POST,
-            url: SERVICE_URL.SEARCH_BOOK.GET,
+            method: FETCH_TYPES.PUT,
+            url: SERVICE_URL.BASKET.GET,
             data: {
-                title: query,
+                itemId: itemId,
+                quantity: quantity,
             },
             cancelToken: new axios.CancelToken((c) => (cancel = c)),
         })
             .then((res) => {
-                setBooks(res.data.data);
+                setLoading(false);
             })
             .catch((e) => {
                 if (axios.isCancel(e)) return;
+                setError(true);
             });
         return () => cancel();
-    }, [query]);
+    }, [quantity]);
 
-    return { books };
+    return { loading, error };
 }

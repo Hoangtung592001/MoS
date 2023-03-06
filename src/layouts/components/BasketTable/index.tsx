@@ -17,6 +17,8 @@ import Modal from '../Modal';
 import { Basket, RemoveItem, resetBasket } from '~/redux/action-creators/basketActionCreator';
 import jwt_decode from 'jwt-decode';
 import { checkTokenExpiry } from '~/commons/commonUsedFunctions';
+import DefaultValueInput from '~/components/DefaultValueInput';
+import useChangeBasketItemQuantity from '~/hooks/useChangeBasketItemQuantity';
 
 export type BookItem = {
     id: string;
@@ -99,7 +101,10 @@ export default function BasketTable() {
                                             </tr>
                                             <tr className="basket-table-row__item3 basket-table-row-quantity">
                                                 <div className="basket-table-row-quantity-container display-flex align-items--center">
-                                                    <Input inputType={InputTypes.QUANTITY} value={item.book.quantity} />
+                                                    <DefaultValueInput
+                                                        defaultValue={item.book.quantity}
+                                                        action={(quantity: number) => {}}
+                                                    />
                                                     <span>{`(of 1)`}</span>
                                                 </div>
                                             </tr>
