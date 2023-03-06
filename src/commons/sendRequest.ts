@@ -1,5 +1,6 @@
 import axios from "axios";
-
+import { useNavigate } from 'react-router';
+import routes from '~/config/routes';
 export const FETCH_TYPES = {
     GET: 'GET',
     POST: 'POST',
@@ -17,12 +18,21 @@ export async function fetchAsync<T>(url: string, method: string, data = {}) {
     return response;
 }
 
-export async function FetchAsync<T>(url: string, method: string, data = {}) {
+export async function FetchAsyncWithAuthentitaion<T>(url: string, method: string, accessToken: string, data = {}) {
+    const navigate = useNavigate();
+
     const response = await axios<T>({
         url: url,
         method: method,
         data: data,
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
     });
+
+    if (response.status >= 400) {
+        navigate(routes.signin);
+    }
 
     return response;
 }

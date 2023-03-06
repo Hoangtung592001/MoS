@@ -56,6 +56,8 @@ function Header() {
         if (accessToken) {
             const tokenExpire = checkTokenExpiry(accessToken);
             if (tokenExpire) setIsTokenExpired(true);
+        } else if (!accessToken) {
+            setIsTokenExpired(true);
         }
     }, []);
     return (
