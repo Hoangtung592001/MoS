@@ -39,5 +39,6 @@ export const SERVICE_URL = {
     },
     SEARCH_BOOK: {
         GET: 'https://localhost:5001/Search?limit=5',
+        GET_WHOLE: 'https://localhost:5001/Search/Whole?limit=100',
     },
 };

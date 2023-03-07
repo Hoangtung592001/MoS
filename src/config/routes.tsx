@@ -15,6 +15,7 @@ const routes = {
     reviewOrder: '/ReviewOrder',
     myPurchases: '/MyPurchases',
     congratulations: '/Congratulations',
+    search: '/search/:title',
 };
 
 export const getBookDetailsRoute = (bookId: string) => {

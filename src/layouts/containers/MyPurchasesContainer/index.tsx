@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import actionCreators from '~/redux';
 import { useEffect } from 'react';
-import { checkTokenExpiry, getAccessTokenFromCookies } from '~/commons/commonUsedFunctions';
+import { checkTokenExpiry, convertConcurrency, getAccessTokenFromCookies } from '~/commons/commonUsedFunctions';
 import { useNavigate } from 'react-router-dom';
 import routes from '~/config/routes';
 import { useAppSelector } from '~/hooks';
@@ -82,7 +82,9 @@ export default function MyPurchasesContainer() {
                             <div className="my-purchases-container-order-total-price">
                                 <BsShieldCheck className="my-purchases-container-order-total-price__icon" />
                                 <span className="my-purchases-container-order-total-price__label">Total:</span>
-                                <span className="my-purchases-container-order-total-price__price">${totalCost}</span>
+                                <span className="my-purchases-container-order-total-price__price">
+                                    ${convertConcurrency(totalCost)}
+                                </span>
                             </div>
                         </div>
                     </div>

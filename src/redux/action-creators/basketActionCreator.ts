@@ -29,6 +29,12 @@ export type RemoveItem = {
     accessToken: string;
 };
 
+export type ChangeItemQuantity = {
+    itemId: string;
+    quantity: number;
+    accessToken: string;
+};
+
 export const getBasket = (accessToken: string) => async (dispatch: any) => {
     const response = await fetchAsyncWithAuthentitaion<BaseResponse<Basket>>(
         SERVICE_URL.BASKET.GET,
@@ -97,3 +103,24 @@ export const removeItemFromBasket = createAsyncThunk('Basket/RemoveItem', async 
         return thunkApi.rejectWithValue(1);
     }
 });
+
+export const changeItemQuantityAction = createAsyncThunk(
+    'Basket/ChangeQuantity',
+    async (props: ChangeItemQuantity, thunkApi) => {
+        try {
+            const { accessToken, ...changeItemQuantityProps } = props;
+            const response = await fetchAsyncWithAuthentitaion<any>(
+                SERVICE_URL.BASKET.GET,
+                FETCH_TYPES.PUT,
+                accessToken,
+                changeItemQuantityProps,
+            );
+
+            if (response.status == 200) {
+                return thunkApi.fulfillWithValue(1);
+            }
+        } catch (e) {
+            return thunkApi.rejectWithValue(1);
+        }
+    },
+);

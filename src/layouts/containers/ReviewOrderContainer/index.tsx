@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { checkTokenExpiry, getAccessTokenFromCookies } from '~/commons/commonUsedFunctions';
 import { Button, Input, TextLink } from '~/components';
-import routes from '~/config/routes';
+import routes, { getBookDetailsRoute } from '~/config/routes';
 import { CashPaymentOptionId, RequestStatus } from '~/constants';
 import { InputTypes, TextLinkTypes } from '~/constants/enums';
 import localizations from '~/constants/locallizations';
@@ -129,7 +129,10 @@ export default function ReviewOrderContainer() {
                                         <tr className="basket-table-row">
                                             <td className="basket-table-row__item1 basket-table-row-item display-flex">
                                                 <div className="basket-table-row-info display-flex flex-direction--column">
-                                                    <TextLink type={TextLinkTypes.BLUE}>
+                                                    <TextLink
+                                                        type={TextLinkTypes.BLUE}
+                                                        to={getBookDetailsRoute(item.book.id)}
+                                                    >
                                                         <span className="basket-table-row-info__title">
                                                             {item.book.title}
                                                         </span>
@@ -202,7 +205,7 @@ export default function ReviewOrderContainer() {
                             <div className="basket-total-total">
                                 <span className="basket-total-total__message">Total:</span>
                                 <span className="basket-total-total__price">
-                                    US ${shippingFee + basket?.orderTotal}
+                                    US ${Math.round((shippingFee + basket?.orderTotal) * 100) / 100}
                                 </span>
                             </div>
                         </div>

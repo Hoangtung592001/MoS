@@ -1,8 +1,8 @@
 import './DefaultValueInput.scss';
 import { useState } from 'react';
-function DefaultValueInput({ inputType, isValid, defaultValue, action, ...props }: any) {
+function DefaultValueInput({ inputType, defaultValue, actionOnBlur, itemId, ...props }: any) {
     const [value, setValue] = useState(defaultValue);
-
+    const [isValid, setIsValid] = useState<boolean>(true);
     return (
         <input
             type="text"
@@ -16,7 +16,9 @@ function DefaultValueInput({ inputType, isValid, defaultValue, action, ...props 
             value={value}
             onChange={(e) => {
                 setValue(e.target.value);
-                action(e.target.value);
+            }}
+            onBlur={() => {
+                actionOnBlur(value, setIsValid, itemId);
             }}
             {...props}
         />
