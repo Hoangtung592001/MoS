@@ -1,8 +1,9 @@
-import { signIn, signUp, signOut } from './action-creators/userActionCreator';
+import { signIn, signUp, signOut, resetUserAction } from './action-creators/userActionCreator';
 import { removeErrorAction } from './action-creators/errorActionCreator';
 import { getFrequentlyViewedItems } from './action-creators/frequentlyViewedItemsActionCreator';
 import {
     addToBasket,
+    changeItemQuantityAction,
     getBasket,
     getBasketTotalItems,
     removeItemFromBasket,
@@ -20,7 +21,7 @@ import { getAddressById, getSavedAddress, resetAddress, setAddress } from './act
 import { getCountries } from './action-creators/countryActionCreator';
 import { getShippingFee } from './action-creators/shippingActionCreator';
 import { getOrders, resetOrder, setOrder } from './action-creators/orderActionCreator';
-import { searchBook } from './action-creators/searchBookActionCreator';
+import { searchBook, searchWholeBook } from './action-creators/searchBookActionCreator';
 const actionCreators = {
     removeErrorAction: removeErrorAction,
     signIn: signIn,
@@ -48,6 +49,9 @@ const actionCreators = {
     resetBasket: resetBasket,
     searchBook: searchBook,
     removeItemFromBasket: removeItemFromBasket,
+    changeItemQuantityAction: changeItemQuantityAction,
+    searchWholeBook: searchWholeBook,
+    resetUserAction: resetUserAction,
 };
 
 export default actionCreators;

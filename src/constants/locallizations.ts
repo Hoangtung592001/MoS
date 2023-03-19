@@ -51,6 +51,7 @@ const localizations = {
     termsAndConditions:
         'By using the Web site, you confirm that you have read, understood, and agreed to be bound by the Terms and Conditions.',
     email: 'Email',
+    username: 'Username',
     password: 'Password',
     signinTermsAndConditions: 'By signing-in, you agree to the AbeBooks.com ',
     keepMeSignedIn: 'Keep me signed in.',
@@ -62,7 +63,7 @@ const localizations = {
     atLeast6Charaters: 'At least 6 characters',
     yourName: 'Your Name',
     reEnterPassword: 'Re-enter password',
-    alertPassword: 'Passwords must be at least 6 characters',
+    alertPassword: 'Password must be at least 6 characters',
     alreadyHaveeAnAccount: 'Already have an account?',
     basketItems: 'Basket Items',
     items: 'items',
@@ -151,6 +152,7 @@ const localizations = {
         'Use this number to track your purchases and be sure to include it in any e-mail you send to the book seller',
     errorModalTitle: 'Ooops!',
     errorModalContent: 'There is no item in your basket!',
+    usernameValidation: 'Username must be at least 6 characters',
 };
 
 export default localizations;

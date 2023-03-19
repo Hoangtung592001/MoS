@@ -24,15 +24,19 @@ export const hideCardNumber = (cardNumber: string) => {
 };
 
 export const getRandomKey = () => {
-    return Math.floor(Math.random() * 1000000);
+    return Math.floor(Math.random() * 100000000);
 };
 
 export const checkTokenExpiry = (token: string) => {
     const { exp } = jwtDecode<any>(token);
-    
+
     if (Date.now() / 1000 >= exp) {
         return true;
     }
 
     return false;
+};
+
+export const convertConcurrency = (cost: number) => {
+    return Math.round(cost * 100) / 100;
 };

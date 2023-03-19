@@ -1,18 +1,25 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RequestStatus } from '~/constants';
 import { Exception, ProductItem } from '~/constants/interfaces';
-import { addToBasket, Basket, removeItemFromBasket } from '../action-creators/basketActionCreator';
+import {
+    addToBasket,
+    Basket,
+    changeItemQuantityAction,
+    removeItemFromBasket,
+} from '../action-creators/basketActionCreator';
 
 interface InitialStateInterface {
     basket: Basket;
     basketTotal: number;
     status: number;
     removeItemStatus: number;
+    changeItemQuantityStatus: number;
 }
 
 const initialState: InitialStateInterface = {
     status: RequestStatus.Nothing,
     removeItemStatus: RequestStatus.Nothing,
+    changeItemQuantityStatus: RequestStatus.Nothing,
     basket: {
         basketItems: [],
         orderTotal: 0,
@@ -33,6 +40,7 @@ export const basketSlice = createSlice({
         makeOriginal: (state) => {
             state.status = RequestStatus.Nothing;
             state.removeItemStatus = RequestStatus.Nothing;
+            state.changeItemQuantityStatus = RequestStatus.Nothing;
         },
     },
     extraReducers(builder) {
@@ -58,6 +66,18 @@ export const basketSlice = createSlice({
 
         builder.addCase(removeItemFromBasket.rejected, (state) => {
             state.removeItemStatus = RequestStatus.Rejected;
+        });
+
+        builder.addCase(changeItemQuantityAction.pending, (state) => {
+            state.changeItemQuantityStatus = RequestStatus.Pending;
+        });
+
+        builder.addCase(changeItemQuantityAction.fulfilled, (state) => {
+            state.changeItemQuantityStatus = RequestStatus.Fulfilled;
+        });
+
+        builder.addCase(changeItemQuantityAction.rejected, (state) => {
+            state.changeItemQuantityStatus = RequestStatus.Rejected;
         });
     },
 });

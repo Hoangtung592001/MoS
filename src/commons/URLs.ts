@@ -46,3 +46,7 @@ export const getDeleteBasketItemUrl = (basketItemId: string) => {
 
     return url.replace('{basketItemId}', basketItemId);
 };
+
+export const getSearchedBooksUrl = (title: string) => {
+    return `/search/${title}`;
+};

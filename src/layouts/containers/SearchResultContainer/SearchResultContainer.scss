@@ -1,0 +1,8 @@
+.search-result-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+}
+
+.search-result-container-item {
+    display: inline-grid;
+}

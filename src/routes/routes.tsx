@@ -18,6 +18,7 @@ import {
 import CongratulationsContainer from '~/layouts/containers/CongratulationsContainer';
 import GoogleMapContainer from '~/layouts/containers/GoogleMapContainer';
 import MyPurchasesContainer from '~/layouts/containers/MyPurchasesContainer';
+import SearchResultContainer from '~/layouts/containers/SearchResultContainer';
 import ShippingAddressContainer from '~/layouts/containers/ShippingAddressContainer';
 
 interface Route {
@@ -43,6 +44,7 @@ const publicRoutes: Route[] = [
     { path: config.routes.reviewOrder, component: ReviewOrderContainer, layout: HeaderIcon },
     { path: config.routes.myPurchases, component: MyPurchasesContainer },
     { path: config.routes.congratulations, component: CongratulationsContainer },
+    { path: config.routes.search, component: SearchResultContainer },
 ];
 
 export { publicRoutes };

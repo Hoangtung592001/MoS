@@ -17,18 +17,19 @@ import { useState } from 'react';
 import useBookSearch from '~/hooks/useBookSearch';
 import jwtDecode from 'jwt-decode';
 import { checkTokenExpiry } from '~/commons/commonUsedFunctions';
+import { getSearchedBooksUrl } from '~/commons/URLs';
 
 function Header() {
     const cookies = new Cookies();
     const accessToken = cookies.get(accessTokenKey);
     const [isTokenExpired, setIsTokenExpired] = useState<boolean>(false);
-    
+
     const dispatch = useAppDispatch();
     const { signOut, getBasketTotalItems } = bindActionCreators(actionCreators, dispatch);
     const { basketTotal } = useAppSelector((state) => state.basketReducer);
     const navigate = useNavigate();
     const [query, setQuery] = useState<string>('');
-    const [selectedOption, setSelectedOption] = useState<string>();
+    const [selectedOption, setSelectedOption] = useState<string>('');
     const { books } = useBookSearch(query);
 
     const selectItems = useMemo<Array<InputDropdownItem>>(() => {
@@ -42,12 +43,12 @@ function Header() {
         });
     }, [books]);
 
-    const handleSelect = (selectedItem: string) => {
-        if (selectedOption) {
+    const handleSelect = useCallback((selectedItem: string) => {
+        if (selectedItem) {
             setQuery('');
-            navigate(getBookDetailsRoute(selectedOption));
+            navigate(getBookDetailsRoute(selectedItem));
         }
-    };
+    }, []);
 
     useEffect(() => {
         if (accessToken) {
@@ -78,15 +79,14 @@ function Header() {
                             <InputDropdown
                                 placeholder={localizations.inputSearchPlaceholder}
                                 selectItems={selectItems}
-                                handleSelect={handleSelect}
                                 value={query}
                                 setValue={setQuery}
                                 key={selectedOption}
-                                setKey={setSelectedOption}
+                                actionOnClick={handleSelect}
                             />
                         </div>
                         <div className="header-nav-search-button">
-                            <ButtonLink to="" type={ButtonLinkTypes.QUATERNARY_BUTTON}>
+                            <ButtonLink to={getSearchedBooksUrl(query)} type={ButtonLinkTypes.QUATERNARY_BUTTON}>
                                 <span className="header-nav-search-button__icon">
                                     <BiSearchAlt2 />
                                 </span>

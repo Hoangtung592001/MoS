@@ -1,3 +1,4 @@
+import { convertConcurrency } from '~/commons/commonUsedFunctions';
 import { redirectToBookDetailByBookId } from '~/commons/URLs';
 import { TextLink } from '~/components';
 import './OrderItem.scss';
@@ -33,8 +34,8 @@ export default function OrderItem({
                 </div>
             </div>
             <div className="order-item-price">
-                <span className="order-item-price__original">${originalPriceEach}</span>
-                <span className="order-item-price__final">${finalPriceEach}</span>
+                <span className="order-item-price__original">${convertConcurrency(originalPriceEach)}</span>
+                <span className="order-item-price__final">${convertConcurrency(finalPriceEach)}</span>
             </div>
         </div>
     );

@@ -3,7 +3,7 @@ import './BasketTable.scss';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '~/hooks';
 import { useCallback, useEffect } from 'react';
-import routes from '~/config/routes';
+import routes, { getBookDetailsRoute } from '~/config/routes';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import actionCreators from '~/redux';
@@ -14,9 +14,9 @@ import Cookies from 'universal-cookie';
 import { accessTokenKey, RequestStatus } from '~/constants';
 import { useState } from 'react';
 import Modal from '../Modal';
-import { Basket, RemoveItem, resetBasket } from '~/redux/action-creators/basketActionCreator';
+import { Basket, ChangeItemQuantity, RemoveItem, resetBasket } from '~/redux/action-creators/basketActionCreator';
 import jwt_decode from 'jwt-decode';
-import { checkTokenExpiry } from '~/commons/commonUsedFunctions';
+import { checkTokenExpiry, convertConcurrency } from '~/commons/commonUsedFunctions';
 import DefaultValueInput from '~/components/DefaultValueInput';
 import useChangeBasketItemQuantity from '~/hooks/useChangeBasketItemQuantity';
 
@@ -29,13 +29,34 @@ export default function BasketTable() {
     const cookies = new Cookies();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { getBasket, removeItemFromBasket, resetBasket } = bindActionCreators(actionCreators, dispatch);
+    const { getBasket, removeItemFromBasket, resetBasket, changeItemQuantityAction } = bindActionCreators(
+        actionCreators,
+        dispatch,
+    );
     const accessToken = cookies.get(accessTokenKey);
-    const { basket, removeItemStatus } = useAppSelector((state) => state.basketReducer);
+    const { basket, removeItemStatus, changeItemQuantityStatus } = useAppSelector((state) => state.basketReducer);
 
     const onProceedToCheckout = useCallback((basket: Basket) => {
         navigate(routes.shippingAddress);
     }, []);
+
+    const changeItemQuantity = useCallback(
+        (quantity: number, setIsValid: React.Dispatch<React.SetStateAction<boolean>>, itemId: string) => {
+            if (quantity <= 0) {
+                setIsValid(false);
+            } else {
+                const changeItemQuantityProps: ChangeItemQuantity = {
+                    accessToken: accessToken,
+                    quantity: quantity,
+                    itemId: itemId,
+                };
+
+                changeItemQuantityAction(changeItemQuantityProps);
+                setIsValid(true);
+            }
+        },
+        [],
+    );
 
     useEffect(() => {
         if (!accessToken) {
@@ -56,6 +77,13 @@ export default function BasketTable() {
             window.location.reload();
         }
     }, [removeItemFromBasket]);
+
+    useEffect(() => {
+        if (changeItemQuantityStatus == RequestStatus.Fulfilled) {
+            resetBasket();
+            window.location.reload();
+        }
+    }, [changeItemQuantityStatus]);
 
     return (
         <>
@@ -84,7 +112,10 @@ export default function BasketTable() {
                                             <tr className="basket-table-row__item1 basket-table-row-item display-flex">
                                                 <img src={item.book.bookImage.url} alt="Books" />
                                                 <div className="basket-table-row-info display-flex flex-direction--column">
-                                                    <TextLink type={TextLinkTypes.BLUE}>
+                                                    <TextLink
+                                                        type={TextLinkTypes.BLUE}
+                                                        to={getBookDetailsRoute(item.book.id)}
+                                                    >
                                                         <span className="basket-table-row-info__title">
                                                             {item.book.title}
                                                         </span>
@@ -103,7 +134,9 @@ export default function BasketTable() {
                                                 <div className="basket-table-row-quantity-container display-flex align-items--center">
                                                     <DefaultValueInput
                                                         defaultValue={item.book.quantity}
-                                                        action={(quantity: number) => {}}
+                                                        type="number"
+                                                        actionOnBlur={changeItemQuantity}
+                                                        itemId={item.id}
                                                     />
                                                     <span>{`(of 1)`}</span>
                                                 </div>
@@ -134,7 +167,7 @@ export default function BasketTable() {
                                             </tr>
                                             <tr className="basket-table-row__item2 basket-table-row-price">
                                                 <span className="basket-table-row-price__total--sub-total basket-table-row-shipping__text">
-                                                    US$ {item.book.price}
+                                                    US$ {convertConcurrency(item.book.price * item.book.quantity)}
                                                 </span>
                                             </tr>
                                             <tr className="basket-table-row__item3"></tr>
@@ -158,7 +191,9 @@ export default function BasketTable() {
                         </Button>
                         <div className="basket-total-total">
                             <span className="basket-total-total__message">Order Total:</span>
-                            <span className="basket-total-total__price">US ${basket?.orderTotal}</span>
+                            <span className="basket-total-total__price">
+                                US ${convertConcurrency(basket?.orderTotal)}
+                            </span>
                         </div>
                     </div>
                     <div className="basket-total-button">
@@ -167,6 +202,7 @@ export default function BasketTable() {
                                 onClick={(e: any) => {
                                     onProceedToCheckout(basket);
                                 }}
+                                isLoading={changeItemQuantityStatus == RequestStatus.Pending}
                             >
                                 <span>Proceed to Checkout</span>
                             </Button>

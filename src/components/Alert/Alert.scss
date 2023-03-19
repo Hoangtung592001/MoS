@@ -1,5 +1,7 @@
 .alert {
-    margin-top: 10px;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
 
     &__icon {
         margin-right: 5px;

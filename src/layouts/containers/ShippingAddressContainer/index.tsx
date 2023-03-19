@@ -38,7 +38,7 @@ export default function ShippingAddressContainer() {
     const setAddressStatus = useAppSelector((state) => state.addressReducer.status);
     const { setAddress } = bindActionCreators(actionCreators, dispatch);
     const { isLoaded } = useLoadScript({
-        googleMapsApiKey: 'AIzaSyDI67HKJfI0oeNGqvdX6VNW5_1Fq2wq9jQ',
+        googleMapsApiKey: 'AIzaSyBJpZt5eX9hArvtxM5lmPhhTHBbMCgDuko',
         libraries: ['places'],
     });
 

@@ -14,6 +14,7 @@ export enum ButtonTypes {
     ADDTOBASKET = 'basket',
     NEXT_SLIDER = 'next-slide',
     USE_SAVED_CARD = 'saved-card',
+    CREATE_ACCOUNT = 'create-account',
 }
 
 export enum InputTypes {
