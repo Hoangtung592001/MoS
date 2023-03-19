@@ -18,7 +18,7 @@ export default function InputDropdown({
     ...props
 }: any) {
     return (
-        <Combobox className="input-dropdown-input">
+        <Combobox className="input-dropdown-input" onSelect={handleSelect ? handleSelect : null}>
             <ComboboxInput
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
@@ -38,8 +38,9 @@ export default function InputDropdown({
                                 key={id}
                                 value={value}
                                 onClick={(e) => {
-                                    console.log(id);
-                                    actionOnClick(id);
+                                    if (actionOnClick) {
+                                        actionOnClick(id);
+                                    }
                                 }}
                             />
                         ))}

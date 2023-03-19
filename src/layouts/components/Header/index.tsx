@@ -79,7 +79,6 @@ function Header() {
                             <InputDropdown
                                 placeholder={localizations.inputSearchPlaceholder}
                                 selectItems={selectItems}
-                                handleSelect={handleSelect}
                                 value={query}
                                 setValue={setQuery}
                                 key={selectedOption}

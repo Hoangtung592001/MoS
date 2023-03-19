@@ -1,4 +1,4 @@
-import { signIn, signUp, signOut } from './action-creators/userActionCreator';
+import { signIn, signUp, signOut, resetUserAction } from './action-creators/userActionCreator';
 import { removeErrorAction } from './action-creators/errorActionCreator';
 import { getFrequentlyViewedItems } from './action-creators/frequentlyViewedItemsActionCreator';
 import {
@@ -51,6 +51,7 @@ const actionCreators = {
     removeItemFromBasket: removeItemFromBasket,
     changeItemQuantityAction: changeItemQuantityAction,
     searchWholeBook: searchWholeBook,
+    resetUserAction: resetUserAction,
 };
 
 export default actionCreators;

@@ -3,7 +3,7 @@ import './Button.scss';
 
 function Button({ type, children, isLoading, loadingColor, ...props }: any) {
     return (
-        <button className={type ? `button button--${type}` : 'button'} {...props}>
+        <button className={type ? `button button--${type}` : 'button'} {...props} disabled={isLoading}>
             {isLoading ? (
                 <SpinnerCircularFixed
                     className="button__spinner"

@@ -16,7 +16,7 @@ import { useState } from 'react';
 import Modal from '../Modal';
 import { Basket, ChangeItemQuantity, RemoveItem, resetBasket } from '~/redux/action-creators/basketActionCreator';
 import jwt_decode from 'jwt-decode';
-import { checkTokenExpiry } from '~/commons/commonUsedFunctions';
+import { checkTokenExpiry, convertConcurrency } from '~/commons/commonUsedFunctions';
 import DefaultValueInput from '~/components/DefaultValueInput';
 import useChangeBasketItemQuantity from '~/hooks/useChangeBasketItemQuantity';
 
@@ -77,6 +77,13 @@ export default function BasketTable() {
             window.location.reload();
         }
     }, [removeItemFromBasket]);
+
+    useEffect(() => {
+        if (changeItemQuantityStatus == RequestStatus.Fulfilled) {
+            resetBasket();
+            window.location.reload();
+        }
+    }, [changeItemQuantityStatus]);
 
     return (
         <>
@@ -160,7 +167,7 @@ export default function BasketTable() {
                                             </tr>
                                             <tr className="basket-table-row__item2 basket-table-row-price">
                                                 <span className="basket-table-row-price__total--sub-total basket-table-row-shipping__text">
-                                                    US$ {item.book.price}
+                                                    US$ {convertConcurrency(item.book.price * item.book.quantity)}
                                                 </span>
                                             </tr>
                                             <tr className="basket-table-row__item3"></tr>
@@ -184,7 +191,9 @@ export default function BasketTable() {
                         </Button>
                         <div className="basket-total-total">
                             <span className="basket-total-total__message">Order Total:</span>
-                            <span className="basket-total-total__price">US ${basket?.orderTotal}</span>
+                            <span className="basket-total-total__price">
+                                US ${convertConcurrency(basket?.orderTotal)}
+                            </span>
                         </div>
                     </div>
                     <div className="basket-total-button">

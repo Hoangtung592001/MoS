@@ -40,6 +40,7 @@ export const basketSlice = createSlice({
         makeOriginal: (state) => {
             state.status = RequestStatus.Nothing;
             state.removeItemStatus = RequestStatus.Nothing;
+            state.changeItemQuantityStatus = RequestStatus.Nothing;
         },
     },
     extraReducers(builder) {
