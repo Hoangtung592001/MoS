@@ -1,4 +1,4 @@
-import { signIn, signUp, signOut, resetUserAction } from './action-creators/userActionCreator';
+import { signIn, signUp, signOut, resetUserAction, checkAdminAction } from './action-creators/userActionCreator';
 import { removeErrorAction } from './action-creators/errorActionCreator';
 import { getFrequentlyViewedItems } from './action-creators/frequentlyViewedItemsActionCreator';
 import {
@@ -9,7 +9,7 @@ import {
     removeItemFromBasket,
     resetBasket,
 } from './action-creators/basketActionCreator';
-import { getBookDetails } from './action-creators/bookDetailsActionCreator';
+import { GetAll, getBookDetails, removeBook, resetBookDetails } from './action-creators/bookDetailsActionCreator';
 import { getPaymentOptionTypeDescriptions } from './action-creators/paymentOptionTypeDescriptionActionCreator';
 import {
     getPaymentOptions,
@@ -52,6 +52,10 @@ const actionCreators = {
     changeItemQuantityAction: changeItemQuantityAction,
     searchWholeBook: searchWholeBook,
     resetUserAction: resetUserAction,
+    GetAllBooks: GetAll,
+    removeBook: removeBook,
+    resetBookDetails: resetBookDetails,
+    checkAdminAction: checkAdminAction
 };
 
 export default actionCreators;

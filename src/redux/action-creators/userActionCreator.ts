@@ -1,11 +1,11 @@
 import { SignInRequest, SignUpRequest, SignInData } from "../actions/userAction";
 import { BaseResponse, ExceptionResponse } from "~/commons/response";
 import { SERVICE_URL } from "~/constants/server";
-import { FETCH_TYPES } from "~/commons/sendRequest";
+import { fetchAsyncWithAuthentitaion, FetchAsyncWithAuthentitaion, FETCH_TYPES } from "~/commons/sendRequest";
 import { fetchAsync } from "~/commons/sendRequest";
 import { GetExceptionUrl } from "~/commons/URLs";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { makeOriginal, signOut as signOutAction } from '../reducers/userReducer';
+import { checkAdmin, makeOriginal, signOut as signOutAction } from '../reducers/userReducer';
 import { Exception } from '~/constants/interfaces';
 import { accessTokenKey } from '~/constants';
 import Cookies from 'universal-cookie';
@@ -73,3 +73,15 @@ export const signUp = createAsyncThunk('User/SignUp', async (props: SignUpProps,
 export const resetUserAction = () => (dispatch: any) => {
     dispatch(makeOriginal());
 };
+
+export const checkAdminAction = (accessToken: string) => async (dispatch: any) => {
+    const response = await fetchAsyncWithAuthentitaion<BaseResponse<boolean>>(
+        SERVICE_URL.USER.CHECK_ADMIN,
+        FETCH_TYPES.GET,
+        accessToken
+    );
+
+    if (response.data.success) {
+        dispatch(checkAdmin(response.data.data));
+    }
+}

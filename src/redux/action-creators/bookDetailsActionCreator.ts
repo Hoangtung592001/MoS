@@ -1,9 +1,11 @@
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import { StringLiteral } from "typescript";
 import { BaseResponse } from "~/commons/response";
-import { fetchAsync, FETCH_TYPES } from "~/commons/sendRequest";
-import { GetBookDetailsUrl } from "~/commons/URLs";
+import { fetchAsync, fetchAsyncWithAuthentitaion, FETCH_TYPES } from "~/commons/sendRequest";
+import { GetBookDetailsUrl, removeBookUrl } from "~/commons/URLs";
 import { Author, BookCondition, BookImage, Publisher } from "~/constants/interfaces";
-import { get } from "../reducers/bookDetailsReducer";
+import { SERVICE_URL } from "~/constants/server";
+import { get, getAll, makeOriginal } from "../reducers/bookDetailsReducer";
 
 export interface BookDetails {
     id: string;
@@ -26,6 +28,11 @@ export interface BookDetails {
     bookDetails: string;
 }
 
+export type RemoveBookReq = {
+    accessToken: string;
+    bookId: string;
+}
+
 export const getBookDetails = (accessToken: string, bookId: string) => async (dispatch: any) => {
     const response = await fetchAsync<BaseResponse<BookDetails>>
                             (
@@ -39,3 +46,38 @@ export const getBookDetails = (accessToken: string, bookId: string) => async (di
         dispatch(get(data.data));
     }
 }
+
+export const GetAll = () => async (dispatch: any) => {
+    const response = await fetchAsync<BaseResponse<Array<BookDetails>>>
+                            (
+                                SERVICE_URL.BOOKS.GET_ALL,
+                                FETCH_TYPES.GET
+                            );
+
+    if (response.data.success) {
+        const data = response.data;
+
+        dispatch(getAll(data.data));
+    }
+}
+
+export const removeBook = createAsyncThunk('Book/Remove', async (props: RemoveBookReq, thunkApi) => {
+    const { accessToken, bookId } = props;
+    
+    try {
+        await fetchAsyncWithAuthentitaion(
+            removeBookUrl(bookId),
+            FETCH_TYPES.DELETE,
+            accessToken,
+        );
+
+        thunkApi.fulfillWithValue(true)
+    } catch (e) {
+        return thunkApi.rejectWithValue(false);
+    }
+});
+
+export const resetBookDetails = () => (dispatch: any) => {
+    dispatch(makeOriginal());
+};
+

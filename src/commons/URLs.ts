@@ -47,6 +47,12 @@ export const getDeleteBasketItemUrl = (basketItemId: string) => {
     return url.replace('{basketItemId}', basketItemId);
 };
 
+export const removeBookUrl = (bookId: string) => {
+    const url = SERVICE_URL.BOOKS.REMOVE;
+
+    return url.replace('{BookId}', bookId);
+};
+
 export const getSearchedBooksUrl = (title: string) => {
     return `/search/${title}`;
 };
