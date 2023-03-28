@@ -15,6 +15,7 @@ import {
     PaymentOptionsContainer,
     ReviewOrderContainer,
 } from '~/layouts/containers';
+import BooksContainer from '~/layouts/containers/BooksContainer';
 import CongratulationsContainer from '~/layouts/containers/CongratulationsContainer';
 import GoogleMapContainer from '~/layouts/containers/GoogleMapContainer';
 import MyPurchasesContainer from '~/layouts/containers/MyPurchasesContainer';
@@ -45,6 +46,7 @@ const publicRoutes: Route[] = [
     { path: config.routes.myPurchases, component: MyPurchasesContainer },
     { path: config.routes.congratulations, component: CongratulationsContainer },
     { path: config.routes.search, component: SearchResultContainer },
+    { path: config.routes.books, component: BooksContainer },
 ];
 
 export { publicRoutes };

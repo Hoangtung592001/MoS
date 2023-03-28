@@ -17,6 +17,7 @@ interface initialStateInterface {
     errors: Exception | null;
     signUpError: Exception | null;
     signUpStatus: number;
+    isAdmin: boolean;
 }
 
 const initialState: initialStateInterface = {
@@ -27,6 +28,7 @@ const initialState: initialStateInterface = {
     errors: null,
     signUpError: null,
     signUpStatus: RequestStatus.Nothing,
+    isAdmin: false
 };
 
 const userSlice = createSlice({
@@ -43,6 +45,9 @@ const userSlice = createSlice({
             state.signUpStatus = RequestStatus.Nothing;
             state.errors = null;
         },
+        checkAdmin(state, action: PayloadAction<boolean>) {
+            state.isAdmin = action.payload;
+        }
     },
     extraReducers(builder) {
         builder.addCase(signIn.pending, (state) => {
@@ -81,6 +86,6 @@ const userSlice = createSlice({
     },
 });
 
-export const { signOut, makeOriginal } = userSlice.actions;
+export const { signOut, makeOriginal, checkAdmin } = userSlice.actions;
 
 export default userSlice.reducer;

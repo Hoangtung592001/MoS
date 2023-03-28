@@ -153,6 +153,8 @@ const localizations = {
     errorModalTitle: 'Ooops!',
     errorModalContent: 'There is no item in your basket!',
     usernameValidation: 'Username must be at least 6 characters',
+    manageBooks: 'Manage Books',
+    addNewBook: 'Add a new Book'
 };
 
 export default localizations;

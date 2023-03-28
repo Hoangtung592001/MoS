@@ -2,6 +2,7 @@ export const SERVICE_URL = {
     USER: {
         SIGN_UP: 'https://localhost:5001/User/SignUp',
         SIGN_IN: 'https://localhost:5001/User/SignIn',
+        CHECK_ADMIN: 'https://localhost:5001/User/CheckAdmin',
     },
     EXCEPTION: {
         GET: 'https://localhost:5001/Exception/{ExceptionId}',
@@ -11,6 +12,8 @@ export const SERVICE_URL = {
         RECOMMENDED_ITEMS: 'https://localhost:5001/Book/RecommendedItems',
         RECENTLY_VIEWED_ITEMS: 'https://localhost:5001/Book/RecentlyViewedItem',
         GET_BOOK_DETAILS: 'https://localhost:5001/Book/GetBookDetails/{BookId}',
+        GET_ALL: 'https://localhost:5001/Book/GetAll',
+        REMOVE: 'https://localhost:5001/Book/DeleteBook/{BookId}',
     },
     ORDERS: {
         GET: 'https://localhost:5001/Order',

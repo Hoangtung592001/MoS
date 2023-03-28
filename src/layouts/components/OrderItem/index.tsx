@@ -10,6 +10,9 @@ export type OrderItemProps = {
     quantity: number;
     finalPriceEach: number;
     originalPriceEach: number;
+    disablePrice?: boolean;
+    Button?: any;
+    showQuantity?: boolean;
 };
 
 export default function OrderItem({
@@ -19,6 +22,9 @@ export default function OrderItem({
     quantity,
     finalPriceEach,
     originalPriceEach,
+    disablePrice = false,
+    Button,
+    showQuantity = true
 }: OrderItemProps) {
     return (
         <div className="order-item display-flex">
@@ -30,12 +36,22 @@ export default function OrderItem({
                     <TextLink to={redirectToBookDetailByBookId(bookId)}>
                         <span className="order-item-product-intro__title">{title}</span>
                     </TextLink>
-                    <span className="order-item-product-intro__quantity">x{quantity}</span>
+                    {
+                        showQuantity && <span className="order-item-product-intro__quantity">x{quantity}</span>
+                    }
                 </div>
             </div>
             <div className="order-item-price">
-                <span className="order-item-price__original">${convertConcurrency(originalPriceEach)}</span>
-                <span className="order-item-price__final">${convertConcurrency(finalPriceEach)}</span>
+                {
+                !disablePrice &&
+                    <>
+                        <span className="order-item-price__original">${convertConcurrency(originalPriceEach)}</span>
+                        <span className="order-item-price__final">${convertConcurrency(finalPriceEach)}</span>
+                    </>
+                }
+                {
+                    Button
+                }
             </div>
         </div>
     );
