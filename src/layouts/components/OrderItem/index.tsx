@@ -13,6 +13,7 @@ export type OrderItemProps = {
     disablePrice?: boolean;
     Button?: any;
     showQuantity?: boolean;
+    url?: string;
 };
 
 export default function OrderItem({
@@ -24,7 +25,8 @@ export default function OrderItem({
     originalPriceEach,
     disablePrice = false,
     Button,
-    showQuantity = true
+    showQuantity = true,
+    url
 }: OrderItemProps) {
     return (
         <div className="order-item display-flex">
@@ -33,7 +35,7 @@ export default function OrderItem({
                     <img src={imgUrl} className="order-item-product-img__img" />
                 </div>
                 <div className="order-item-product-intro display-flex flex-direction--column">
-                    <TextLink to={redirectToBookDetailByBookId(bookId)}>
+                    <TextLink to={url ? url : redirectToBookDetailByBookId(bookId)}>
                         <span className="order-item-product-intro__title">{title}</span>
                     </TextLink>
                     {

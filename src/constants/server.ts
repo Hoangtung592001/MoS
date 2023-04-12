@@ -10,10 +10,15 @@ export const SERVICE_URL = {
     BOOKS: {
         FREQUENTLY_VIEW_ITEMS: 'https://localhost:5001/Book/FrequentlyViewedItems',
         RECOMMENDED_ITEMS: 'https://localhost:5001/Book/RecommendedItems',
-        RECENTLY_VIEWED_ITEMS: 'https://localhost:5001/Book/RecentlyViewedItem',
+        RECENTLY_VIEWED_ITEMS: 'https://localhost:5001/Book/RecentlyViewedItemsPost',
         GET_BOOK_DETAILS: 'https://localhost:5001/Book/GetBookDetails/{BookId}',
         GET_ALL: 'https://localhost:5001/Book/GetAll',
         REMOVE: 'https://localhost:5001/Book/DeleteBook/{BookId}',
+        CREATE: 'https://localhost:5001/Book/CreateBook',
+        GET_BOOK_CONDITIONS: 'https://localhost:5001/Book/GetAllBookCondition',
+        EDIT: 'https://localhost:5001/Book/EditBook',
+        POST_RECENTLY_VIEWED_ITEMS: 'https://localhost:5001/Book/RecentlyViewedItem',
+        TRENDING_ITEMS: 'https://localhost:5001/Book/TrendingItems?limit=5',
     },
     ORDERS: {
         GET: 'https://localhost:5001/Order',
@@ -43,5 +48,17 @@ export const SERVICE_URL = {
     SEARCH_BOOK: {
         GET: 'https://localhost:5001/Search?limit=5',
         GET_WHOLE: 'https://localhost:5001/Search/Whole?limit=100',
+    },
+    UPLOAD: {
+        UPLOAD_IMAGE: 'https://localhost:5001/Upload/UploadFile',
+        GET_IMAGE_AFTER_UPLOADED: 'https://localhost:5001/Upload/'
+    },
+    AUTHOR: {
+        CREATE: 'https://localhost:5001/Author/CreateNewAuthor',
+        GET: 'https://localhost:5001/Author/GetAll',
+    },
+    PUBLISHER: {
+        CREATE: 'https://localhost:5001/Publisher',
+        GET: 'https://localhost:5001/Publisher/GetAll',
     },
 };

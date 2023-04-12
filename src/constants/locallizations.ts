@@ -16,6 +16,7 @@ const localizations = {
     searchFormIntro: 'SHOP FROM INDEPENDENT SELLER',
     searchFormHeader: 'Search for books, fine art and collectibles',
     author: 'Author',
+    publisher: 'Publisher',
     title: 'Title',
     keywordOrISBN: 'Keyword or ISBN',
     search: 'Search',
@@ -154,7 +155,26 @@ const localizations = {
     errorModalContent: 'There is no item in your basket!',
     usernameValidation: 'Username must be at least 6 characters',
     manageBooks: 'Manage Books',
-    addNewBook: 'Add a new Book'
+    addNewBook: 'Create a new Book',
+    description: 'Description',
+    bookDetails: 'Book Details',
+    storeDescription: 'Store Description',
+    termOfSale: 'Terms of Sale',
+    shippingTerm: 'Shipping Terms',
+    synopsis: 'Synopsis',
+    mainImage: 'Main Image',
+    publishedAt: 'Published At',
+    createNewPublisher: 'Create a new Publisher',
+    createNewAuthor: 'Create a new Author',
+    submit: 'Submit',
+    authorName: 'Author Name',
+    publisherName: 'Publisher Name',
+    bookCondition: 'Book Condition',
+    bookList: 'Book List',
+    editBook: 'Edit Book',
+    recentlyViewedItems: 'Recently Viewed Items',
+    quantityExceeded: 'One of your items exceeded quantity in stock. Please remove those items!',
+    exceededError: 'Exceeded Quantity in Stock'
 };
 
 export default localizations;

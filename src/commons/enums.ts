@@ -5,3 +5,8 @@ export enum ExceptionMessageTypes {
     UNKNOWN = "Unknown",
     AUTHENTICATION = "Authentication"
 }
+
+export enum BookImageTypeTDs {
+    Main = 1,
+    Sub = 2
+}

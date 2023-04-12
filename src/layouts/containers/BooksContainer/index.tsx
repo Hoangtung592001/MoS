@@ -10,6 +10,7 @@ import OrderItem from "~/layouts/components/OrderItem";
 import actionCreators from "~/redux";
 import { RemoveBookReq } from "~/redux/action-creators/bookDetailsActionCreator";
 import './BooksContainer.scss';
+import { getEditBookRoute } from "~/config/routes";
 export default function BooksContainer() {
     const dispatch = useAppDispatch();
     const { GetAllBooks, removeBook, resetBookDetails } = bindActionCreators(actionCreators, dispatch);
@@ -47,10 +48,10 @@ export default function BooksContainer() {
                         originalPriceEach={book.price}
                         disablePrice={true}
                         showQuantity={false}
+                        url={getEditBookRoute(book.id)}
                         Button={
                             <div>
                                 <Button type={ButtonTypes.ADDTOBASKET} onClick={(e : any) => {
-                                    console.log(book);
                                     onRemove(book.id)
                                 }} isLoading={removeBookStatus == RequestStatus.Pending}>
                                     <span className="price-info__add-to-basket">

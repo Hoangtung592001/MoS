@@ -2,7 +2,7 @@ import localizations from '~/constants/locallizations';
 import './BasketTable.scss';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '~/hooks';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import routes, { getBookDetailsRoute } from '~/config/routes';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -15,10 +15,9 @@ import { accessTokenKey, RequestStatus } from '~/constants';
 import { useState } from 'react';
 import Modal from '../Modal';
 import { Basket, ChangeItemQuantity, RemoveItem, resetBasket } from '~/redux/action-creators/basketActionCreator';
-import jwt_decode from 'jwt-decode';
 import { checkTokenExpiry, convertConcurrency } from '~/commons/commonUsedFunctions';
 import DefaultValueInput from '~/components/DefaultValueInput';
-import useChangeBasketItemQuantity from '~/hooks/useChangeBasketItemQuantity';
+import BoostrapModal from '../BoostrapModal';
 
 export type BookItem = {
     id: string;
@@ -26,6 +25,12 @@ export type BookItem = {
 };
 
 export default function BasketTable() {
+    const [showModal, setShowModal] = useState(false);
+    const [titleModal, setTitleModal] = useState('');
+    const [contentModal, setContentModal] = useState('');
+    const isErroredModal = useMemo(() => {
+        return true;
+    }, [])
     const cookies = new Cookies();
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -34,11 +39,24 @@ export default function BasketTable() {
         dispatch,
     );
     const accessToken = cookies.get(accessTokenKey);
-    const { basket, removeItemStatus, changeItemQuantityStatus } = useAppSelector((state) => state.basketReducer);
-
+    const { basket, removeItemStatus, changeItemQuantityStatus, changeItemQuantityError } = useAppSelector((state) => state.basketReducer);
     const onProceedToCheckout = useCallback((basket: Basket) => {
         navigate(routes.shippingAddress);
     }, []);
+
+    const isQuantityValid = useMemo(() => {
+        return basket.basketItems.every((item) => {
+            return item.isQuantityValid;
+        })
+    }, [basket]);
+
+    useEffect(() => {
+        if (changeItemQuantityError) {
+            setShowModal(true);
+            setTitleModal(localizations.errorModalTitle);
+            setContentModal(changeItemQuantityError.description);
+        }
+    }, [changeItemQuantityError]);
 
     const changeItemQuantity = useCallback(
         (quantity: number, setIsValid: React.Dispatch<React.SetStateAction<boolean>>, itemId: string) => {
@@ -87,6 +105,7 @@ export default function BasketTable() {
 
     return (
         <>
+            <BoostrapModal show={showModal} setShow={setShowModal} isErrored={isErroredModal} title={titleModal} content={contentModal}/>
             <div className="basket">
                 <table className="basket-table">
                     <thead className="basket-table-row basket-table-row-header">
@@ -107,19 +126,28 @@ export default function BasketTable() {
                             {basket.basketItems.map((item, index) => {
                                 return (
                                     <Fragment key={index}>
-                                        {/* <div className="basket-table-row-container"> */}
                                         <tbody className="basket-table-row basket-table-row-container">
                                             <tr className="basket-table-row__item1 basket-table-row-item display-flex">
                                                 <img src={item.book.bookImage.url} alt="Books" />
                                                 <div className="basket-table-row-info display-flex flex-direction--column">
-                                                    <TextLink
-                                                        type={TextLinkTypes.BLUE}
-                                                        to={getBookDetailsRoute(item.book.id)}
-                                                    >
-                                                        <span className="basket-table-row-info__title">
-                                                            {item.book.title}
-                                                        </span>
-                                                    </TextLink>
+                                                    <div>
+                                                        <TextLink
+                                                            type={TextLinkTypes.BLUE}
+                                                            to={getBookDetailsRoute(item.book.id)}
+                                                        >
+                                                            <span className="basket-table-row-info__title">
+                                                                {item.book.title}
+                                                            </span>
+                                                        </TextLink>
+                                                        {
+                                                            !item.isQuantityValid &&
+                                                            <span className='basket-table-row-info__error'>
+                                                                {
+                                                                    `(${localizations.exceededError})`
+                                                                }
+                                                            </span>
+                                                        }
+                                                    </div>
                                                     <span className="basket-table-row-info__author">
                                                         {item.book.author.name}
                                                     </span>
@@ -157,8 +185,6 @@ export default function BasketTable() {
                                                 </Button>
                                             </tr>
                                         </tbody>
-                                        {/* </div> */}
-                                        {/* <div className="basket-table-row-payment"> */}
                                         <tbody className="basket-table-row basket-table-row-payment">
                                             <tr className="basket-table-row__item1 basket-table-row-shipping display-flex justify-content--right">
                                                 <span className="basket-table-row-shipping__text--sub-total basket-table-row-shipping__text">
@@ -173,7 +199,6 @@ export default function BasketTable() {
                                             <tr className="basket-table-row__item3"></tr>
                                             <tr className="basket-table-row__item4"></tr>
                                         </tbody>
-                                        {/* </div> */}
                                     </Fragment>
                                 );
                             })}
@@ -200,7 +225,14 @@ export default function BasketTable() {
                         {basket.basketItems.length > 0 && (
                             <Button
                                 onClick={(e: any) => {
-                                    onProceedToCheckout(basket);
+                                    if (!isQuantityValid) {
+                                        setShowModal(true);
+                                        setTitleModal(localizations.errorModalTitle);
+                                        setContentModal(localizations.quantityExceeded);
+                                    }
+                                    else {
+                                        onProceedToCheckout(basket);
+                                    }
                                 }}
                                 isLoading={changeItemQuantityStatus == RequestStatus.Pending}
                             >

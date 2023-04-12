@@ -18,6 +18,17 @@ export const getDateTime = (date: Date) => {
     return null;
 };
 
+export const getDateTimeFromServer = (date: Date) => {
+    if (date) {
+        date = new Date(date);
+        const formatDate = date.getDate() < 10 ? `0${date.getDate()}`:date.getDate();
+        const formatMonth = date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}`: date.getMonth();
+        const formattedDate = [date.getFullYear(), formatMonth, formatDate].join('-');
+        return formattedDate;
+    }
+    return '';
+}
+
 export const hideCardNumber = (cardNumber: string) => {
     const exposedNumber = cardNumber.substring(12);
     return '************' + exposedNumber;

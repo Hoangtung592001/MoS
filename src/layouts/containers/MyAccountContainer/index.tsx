@@ -55,20 +55,18 @@ export default function MyAccountContainer() {
                     <TextLinkBox to="" text={localizations.manageMyCreditCards} />
                 </div>
             </div>
-            <div className="my-account-row display-flex flex-direction--column">
-                <h4 className="my-account-row__header">{localizations.myWants}</h4>
-                <div className="my-account-row-link-box">
-                    {
-                        isAdmin && 
-                        <>
-                            <TextLinkBox to={routes.books} text={localizations.manageBooks} />
-                            <TextLinkBox to="" text={localizations.addNewBook} />
-                        </>
-                    }
-                    <TextLinkBox to="" text={localizations.learnMoreAboutWants} />
-                    <TextLinkBox to="" text={localizations.downloadMyWantsReport} />
+            {
+                isAdmin && 
+                <div className="my-account-row display-flex flex-direction--column">
+                    <h4 className="my-account-row__header">{localizations.myWants}</h4>
+                    <div className="my-account-row-link-box">
+                        <TextLinkBox to={routes.books} text={localizations.manageBooks} />
+                        <TextLinkBox to={routes.addNewBook} text={localizations.addNewBook} />
+                        <TextLinkBox to={routes.addNewAuthor} text={localizations.createNewAuthor} />
+                        <TextLinkBox to={routes.addNewPublisher} text={localizations.createNewPublisher} />
+                    </div>
                 </div>
-            </div>
+            }
             <div className="my-account-row display-flex flex-direction--column">
                 <h4 className="my-account-row__header">{localizations.help}</h4>
                 <div className="my-account-row-link-box">

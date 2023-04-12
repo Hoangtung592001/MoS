@@ -1,6 +1,9 @@
 import './BookDetails.scss';
 import localizations from '~/constants/locallizations';
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
+import { getAccessTokenFromCookies } from '~/commons/commonUsedFunctions';
+import { FETCH_TYPES, fetchAsyncWithAuthentitaion } from '~/commons/sendRequest';
+import { SERVICE_URL } from '~/constants/server';
 
 interface BookDetailsProps {
     description: string;
@@ -62,41 +65,11 @@ export default function BookDetails(props: BookDetailsProps) {
                                         </Fragment>
                                     );
                                 })}
-                                {/* <div className='book-details-characteristic-container'>
-                                    <h4 className='book-details-characteristic__header'>Synopsis:</h4>
-                                    <div className='book-details-characteristic-content display-flex flex-direction--column'>
-                                        <span>Used. Very Good conditions. May have soft reading marks and name of the previous owner.</span>
-                                        <span>"About this title" may belong to another edition of this title.</span>
-                                    </div>
-                                </div> */}
                             </div>
                         </div>
                     );
                 })
             }
-            {/* <div className='book-details-characteristics display-flex'>
-                <h4 className='book-details-characteristics__header'>About this title</h4>
-                <div className='book-details-characteristic'>
-                    <div className='book-details-characteristic-container'>
-                        <h4 className='book-details-characteristic__header'>Synopsis:</h4>
-                        <div className='book-details-characteristic-content display-flex flex-direction--column'>
-                            <span>Used. Very Good conditions. May have soft reading marks and name of the previous owner.</span>
-                            <span>"About this title" may belong to another edition of this title.</span>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
-            {/* <div className='book-details-characteristics display-flex'>
-                <h4 className='book-details-characteristics__header'>Store Description</h4>
-                <div className='book-details-characteristic'>
-                    <div className='book-details-characteristic-container'>
-                        <h4 className='book-details-characteristic__header'>Terms of Sale:</h4>
-                        <div className='book-details-characteristic-content display-flex flex-direction--column'>
-                            <span>We guarantee the condition of every book as it's described on the Abebooks web sites. If you're dissatisfied with your purchase (Incorrect Book/Not as Described/Damaged) or if the order hasn't arrived, you're eligible for a refund within 30 days of the estimated delivery date. If you've changed your mind about a book that you've ordered, please use the Ask bookseller a question link to contact us and we'll respond within 2 business days.</span>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
             <div className='book-details-characteristics display-flex'>
                 <h4 className='book-details-characteristics__header'>{localizations.paymentMethods}</h4>
                 <div className='book-details-characteristic'>

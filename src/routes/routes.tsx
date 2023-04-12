@@ -14,7 +14,12 @@ import {
     ChangePasswordContainer,
     PaymentOptionsContainer,
     ReviewOrderContainer,
+    EditBookContainer,
 } from '~/layouts/containers';
+import AddNewBookContainer from '~/layouts/containers/AddBewBookContainer';
+import AddNewAuthorContainer from '~/layouts/containers/AddNewAuthorContainer';
+import AddNewPublisherContainer from '~/layouts/containers/AddNewPublisherContainer';
+import BookListContainer from '~/layouts/containers/BookListContainer';
 import BooksContainer from '~/layouts/containers/BooksContainer';
 import CongratulationsContainer from '~/layouts/containers/CongratulationsContainer';
 import GoogleMapContainer from '~/layouts/containers/GoogleMapContainer';
@@ -47,6 +52,11 @@ const publicRoutes: Route[] = [
     { path: config.routes.congratulations, component: CongratulationsContainer },
     { path: config.routes.search, component: SearchResultContainer },
     { path: config.routes.books, component: BooksContainer },
+    { path: config.routes.addNewBook, component: AddNewBookContainer },
+    { path: config.routes.addNewAuthor, component: AddNewAuthorContainer },
+    { path: config.routes.addNewPublisher, component: AddNewPublisherContainer },
+    { path: config.routes.bookList, component: BookListContainer },
+    { path: config.routes.editBook, component: EditBookContainer },
 ];
 
 export { publicRoutes };

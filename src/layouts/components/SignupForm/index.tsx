@@ -81,6 +81,7 @@ export default function SignupForm() {
                                     value={username}
                                     onChange={(e: any) => {
                                         setUsername(e.target.value);
+                                        setIsUsernameValid(true);
                                     }}
                                     isValid={isUsernameValid}
                                 />
@@ -100,6 +101,7 @@ export default function SignupForm() {
                                     value={password}
                                     onChange={(e: any) => {
                                         setPassword(e.target.value);
+                                        setIsPasswordValid(true);
                                     }}
                                     isValid={isPasswordValid}
                                     type="password"
@@ -118,6 +120,7 @@ export default function SignupForm() {
                                     isValid={isReEnteredPasswordValid}
                                     onChange={(e: any) => {
                                         setReEnteredPassword(e.target.value);
+                                        setIsReEnteredPasswordValid(true);
                                     }}
                                     type="password"
                                 />

@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { BaseResponse } from "~/commons/response";
+import { BaseResponse, ExceptionResponse } from "~/commons/response";
 import { fetchAsync, fetchAsyncWithAuthentitaion, FETCH_TYPES } from "~/commons/sendRequest";
-import { getDeleteBasketItemUrl } from '~/commons/URLs';
+import { GetExceptionUrl, getDeleteBasketItemUrl } from '~/commons/URLs';
 import { Book, Exception } from '~/constants/interfaces';
 import { SERVICE_URL } from '~/constants/server';
 import { get, getBasketTotal, makeOriginal } from '../reducers/basketReducer';
@@ -11,6 +11,7 @@ interface BasketItem {
     bookId: string;
     userId: string;
     book: Book;
+    isQuantityValid?: boolean;
 }
 
 export interface Basket {
@@ -65,7 +66,7 @@ export const getBasketTotalItems = (accessToken: string) => async (dispatch: any
 
 export const addToBasket = createAsyncThunk('Basket/AddToBasket', async (props: AddToBasket, thunkApi) => {
     try {
-        const response = await fetchAsyncWithAuthentitaion<any>(
+        const response = await fetchAsyncWithAuthentitaion<BaseResponse<any> | ExceptionResponse>(
             SERVICE_URL.BASKET.GET,
             FETCH_TYPES.POST,
             props.accessToken,
@@ -75,8 +76,18 @@ export const addToBasket = createAsyncThunk('Basket/AddToBasket', async (props: 
             },
         );
 
-        if (response.status == 200) {
+        if (response.data.success) {
             return thunkApi.fulfillWithValue(1);
+        }
+        else {
+            // const data = response.data as ExceptionResponse;
+
+            // const exceptionResponse = await fetchAsync<BaseResponse<Exception>>(
+            //     GetExceptionUrl(data.exceptionId),
+            //     FETCH_TYPES.GET,
+            // );
+
+            // return thunkApi.rejectWithValue(exceptionResponse.data.data);
         }
     } catch (e) {
         return thunkApi.rejectWithValue(1);
@@ -116,11 +127,18 @@ export const changeItemQuantityAction = createAsyncThunk(
                 changeItemQuantityProps,
             );
 
-            if (response.status == 200) {
+            if (response.data.success) {
                 return thunkApi.fulfillWithValue(1);
+            } else {
+                const data = response.data as ExceptionResponse;
+
+                const exceptionResponse = await fetchAsync<BaseResponse<Exception>>(
+                    GetExceptionUrl(data.exceptionId),
+                    FETCH_TYPES.GET,
+                );
+
+                return thunkApi.rejectWithValue(exceptionResponse.data.data);
             }
-        } catch (e) {
-            return thunkApi.rejectWithValue(1);
-        }
+        } catch (e) { }
     },
 );

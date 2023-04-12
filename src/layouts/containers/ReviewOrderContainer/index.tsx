@@ -14,7 +14,6 @@ import actionCreators from '~/redux';
 import { SetOrderReq } from '~/redux/action-creators/orderActionCreator';
 import './ReviewOrderContainer.scss';
 import CashReview from '~/layouts/components/CashReview';
-import jwtDecode from 'jwt-decode';
 export default function ReviewOrderContainer() {
     const location = useLocation();
     const dispatch = useAppDispatch();
@@ -22,6 +21,7 @@ export default function ReviewOrderContainer() {
     const navigate = useNavigate();
     const addressId = location.state?.addressId;
     const paymentOptionId = location.state?.paymentOptionId;
+    console.log(paymentOptionId);
     const { getAddressById, getPaymentOptionById } = bindActionCreators(actionCreators, dispatch);
     const { currentAddress } = useAppSelector((state) => state.addressReducer);
     const { currentPaymentOption } = useAppSelector((state) => state.paymenOptionsReducer);
@@ -83,7 +83,7 @@ export default function ReviewOrderContainer() {
         <div className="review-order-container">
             <h3>Order Summary</h3>
             <div className="review-order-info display-flex justify-content--space-between">
-                {currentAddress && currentPaymentOption && (
+                {currentAddress && (currentPaymentOption || paymentOptionId === CashPaymentOptionId) && (
                     <>
                         <div className="review-order-info-address">
                             <ShippingAddressReview
@@ -97,6 +97,7 @@ export default function ReviewOrderContainer() {
                             {paymentOptionId === CashPaymentOptionId ? (
                                 <CashReview title={localizations.paymentInfo} />
                             ) : (
+                                currentPaymentOption && 
                                 <VisaReview
                                     title={localizations.paymentInfo}
                                     creditCardNumber={currentPaymentOption.cardNumber}
@@ -212,7 +213,7 @@ export default function ReviewOrderContainer() {
                         <div className="basket-total-button">
                             <Button
                                 onClick={(e: any) => {
-                                    if (!securityCode) {
+                                    if (!securityCode && paymentOptionId !== CashPaymentOptionId ) {
                                         setIsSecurityCodeValid(false);
                                     } else {
                                         const basketItemIDs = basket.basketItems.map((basketItem) => {

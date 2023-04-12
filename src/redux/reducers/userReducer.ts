@@ -54,7 +54,7 @@ const userSlice = createSlice({
             state.isLoading = true;
         });
 
-        builder.addCase(signIn.fulfilled, (state, action: PayloadAction<string>) => {
+        builder.addCase(signIn.fulfilled, (state, action: PayloadAction<any>) => {
             state.isLoading = false;
 
             state.errors = null;

@@ -140,8 +140,8 @@ function Header() {
                 </div>
                 <div className="header-main-nav">
                     <div className="header-main-links">
-                        <TextLink>
-                            <span>{localizations.advancedSearch}</span>
+                        <TextLink to={routes.bookList}>
+                            <span>{localizations.bookList}</span>
                         </TextLink>
                     </div>
                     <div className="header-main-links">

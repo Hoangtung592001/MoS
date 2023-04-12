@@ -56,3 +56,9 @@ export const removeBookUrl = (bookId: string) => {
 export const getSearchedBooksUrl = (title: string) => {
     return `/search/${title}`;
 };
+
+export const getImageAfterUploaded = (imgName: string) => {
+    const url = SERVICE_URL.UPLOAD.GET_IMAGE_AFTER_UPLOADED;
+
+    return url + imgName;
+}

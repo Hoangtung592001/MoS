@@ -19,4 +19,6 @@ export { default as ShippingAddressForm } from './ShippingAddressForm';
 export { default as Visa } from './Visa';
 export { default as Cash } from './Cash';
 export { default as Review } from './Review';
+export { default as BoostrapModal } from './BoostrapModal';
+
  

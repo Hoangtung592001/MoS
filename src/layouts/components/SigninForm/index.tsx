@@ -50,7 +50,10 @@ export default function SigninForm() {
                                 <label htmlFor="" className="search-form-input__label">
                                     {localizations.email}
                                 </label>
-                                <Input inputType={InputTypes.SEARCH} placeholder={localizations.enterEmail} value={email} onChange={({ target }: any) => setEmail(target.value)} />
+                                <Input inputType={InputTypes.SEARCH} placeholder={localizations.enterEmail} value={email} onChange={({ target }: any) => {
+                                    setEmail(target.value);
+                                }    
+                                } />
                             </div>
                             <div className="sign-in-form-input">
                                 <div className='sign-in-form-input-container display-flex justify-content--space-between'>

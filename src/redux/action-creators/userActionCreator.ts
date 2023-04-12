@@ -18,26 +18,34 @@ export type SignUpProps = {
 export type SignUpResponse = {};
 
 export const signIn = createAsyncThunk('User/SignIn', async (props: SignInRequest, thunkApi) => {
-    const response = await fetchAsync<BaseResponse<SignInData> | ExceptionResponse>(
-        SERVICE_URL.USER.SIGN_IN,
-        FETCH_TYPES.POST,
-        props,
-    );
-    if (response.data.success) {
-        const data = response.data as BaseResponse<SignInData>;
-        const cookies = new Cookies();
-        cookies.set(accessTokenKey, data.data.token);
-
-        return thunkApi.fulfillWithValue(data.data.token);
-    } else {
-        const data = response.data as ExceptionResponse;
-
-        const exceptionResponse = await fetchAsync<BaseResponse<Exception>>(
-            GetExceptionUrl(data.exceptionId),
-            FETCH_TYPES.GET,
+    try {
+        const response = await fetchAsync<BaseResponse<SignInData> | ExceptionResponse>(
+            SERVICE_URL.USER.SIGN_IN,
+            FETCH_TYPES.POST,
+            props,
         );
-
-        return thunkApi.rejectWithValue(exceptionResponse.data.data);
+        if (response.data.success) {
+            const data = response.data as BaseResponse<SignInData>;
+            const cookies = new Cookies();
+            cookies.set(accessTokenKey, data.data.token);
+    
+            return thunkApi.fulfillWithValue(data.data.token);
+        } else {
+            const data = response.data as ExceptionResponse;
+    
+            const exceptionResponse = await fetchAsync<BaseResponse<Exception>>(
+                GetExceptionUrl(data.exceptionId),
+                FETCH_TYPES.GET,
+            );
+    
+            return thunkApi.rejectWithValue(exceptionResponse.data.data);
+        }
+    }
+    catch(e : any) {
+        const exception : Exception = {
+            description: e.message
+        }
+        return thunkApi.rejectWithValue(exception);
     }
 });
 
@@ -67,7 +75,13 @@ export const signUp = createAsyncThunk('User/SignUp', async (props: SignUpProps,
 
             return thunkApi.rejectWithValue(exceptionResponse.data.data);
         }
-    } catch (e) {}
+    } 
+    catch(e : any) {
+        const exception : Exception = {
+            description: e.message
+        }
+        return thunkApi.rejectWithValue(exception);
+    }
 });
 
 export const resetUserAction = () => (dispatch: any) => {

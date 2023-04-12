@@ -16,8 +16,8 @@ export interface ProductItem {
 }
 
 export interface Exception {
-    id: string;
-    exceptionMessageType: string;
+    id?: string;
+    exceptionMessageType?: string;
     description: string;
 }
 
@@ -31,7 +31,7 @@ export interface Publisher {
 }
 
 export interface BookCondition {
-    id: string;
+    id: number;
     name: string;
 }
 

@@ -1,12 +1,5 @@
 import './Select.scss';
 
-// interface SelectProps {
-//     label: string;
-//     isRequired: boolean;
-//     items: Array<SelectItem>;
-//     props: any;
-// }
-
 export interface SelectItem {
     id: any;
     value: string;
@@ -25,6 +18,7 @@ export default function Select({ label, isRequired, items, selectType, ...props 
                 className={`${selectType ? `select__content--${selectType} select__content` : 'select__content'}`}
                 {...props}
             >
+                <option value=''></option>
                 {items &&
                     items.length > 0 &&
                     items.map((item: any, index: any) => {

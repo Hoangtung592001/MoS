@@ -11,6 +11,8 @@ import countryReducer from './countryReducer';
 import shippingReducer from './shippingReducer';
 import orderReducer from './orderReducer';
 import searchBookReducer from './searchBookReducer';
+import authorReducer from "./authorReducer";
+import publisherReducer from "./publisherReducer";
 export default combineReducers({
     user: userReducer,
     error: errorReducer,
@@ -24,4 +26,6 @@ export default combineReducers({
     shippingReducer: shippingReducer,
     orderReducer: orderReducer,
     searchBookReducer: searchBookReducer,
+    authorReducer: authorReducer,
+    publisherReducer: publisherReducer,
 });

@@ -1,6 +1,6 @@
 import './BookIntroAndDetailsContainer.scss';
-import { BookIntro, BookDetails, PriceInfo, ProductCardList } from '../../components';
-import { Fragment, useState } from 'react';
+import { BookIntro, BookDetails, PriceInfo, ProductCardList, BoostrapModal } from '../../components';
+import { Fragment, useMemo, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '~/hooks';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -11,7 +11,9 @@ import { AddToBasket } from '~/redux/action-creators/basketActionCreator';
 import routes from '~/config/routes';
 import Cookies from 'universal-cookie';
 import { accessTokenKey, RequestStatus } from '~/constants';
-import jwtDecode from 'jwt-decode';
+import { FETCH_TYPES, fetchAsyncWithAuthentitaion } from '~/commons/sendRequest';
+import { SERVICE_URL } from '~/constants/server';
+import localizations from '~/constants/locallizations';
 export default function BookIntroAndDetailsContainer() {
     const bookDetails = useAppSelector((state) => state.bookDetailsReducer.bookDetails);
     const cookies = new Cookies();
@@ -23,6 +25,7 @@ export default function BookIntroAndDetailsContainer() {
         actionCreators,
         dispatch,
     );
+
     const frequentlyViewedItems = useAppSelector((state) => state.frequentlyViewedItemsReducer.items);
     const navigate = useNavigate();
     const onAddToBasket = () => {
@@ -53,7 +56,7 @@ export default function BookIntroAndDetailsContainer() {
         if (bookId) {
             getBookDetails(getAccessTokenFromCookies(), bookId);
         }
-    }, [bookId, getBookDetails]);
+    }, [bookId]);
 
     useEffect(() => {
         if (status == RequestStatus.Fulfilled) {
@@ -61,6 +64,19 @@ export default function BookIntroAndDetailsContainer() {
             navigate(routes.basket);
         }
     }, [status]);
+
+    useEffect(() => {
+        if (accessToken && bookId) {
+            fetchAsyncWithAuthentitaion(
+                SERVICE_URL.BOOKS.POST_RECENTLY_VIEWED_ITEMS,
+                FETCH_TYPES.POST,
+                accessToken,
+                {
+                    bookId: bookId
+                }
+            )
+        }
+    }, []);
 
     return bookDetails ? (
         <Fragment>
@@ -85,12 +101,15 @@ export default function BookIntroAndDetailsContainer() {
                     />
                 </div>
                 <div className="book-intro-and-details-price">
+                {
+                    bookDetails.quantity !== 0 && 
                     <PriceInfo
                         price={bookDetails.price}
                         bookId={bookDetails.id}
                         onAddToBasket={onAddToBasket}
                         isLoading={status == RequestStatus.Pending}
                     />
+                }
                 </div>
             </div>
             <div className="book-intro-and-details-recomended-items">

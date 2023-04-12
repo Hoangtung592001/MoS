@@ -9,7 +9,7 @@ import {
     removeItemFromBasket,
     resetBasket,
 } from './action-creators/basketActionCreator';
-import { GetAll, getBookDetails, removeBook, resetBookDetails } from './action-creators/bookDetailsActionCreator';
+import { GetAll, createBook, editBook, getAllBookConditionsAction, getBookDetails, getRecentlyViewedItemsAction, getTrendingItemsAction, removeBook, resetBookDetails } from './action-creators/bookDetailsActionCreator';
 import { getPaymentOptionTypeDescriptions } from './action-creators/paymentOptionTypeDescriptionActionCreator';
 import {
     getPaymentOptions,
@@ -22,6 +22,9 @@ import { getCountries } from './action-creators/countryActionCreator';
 import { getShippingFee } from './action-creators/shippingActionCreator';
 import { getOrders, resetOrder, setOrder } from './action-creators/orderActionCreator';
 import { searchBook, searchWholeBook } from './action-creators/searchBookActionCreator';
+import { createAuthorAction, getAuthors, resetAuthor } from './action-creators/authorActionCreator';
+import { createPublisherAction, getPublishers, resetPublisher } from './action-creators/publisherActionCreator';
+
 const actionCreators = {
     removeErrorAction: removeErrorAction,
     signIn: signIn,
@@ -55,7 +58,18 @@ const actionCreators = {
     GetAllBooks: GetAll,
     removeBook: removeBook,
     resetBookDetails: resetBookDetails,
-    checkAdminAction: checkAdminAction
+    checkAdminAction: checkAdminAction,
+    createAuthorAction: createAuthorAction,
+    getAuthors: getAuthors,
+    createPublisherAction: createPublisherAction,
+    getPublishers: getPublishers,
+    resetAuthor: resetAuthor,
+    resetPublisher: resetPublisher,
+    createBook: createBook,
+    getAllBookConditionsAction: getAllBookConditionsAction,
+    editBook: editBook,
+    getRecentlyViewedItems: getRecentlyViewedItemsAction,
+    getTrendingItems: getTrendingItemsAction
 };
 
 export default actionCreators;

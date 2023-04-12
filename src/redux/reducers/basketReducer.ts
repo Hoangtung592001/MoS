@@ -14,6 +14,8 @@ interface InitialStateInterface {
     status: number;
     removeItemStatus: number;
     changeItemQuantityStatus: number;
+    changeItemQuantityError: Exception | null;
+    addToBasketError: Exception | null;
 }
 
 const initialState: InitialStateInterface = {
@@ -25,6 +27,8 @@ const initialState: InitialStateInterface = {
         orderTotal: 0,
     },
     basketTotal: 0,
+    changeItemQuantityError: null,
+    addToBasketError: null,
 };
 
 export const basketSlice = createSlice({
@@ -50,10 +54,12 @@ export const basketSlice = createSlice({
 
         builder.addCase(addToBasket.fulfilled, (state) => {
             state.status = RequestStatus.Fulfilled;
+            state.addToBasketError = null;
         });
 
-        builder.addCase(addToBasket.rejected, (state) => {
+        builder.addCase(addToBasket.rejected, (state, action: PayloadAction<any>) => {
             state.status = RequestStatus.Rejected;
+            state.addToBasketError = action.payload;
         });
 
         builder.addCase(removeItemFromBasket.pending, (state) => {
@@ -76,8 +82,9 @@ export const basketSlice = createSlice({
             state.changeItemQuantityStatus = RequestStatus.Fulfilled;
         });
 
-        builder.addCase(changeItemQuantityAction.rejected, (state) => {
-            state.changeItemQuantityStatus = RequestStatus.Rejected;
+        builder.addCase(changeItemQuantityAction.rejected, (state, action: PayloadAction<any>) => {
+            state.changeItemQuantityStatus = RequestStatus.Rejected
+            state.changeItemQuantityError = action.payload;
         });
     },
 });
