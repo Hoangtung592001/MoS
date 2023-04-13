@@ -31,7 +31,7 @@ export default function MyAccountContainer() {
 
     useEffect(() => {
         checkAdminAction(accessToken);
-    }, [])
+    }, []);
 
     return (
         <div className="my-account-container display-flex justify-content--space-between">
@@ -55,18 +55,25 @@ export default function MyAccountContainer() {
                     <TextLinkBox to="" text={localizations.manageMyCreditCards} />
                 </div>
             </div>
-            {
-                isAdmin && 
-                <div className="my-account-row display-flex flex-direction--column">
-                    <h4 className="my-account-row__header">{localizations.myWants}</h4>
+            <div className="my-account-row display-flex flex-direction--column">
+                <h4 className="my-account-row__header">{localizations.myWants}</h4>
+                {
+                    isAdmin ? 
                     <div className="my-account-row-link-box">
                         <TextLinkBox to={routes.books} text={localizations.manageBooks} />
                         <TextLinkBox to={routes.addNewBook} text={localizations.addNewBook} />
                         <TextLinkBox to={routes.addNewAuthor} text={localizations.createNewAuthor} />
                         <TextLinkBox to={routes.addNewPublisher} text={localizations.createNewPublisher} />
                     </div>
-                </div>
-            }
+                    : 
+                    <div className="my-account-row-link-box">
+                        <TextLinkBox to={routes.home} text={localizations.listAndMaintainMyWants} />
+                        <TextLinkBox to={routes.home} text={localizations.myRecentlMatchedWants} />
+                        <TextLinkBox to={routes.home} text={localizations.learnMoreAboutWants} />
+                        <TextLinkBox to={routes.home} text={localizations.downloadMyWantsReport} />
+                    </div>
+                }
+            </div>
             <div className="my-account-row display-flex flex-direction--column">
                 <h4 className="my-account-row__header">{localizations.help}</h4>
                 <div className="my-account-row-link-box">

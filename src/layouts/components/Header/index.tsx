@@ -23,7 +23,7 @@ function Header() {
     const cookies = new Cookies();
     const accessToken = cookies.get(accessTokenKey);
     const [isTokenExpired, setIsTokenExpired] = useState<boolean>(false);
-
+    const { status } = useAppSelector((state) => state.basketReducer);
     const dispatch = useAppDispatch();
     const { signOut, getBasketTotalItems } = bindActionCreators(actionCreators, dispatch);
     const { basketTotal } = useAppSelector((state) => state.basketReducer);
@@ -51,7 +51,8 @@ function Header() {
     }, []);
 
     useEffect(() => {
-        if (accessToken) {
+        const isTokenExpire = checkTokenExpiry(accessToken)
+        if (!isTokenExpire) {
             getBasketTotalItems(accessToken);
         }
         if (accessToken) {
@@ -60,7 +61,7 @@ function Header() {
         } else if (!accessToken) {
             setIsTokenExpired(true);
         }
-    }, []);
+    }, [status]);
     return (
         <div className="header">
             <div className="header-container">

@@ -24,7 +24,17 @@ export default function BookIntro(props: BookIntroParams) {
                 <img src={props.bookImg} alt="Book Image" />
             </div>
             <div className="book-intro-details">
-                <h4 className="book-intro-details__header">{props.title}</h4>
+                <div className='display-flex'>
+                    <h4 className="book-intro-details__header">{props.title}</h4>
+                    {
+                        props.quantity === 0 && 
+                        <span className='basket-table-row-info__error'>
+                            {
+                                `(${localizations.soldOff})`
+                            }
+                        </span>
+                    }
+                </div>
                 <TextLink type={TextLinkTypes.BLUE}>
                     <span className="book-intro-details__text--grey">{props.author}</span>
                 </TextLink>

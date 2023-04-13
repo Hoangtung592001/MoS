@@ -18,7 +18,9 @@ function DefaultValueInput({ inputType, defaultValue, actionOnBlur, itemId, ...p
                 setValue(e.target.value);
             }}
             onBlur={() => {
-                actionOnBlur(value, setIsValid, itemId);
+                if (actionOnBlur)(
+                    actionOnBlur(value, setIsValid, itemId)
+                )
             }}
             {...props}
         />

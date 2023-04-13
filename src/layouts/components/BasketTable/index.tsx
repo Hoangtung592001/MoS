@@ -110,16 +110,30 @@ export default function BasketTable() {
                 <table className="basket-table">
                     <thead className="basket-table-row basket-table-row-header">
                         <tr className="basket-table-row__item1">
-                            {localizations.basketItems} ({basket.basketItems.length}
-                            {localizations.items})
+                            <td>
+                                {localizations.basketItems} ({basket.basketItems.length}
+                                {localizations.items})
+                            </td>
                         </tr>
-                        <tr className="basket-table-row__item2">{localizations.price}</tr>
-                        <tr className="basket-table-row__item3">{localizations.quantity}</tr>
+                        <tr className="basket-table-row__item2">
+                            <td>
+                                {localizations.price}
+                            </td>
+                        </tr>
+                        <tr className="basket-table-row__item3">
+                            <td>
+                                {localizations.quantity}
+                            </td>
+                        </tr>
                         <tr className="basket-table-row__item4"></tr>
                     </thead>
                     {basket.basketItems.length == 0 ? (
                         <tbody>
-                            <p className="basket-table__empty-message">{localizations.emptyBasket}</p>
+                            <tr>
+                                <td>
+                                    <p className="basket-table__empty-message">{localizations.emptyBasket}</p>
+                                </td>
+                            </tr>
                         </tbody>
                     ) : (
                         <Fragment>
@@ -128,73 +142,85 @@ export default function BasketTable() {
                                     <Fragment key={index}>
                                         <tbody className="basket-table-row basket-table-row-container">
                                             <tr className="basket-table-row__item1 basket-table-row-item display-flex">
-                                                <img src={item.book.bookImage.url} alt="Books" />
-                                                <div className="basket-table-row-info display-flex flex-direction--column">
-                                                    <div>
-                                                        <TextLink
-                                                            type={TextLinkTypes.BLUE}
-                                                            to={getBookDetailsRoute(item.book.id)}
-                                                        >
-                                                            <span className="basket-table-row-info__title">
-                                                                {item.book.title}
-                                                            </span>
-                                                        </TextLink>
-                                                        {
-                                                            !item.isQuantityValid &&
-                                                            <span className='basket-table-row-info__error'>
-                                                                {
-                                                                    `(${localizations.exceededError})`
-                                                                }
-                                                            </span>
-                                                        }
+                                                <td className='basket-table-row__item1 basket-table-row-item display-flex'>
+                                                    <img src={item.book.bookImage.url} alt="Books" />
+                                                    <div className="basket-table-row-info display-flex flex-direction--column">
+                                                        <div>
+                                                            <TextLink
+                                                                type={TextLinkTypes.BLUE}
+                                                                to={getBookDetailsRoute(item.book.id)}
+                                                            >
+                                                                <span className="basket-table-row-info__title">
+                                                                    {item.book.title}
+                                                                </span>
+                                                            </TextLink>
+                                                            {
+                                                                !item.isQuantityValid &&
+                                                                <span className='basket-table-row-info__error'>
+                                                                    {
+                                                                        `(${localizations.exceededError})`
+                                                                    }
+                                                                </span>
+                                                            }
+                                                        </div>
+                                                        <span className="basket-table-row-info__author">
+                                                            {item.book.author.name}
+                                                        </span>
                                                     </div>
-                                                    <span className="basket-table-row-info__author">
-                                                        {item.book.author.name}
-                                                    </span>
-                                                </div>
+                                                </td>
                                             </tr>
                                             <tr className="basket-table-row__item2 basket-table-row-price">
-                                                <span className="basket-table-row-price__each">
-                                                    US$ {item.book.price}
-                                                </span>
+                                                <td>
+                                                    <span className="basket-table-row-price__each">
+                                                        US$ {item.book.price}
+                                                    </span>
+                                                </td>
                                             </tr>
                                             <tr className="basket-table-row__item3 basket-table-row-quantity">
-                                                <div className="basket-table-row-quantity-container display-flex align-items--center">
-                                                    <DefaultValueInput
-                                                        defaultValue={item.book.quantity}
-                                                        type="number"
-                                                        actionOnBlur={changeItemQuantity}
-                                                        itemId={item.id}
-                                                    />
-                                                    <span>{`(of 1)`}</span>
-                                                </div>
+                                                <td>
+                                                    <div className="basket-table-row-quantity-container display-flex align-items--center">
+                                                        <DefaultValueInput
+                                                            defaultValue={item.book.quantity}
+                                                            type="number"
+                                                            actionOnBlur={changeItemQuantity}
+                                                            itemId={item.id}
+                                                        />
+                                                        <span>{`(of 1)`}</span>
+                                                    </div>
+                                                </td>
                                             </tr>
                                             <tr className="basket-table-row__item4 display-flex justify-content--right">
-                                                <Button
-                                                    type={ButtonTypes.REMOVE}
-                                                    onClick={(e: any) => {
-                                                        const removeItemProps: RemoveItem = {
-                                                            accessToken: accessToken,
-                                                            basketItemId: item.id,
-                                                        };
-                                                        removeItemFromBasket(removeItemProps);
-                                                    }}
-                                                    isLoading={removeItemStatus == RequestStatus.Pending}
-                                                >
-                                                    {localizations.remove}
-                                                </Button>
+                                                <td>
+                                                    <Button
+                                                        type={ButtonTypes.REMOVE}
+                                                        onClick={(e: any) => {
+                                                            const removeItemProps: RemoveItem = {
+                                                                accessToken: accessToken,
+                                                                basketItemId: item.id,
+                                                            };
+                                                            removeItemFromBasket(removeItemProps);
+                                                        }}
+                                                        isLoading={removeItemStatus == RequestStatus.Pending}
+                                                    >
+                                                        {localizations.remove}
+                                                    </Button>
+                                                </td>
                                             </tr>
                                         </tbody>
                                         <tbody className="basket-table-row basket-table-row-payment">
                                             <tr className="basket-table-row__item1 basket-table-row-shipping display-flex justify-content--right">
-                                                <span className="basket-table-row-shipping__text--sub-total basket-table-row-shipping__text">
-                                                    {localizations.subTotal}
-                                                </span>
+                                                <td>
+                                                    <span className="basket-table-row-shipping__text--sub-total basket-table-row-shipping__text">
+                                                        {localizations.subTotal}
+                                                    </span>
+                                                </td>
                                             </tr>
                                             <tr className="basket-table-row__item2 basket-table-row-price">
-                                                <span className="basket-table-row-price__total--sub-total basket-table-row-shipping__text">
-                                                    US$ {convertConcurrency(item.book.price * item.book.quantity)}
-                                                </span>
+                                                <td>
+                                                    <span className="basket-table-row-price__total--sub-total basket-table-row-shipping__text">
+                                                        US$ {convertConcurrency(item.book.price * item.book.quantity)}
+                                                    </span>
+                                                </td>
                                             </tr>
                                             <tr className="basket-table-row__item3"></tr>
                                             <tr className="basket-table-row__item4"></tr>

@@ -1,4 +1,5 @@
 import config from '~/config';
+import { Roles } from '~/constants';
 import { FooterOnly, HeaderIcon } from '~/layouts';
 
 import {
@@ -31,6 +32,7 @@ interface Route {
     path: string;
     component: any;
     layout?: any;
+    accessPermission?: number;
 }
 
 const publicRoutes: Route[] = [
@@ -51,12 +53,12 @@ const publicRoutes: Route[] = [
     { path: config.routes.myPurchases, component: MyPurchasesContainer },
     { path: config.routes.congratulations, component: CongratulationsContainer },
     { path: config.routes.search, component: SearchResultContainer },
-    { path: config.routes.books, component: BooksContainer },
-    { path: config.routes.addNewBook, component: AddNewBookContainer },
-    { path: config.routes.addNewAuthor, component: AddNewAuthorContainer },
-    { path: config.routes.addNewPublisher, component: AddNewPublisherContainer },
+    { path: config.routes.books, component: BooksContainer, accessPermission: Roles.Admin },
+    { path: config.routes.addNewBook, component: AddNewBookContainer, accessPermission: Roles.Admin },
+    { path: config.routes.addNewAuthor, component: AddNewAuthorContainer, accessPermission: Roles.Admin },
+    { path: config.routes.addNewPublisher, component: AddNewPublisherContainer, accessPermission: Roles.Admin },
     { path: config.routes.bookList, component: BookListContainer },
-    { path: config.routes.editBook, component: EditBookContainer },
+    { path: config.routes.editBook, component: EditBookContainer, accessPermission: Roles.Admin },
 ];
 
 export { publicRoutes };

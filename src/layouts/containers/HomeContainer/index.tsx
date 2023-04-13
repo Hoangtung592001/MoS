@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '~/hooks';
 import actionCreators from '~/redux';
 import { bindActionCreators } from 'redux';
 import './HomeContainer.scss';
-import { getAccessTokenFromCookies } from '~/commons/commonUsedFunctions';
+import { checkTokenExpiry, getAccessTokenFromCookies } from '~/commons/commonUsedFunctions';
 import { ProductItem } from '~/constants/interfaces';
 export default function HomeContainer() {
     const dispatch = useAppDispatch();
@@ -31,7 +31,8 @@ export default function HomeContainer() {
     }, []);
 
     useEffect(() => {
-        if (accessToken) {
+        const isTokenExpire = checkTokenExpiry(accessToken);
+        if (!isTokenExpire) {
             getRecentlyViewedItems(accessToken);
         }
 

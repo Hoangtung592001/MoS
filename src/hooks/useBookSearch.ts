@@ -13,22 +13,24 @@ export default function useBookSearch(query: string) {
     }, [query]);
 
     useEffect(() => {
-        let cancel: any;
-        axios<BaseResponse<Array<Book>>>({
-            method: FETCH_TYPES.POST,
-            url: SERVICE_URL.SEARCH_BOOK.GET,
-            data: {
-                title: query,
-            },
-            cancelToken: new axios.CancelToken((c) => (cancel = c)),
-        })
-            .then((res) => {
-                setBooks(res.data.data);
+        if (query) {
+            let cancel: any;
+            axios<BaseResponse<Array<Book>>>({
+                method: FETCH_TYPES.POST,
+                url: SERVICE_URL.SEARCH_BOOK.GET,
+                data: {
+                    title: query,
+                },
+                cancelToken: new axios.CancelToken((c) => (cancel = c)),
             })
-            .catch((e) => {
-                if (axios.isCancel(e)) return;
-            });
-        return () => cancel();
+                .then((res) => {
+                    setBooks(res.data.data);
+                })
+                .catch((e) => {
+                    if (axios.isCancel(e)) return;
+                });
+            return () => cancel();
+        }
     }, [query]);
 
     return { books };

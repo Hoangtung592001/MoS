@@ -27,6 +27,11 @@ export enum RequestStatus {
     Rejected = 3,
 }
 
+export enum Roles {
+    Admin = 1,
+    User = 2
+}
+
 export const orderStatuses = ['', 'PREPARING', 'PREPARED', 'DELIVERING', 'DELIVERED'];
 
 export const VietNamId = 245;

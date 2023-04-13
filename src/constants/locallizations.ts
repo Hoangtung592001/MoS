@@ -174,7 +174,8 @@ const localizations = {
     editBook: 'Edit Book',
     recentlyViewedItems: 'Recently Viewed Items',
     quantityExceeded: 'One of your items exceeded quantity in stock. Please remove those items!',
-    exceededError: 'Exceeded Quantity in Stock'
+    exceededError: 'Exceeded Quantity in Stock',
+    soldOff: 'Sold Off'
 };
 
 export default localizations;
