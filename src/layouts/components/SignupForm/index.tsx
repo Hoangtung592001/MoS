@@ -139,17 +139,17 @@ export default function SignupForm() {
                                 </Button>
                             </div>
                             <div className="sign-in-form-input">
-                                <span>{localizations.signinTermsAndConditions}</span>
+                                <span className='sign-in-form-input__text--none-left'>{localizations.signinTermsAndConditions}</span>
                                 <TextLink type={TextLinkTypes.BLUE}>
                                     <span>Privacy Policy</span>
                                 </TextLink>
-                                <span>and</span>
+                                <span className='sign-in-form-input__text'>and</span>
                                 <TextLink type={TextLinkTypes.BLUE}>
                                     <span>Terms & Conditions</span>
                                 </TextLink>
                             </div>
                             <div className="sign-in-form-input">
-                                <span>{localizations.alreadyHaveeAnAccount}</span>
+                                <span className='sign-in-form-input__text'>{localizations.alreadyHaveeAnAccount}</span>
                                 <TextLink type={TextLinkTypes.BLUE} to={routes.signin}>
                                     <span>{localizations.signin}</span>
                                 </TextLink>

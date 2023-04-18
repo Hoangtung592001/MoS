@@ -48,6 +48,7 @@ export type Book = {
     price: number;
     edition: number;
     bookImage: BookImage;
+    isDeleted: boolean;
 };
 
 export type BasketItem = {

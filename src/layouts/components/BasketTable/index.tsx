@@ -30,7 +30,7 @@ export default function BasketTable() {
     const [contentModal, setContentModal] = useState('');
     const isErroredModal = useMemo(() => {
         return true;
-    }, [])
+    }, []);
     const cookies = new Cookies();
     const navigate = useNavigate();
     const dispatch = useDispatch();

@@ -7,11 +7,21 @@ type BoostrapModalProps = {
     setShow: React.Dispatch<React.SetStateAction<boolean>>;
     isErrored?: boolean,
     title: string,
-    content: string
+    content: string,
+    isDanger?: boolean,
+    action?: any,
+    saveChangeTitle?: string
 }
 
-function BoostrapModal({ show, setShow, isErrored = false, title, content } : BoostrapModalProps) {
+function BoostrapModal({ show, setShow, isErrored = false, title, content, isDanger = false, action, saveChangeTitle } : BoostrapModalProps) {
   const handleClose = () => setShow(false);
+
+  const handleSave = () => {
+    if (action) {
+      action();
+    }
+    setShow(false)
+  }
 
   return (
     <>
@@ -29,16 +39,18 @@ function BoostrapModal({ show, setShow, isErrored = false, title, content } : Bo
             </span>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant={isErrored ? 'danger' : 'secondary'} onClick={handleClose}>
+          <Button variant={isErrored ? 'danger' : 'secondary'} onClick={handleClose} size="lg">
             <span className='modal-button__text'>
                 Close
             </span>
           </Button>
           {
             !isErrored &&
-            <Button variant="primary" onClick={handleClose}>
+            <Button variant={!isDanger ? "primary" : 'danger'} onClick={handleSave} size="lg">
                 <span className='modal-button__text'>
-                    Save Changes
+                    {
+                      saveChangeTitle ? saveChangeTitle : 'Save Changes' 
+                    }
                 </span>
             </Button>
           }

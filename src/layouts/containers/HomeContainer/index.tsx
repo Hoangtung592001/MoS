@@ -44,12 +44,18 @@ export default function HomeContainer() {
     return (
         <div className='home-container'>
             <SearchAndCarousel />
-            <div className='home-container-product-card'>
-                <ProductCardList title={localizations.frequentlyViewedItems} items={frequentlyViewedItems}/>
-            </div>
-            <div className='home-container-product-card'>
-                <ProductCardList title={localizations.trendingItems} items={trendingItems}/>
-            </div>
+            {
+                frequentlyViewedItems.length > 0 &&
+                <div className='home-container-product-card'>
+                    <ProductCardList title={localizations.frequentlyViewedItems} items={frequentlyViewedItems}/>
+                </div>
+            }
+            {
+                trendingItems.length > 0 &&
+                <div className='home-container-product-card'>
+                    <ProductCardList title={localizations.trendingItems} items={trendingItems}/>
+                </div>
+            }
             {
                 recentlyViewItemsProductItems.length > 0 &&
                 <div className='home-container-product-card'>

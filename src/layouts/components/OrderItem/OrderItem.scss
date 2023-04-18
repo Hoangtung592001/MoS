@@ -38,9 +38,17 @@
     &__title {
         font-weight: 400;
         font-size: 1.6rem;
+        color: #039;
+
+        &:hover {
+            text-decoration: underline;
+        }
     }
 
     &__quantity {
         font-size: 1.5rem;
+        &--author {
+            font-size: 1.4rem;
+        }
     }
 }

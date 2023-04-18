@@ -39,6 +39,9 @@ export const getRandomKey = () => {
 };
 
 export const checkTokenExpiry = (token: string) => {
+    if (!token) {
+        return true;
+    }
     const { exp } = jwtDecode<any>(token);
 
     if (Date.now() / 1000 >= exp) {

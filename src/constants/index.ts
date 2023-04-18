@@ -29,7 +29,8 @@ export enum RequestStatus {
 
 export enum Roles {
     Admin = 1,
-    User = 2
+    User = 2,
+    NotSignedIn = 3
 }
 
 export const orderStatuses = ['', 'PREPARING', 'PREPARED', 'DELIVERING', 'DELIVERED'];

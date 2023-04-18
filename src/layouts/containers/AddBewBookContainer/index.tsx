@@ -15,7 +15,7 @@ import actionCreators from '~/redux';
 import { Author } from '~/redux/action-creators/authorActionCreator';
 import { SelectItem } from '~/components/Select';
 import './AddNewBookContainer.scss';
-import { CreateBookReq, Image, resetBookDetails } from '~/redux/action-creators/bookDetailsActionCreator';
+import { CreateBookReq, Image } from '~/redux/action-creators/bookDetailsActionCreator';
 import { BookImageTypeTDs } from '~/commons/enums';
 import { RequestStatus } from '~/constants';
 import { useNavigate } from 'react-router-dom';
@@ -50,7 +50,7 @@ export default function AddNewBookContainer() {
     const [isAuthorIdValid, setIsAuthorIdValid] = useState<boolean>(true);
     const accessToken = getAccessTokenFromCookies();
     const dispatch = useAppDispatch();
-    const { getAuthors, getPublishers, createBook, getAllBookConditionsAction } = bindActionCreators(actionCreators, dispatch);
+    const { getAuthors, getPublishers, createBook, getAllBookConditionsAction, resetBookDetails } = bindActionCreators(actionCreators, dispatch);
     const authors = useAppSelector(state => state.authorReducer.authors);
     const publishers = useAppSelector(state => state.publisherReducer.publishers);
     const { bookConditions, createBookStatus } = useAppSelector(state => state.bookDetailsReducer);
@@ -59,7 +59,7 @@ export default function AddNewBookContainer() {
     useEffect(() => {
         if (createBookStatus === RequestStatus.Fulfilled) {
             resetBookDetails();
-            window.location.reload();
+            navigate(routes.myAccount)
         }
     }, [createBookStatus]);
 
@@ -117,6 +117,7 @@ export default function AddNewBookContainer() {
         getAuthors(accessToken);
         getPublishers(accessToken);
         getAllBookConditionsAction();
+        window.scrollTo(0, 0);
     }, []);
 
     const onSubmit = () => {
@@ -401,7 +402,12 @@ export default function AddNewBookContainer() {
                                 />
                         <div className='add-new-book-container-main-image'>
                             {
-                                selectedImage && selectedImage.length > 0 && <img src={`${selectedImage}`}/>
+                                selectedImage && selectedImage.length > 0 
+                                && 
+                                <img 
+                                    src={`${selectedImage}`}
+                                    className='add-new-book-container-main-image__image'
+                                />
                             }
                         </div>
                     </div>

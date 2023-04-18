@@ -13,7 +13,7 @@ import { useAppDispatch, useAppSelector } from '~/hooks';
 import actionCreators from '~/redux';
 import { SelectItem } from '~/components/Select';
 import './EditBookContainer.scss';
-import { EditBookImage, EditBookReq, resetBookDetails } from '~/redux/action-creators/bookDetailsActionCreator';
+import { EditBookImage, EditBookReq } from '~/redux/action-creators/bookDetailsActionCreator';
 import { BookImageTypeTDs } from '~/commons/enums';
 import { RequestStatus } from '~/constants';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -48,7 +48,7 @@ export default function EditBookContainer() {
     const [isAuthorIdValid, setIsAuthorIdValid] = useState<boolean>(true);
     const accessToken = getAccessTokenFromCookies();
     const dispatch = useAppDispatch();
-    const { getAuthors, getPublishers, editBook, getAllBookConditionsAction, getBookDetails } = bindActionCreators(actionCreators, dispatch);
+    const { getAuthors, getPublishers, editBook, getAllBookConditionsAction, getBookDetails, resetBookDetails } = bindActionCreators(actionCreators, dispatch);
     const authors = useAppSelector(state => state.authorReducer.authors);
     const publishers = useAppSelector(state => state.publisherReducer.publishers);
     const { bookConditions, editBookStatus } = useAppSelector(state => state.bookDetailsReducer);
@@ -84,7 +84,7 @@ export default function EditBookContainer() {
     useEffect(() => {
         if (editBookStatus === RequestStatus.Fulfilled) {
             resetBookDetails();
-            window.location.reload();
+            navigate(routes.books)
         }
     }, [editBookStatus]);
 
@@ -142,6 +142,7 @@ export default function EditBookContainer() {
         getAuthors(accessToken);
         getPublishers(accessToken);
         getAllBookConditionsAction();
+        window.scrollTo(0, 0);
     }, []);
 
     const onSubmit = () => {
@@ -429,7 +430,11 @@ export default function EditBookContainer() {
                                 />
                         <div className='add-new-book-container-main-image'>
                             {
-                                selectedImage && selectedImage.length > 0 && <img src={`${selectedImage}`}/>
+                                selectedImage && selectedImage.length > 0 && 
+                                <img 
+                                    src={`${selectedImage}`}
+                                    className='add-new-book-container-main-image__image'
+                                />
                             }
                         </div>
                     </div>

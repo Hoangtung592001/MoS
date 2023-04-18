@@ -15,7 +15,7 @@ export default function PriceInfo(props: PriceInfoProps) {
         <div className="price-info">
             <h4 className="price-info__header">{localizations.buyNew}</h4>
             <h4 className="price-info__price">US$ {props.price}</h4>
-            <span className="price-info__where">{localizations.within} U.S.A</span>
+            <span className="price-info__where">{localizations.within} Vietnam</span>
             <div className="price-info-link">
                 <TextLink type={TextLinkTypes.BLUE}>
                     <span>Destination, rates & speeds</span>

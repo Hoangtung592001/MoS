@@ -53,7 +53,7 @@ export default function MyPurchasesContainer() {
                                     {localizations.shopName}
                                 </h3>
                                 <span className="my-purchases-container-order-intro-shop-name__orderAt">
-                                    Ordered At {`${orderAt.getDate()}/${orderAt.getMonth()}/${orderAt.getFullYear()}`}
+                                    Ordered On {`${orderAt.getDate()}/${orderAt.getMonth()}/${orderAt.getFullYear()}`}
                                 </span>
                             </div>
                             <div className="my-purchases-container-order-intro-status">
@@ -73,6 +73,7 @@ export default function MyPurchasesContainer() {
                                             originalPriceEach={
                                                 orderDetail.originalPrice / orderDetail.basketItem.quantity
                                             }
+                                            isBookDeleted={orderDetail.basketItem.book.isDeleted}
                                         />
                                     </div>
                                 );

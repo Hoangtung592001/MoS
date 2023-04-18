@@ -42,7 +42,7 @@ export default function Visa({
             <div className="visa-input">
                 <label htmlFor="" className="visa-input__label">
                     {localizations.cardNumber}
-                    <span className="visa-input__label--required">*</span>
+                    <span className="select__label--required">*</span>
                 </label>
                 <Input
                     inputType={InputTypes.ADDRESS_FORM}
@@ -57,7 +57,7 @@ export default function Visa({
             <div className="visa-input--expiry visa-input">
                 <label htmlFor="" className="visa-input__label">
                     {localizations.expirationDate}
-                    <span className="visa-input__label--required">*</span>
+                    <span className="select__label--required">*</span>
                 </label>
                 <Input
                     inputType={InputTypes.ADDRESS_FORM}
@@ -74,7 +74,7 @@ export default function Visa({
             <div className="visa-input">
                 <label htmlFor="" className="visa-input__label">
                     {localizations.nameOnCreditCard}
-                    <span className="visa-input__label--required">*</span>
+                    <span className="select__label--required">*</span>
                 </label>
                 <Input
                     inputType={InputTypes.ADDRESS_FORM}

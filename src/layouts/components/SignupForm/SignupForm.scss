@@ -1,3 +1,14 @@
 .sign-up-form-input__alert {
     color: #363636;
 }
+
+.sign-in-form-input {
+    &__text {
+        margin-right: 3px;
+        margin-left: 3px;
+
+        &--none-left {
+            margin-left: 0px;
+        }
+    }
+}

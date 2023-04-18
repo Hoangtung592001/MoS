@@ -58,7 +58,7 @@ export default function BookIntro(props: BookIntroParams) {
                         </TextLink>
                     </div>
                     <div className="book-intro-details-seller-time-start display-flex align-items--center">
-                        <span>MoSBooks Seller Since</span>
+                        <span>AbeBooks Seller Since</span>
                         <span className="book-intro-details__text--plain">April 17, 2008</span>
                     </div>
                     <span className="book-intro-details__text--plain">

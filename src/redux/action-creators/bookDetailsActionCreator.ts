@@ -1,5 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { StringLiteral } from "typescript";
 import { BaseResponse } from "~/commons/response";
 import { fetchAsync, fetchAsyncWithAuthentitaion, FETCH_TYPES } from "~/commons/sendRequest";
 import { GetBookDetailsUrl, removeBookUrl } from "~/commons/URLs";

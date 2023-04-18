@@ -37,8 +37,8 @@ interface Route {
 
 const publicRoutes: Route[] = [
     { path: config.routes.home, component: HomeContainer },
-    { path: config.routes.signin, component: SigninContainer, layout: FooterOnly },
-    { path: config.routes.signup, component: SignupContainer, layout: FooterOnly },
+    { path: config.routes.signin, component: SigninContainer, layout: FooterOnly, accessPermission: Roles.NotSignedIn },
+    { path: config.routes.signup, component: SignupContainer, layout: FooterOnly, accessPermission: Roles.NotSignedIn },
     { path: config.routes.basket, component: BasketContainer },
     { path: config.routes.bookDetails, component: BookIntroAndDetailsContainer },
     { path: config.routes.myAccount, component: MyAccountContainer },

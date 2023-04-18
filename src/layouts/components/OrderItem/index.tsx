@@ -2,6 +2,7 @@ import { convertConcurrency } from '~/commons/commonUsedFunctions';
 import { redirectToBookDetailByBookId } from '~/commons/URLs';
 import { TextLink } from '~/components';
 import './OrderItem.scss';
+import localizations from '~/constants/locallizations';
 
 export type OrderItemProps = {
     bookId: string;
@@ -14,6 +15,8 @@ export type OrderItemProps = {
     Button?: any;
     showQuantity?: boolean;
     url?: string;
+    isBookDeleted?: boolean;
+    authorName?: string;
 };
 
 export default function OrderItem({
@@ -26,7 +29,9 @@ export default function OrderItem({
     disablePrice = false,
     Button,
     showQuantity = true,
-    url
+    url,
+    isBookDeleted,
+    authorName
 }: OrderItemProps) {
     return (
         <div className="order-item display-flex">
@@ -35,11 +40,28 @@ export default function OrderItem({
                     <img src={imgUrl} className="order-item-product-img__img" />
                 </div>
                 <div className="order-item-product-intro display-flex flex-direction--column">
-                    <TextLink to={url ? url : redirectToBookDetailByBookId(bookId)}>
-                        <span className="order-item-product-intro__title">{title}</span>
-                    </TextLink>
+                    <div>
+                        {
+                            isBookDeleted ? 
+                            <>
+                                <span className="order-item-product-intro__title">{title}</span>
+                                <span className='basket-table-row-info__error'>
+                                    {
+                                        `(${localizations.bookDeleted})`
+                                    }
+                                </span>
+                            </>
+                            :
+                            <>
+                                <TextLink to={url ? url : redirectToBookDetailByBookId(bookId)}>
+                                    <span className="order-item-product-intro__title">{title}</span>
+                                </TextLink>
+                            </>
+                        }
+                    </div>
                     {
-                        showQuantity && <span className="order-item-product-intro__quantity">x{quantity}</span>
+                        showQuantity ? <span className="order-item-product-intro__quantity">x{quantity}</span>
+                        : <span className="order-item-product-intro__quantity--author">{authorName}</span>
                     }
                 </div>
             </div>

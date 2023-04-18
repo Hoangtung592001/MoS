@@ -22,7 +22,7 @@ export default function BookIntroAndDetailsContainer() {
     const dispatch = useAppDispatch();
     const { bookId } = useParams();
     const { getBookDetails, addToBasket, resetBasket, getFrequentlyViewedItems } = bindActionCreators(
-        actionCreators,
+    actionCreators,
         dispatch,
     );
 
@@ -50,10 +50,12 @@ export default function BookIntroAndDetailsContainer() {
 
     useEffect(() => {
         getFrequentlyViewedItems();
+        window.scrollTo(0, 0);
     }, []);
 
     useEffect(() => {
         if (bookId) {
+            window.scrollTo(0, 0);
             getBookDetails(getAccessTokenFromCookies(), bookId);
         }
     }, [bookId]);
