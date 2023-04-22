@@ -15,7 +15,7 @@
         line-height: 1rem;
         background-color: #dcedff;
         &::placeholder {
-            color: #cccccc;
+            color: var(--black);
         }
 
         &--invalid {

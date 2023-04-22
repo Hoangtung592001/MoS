@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Book, WholeBook } from '../action-creators/searchBookActionCreator';
+import { Book, searchWholeBook, WholeBook } from '../action-creators/searchBookActionCreator';
 
 interface InitialStateInterface {
     books: Array<Book>;
@@ -21,9 +21,12 @@ export const searchBookSlice = createSlice({
         getWhole: (state, action: PayloadAction<Array<WholeBook>>) => {
             state.wholeBooks = action.payload;
         },
+        makeOriginal: (state) => {
+            state.wholeBooks = [];
+        }
     },
 });
 
-export const { get, getWhole } = searchBookSlice.actions;
+export const { get, getWhole, makeOriginal } = searchBookSlice.actions;
 
 export default searchBookSlice.reducer;

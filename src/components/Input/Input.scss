@@ -47,6 +47,26 @@
     }
 
     &--invalid {
-        border: 1px solid #cc0000;
+        border: 1px solid #ff0033;
+    }
+}
+
+.input-container-error {
+    margin-top: 3px;
+    &__message {
+        color: #ff0033;
+        margin-top: 100px;
+    }
+}
+
+.input-container-label {
+    margin-bottom: 3px;
+    &__message {
+        font-weight: 600;
+        &--required {
+            color: #ff0033;
+            margin-left: 3px;
+            line-height: 0px;
+        }
     }
 }

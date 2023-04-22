@@ -1,3 +1,4 @@
+import { ComboboxOptionText } from '@reach/combobox';
 import './InputDropdown.scss';
 import { Combobox, ComboboxInput, ComboboxList, ComboboxOption, ComboboxPopover } from '@reach/combobox';
 
@@ -18,7 +19,7 @@ export default function InputDropdown({
     ...props
 }: any) {
     return (
-        <Combobox className="input-dropdown-input" onSelect={handleSelect ? handleSelect : null}>
+        <Combobox className="input-dropdown-input">
             <ComboboxInput
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
@@ -36,13 +37,19 @@ export default function InputDropdown({
                             <ComboboxOption
                                 className="input-dropdown-data"
                                 key={id}
-                                value={value}
+                                value=""
                                 onClick={(e) => {
                                     if (actionOnClick) {
                                         actionOnClick(id);
                                     }
+
+                                    if (handleSelect) {
+                                        handleSelect(value);
+                                    }
                                 }}
-                            />
+                            >
+                                {value} <ComboboxOptionText/>
+                            </ComboboxOption>
                         ))}
                 </ComboboxList>
             </ComboboxPopover>

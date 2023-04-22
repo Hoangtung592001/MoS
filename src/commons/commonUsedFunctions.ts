@@ -54,3 +54,24 @@ export const checkTokenExpiry = (token: string) => {
 export const convertConcurrency = (cost: number) => {
     return Math.round(cost * 100) / 100;
 };
+
+export const validatePhoneNumber = (phoneNumber: string) => {
+    var phoneNumberPattern = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
+    return phoneNumberPattern.test(phoneNumber);
+}
+
+export const validateEmail = (email: string) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+};
+
+export const getLengthErrorMessage = (length: number) => {
+    return `Length must be more than ${length}`
+}
+
+export const getRequiredErrorMessage = (label: string) => {
+    return `${label} is required`
+}

@@ -21,7 +21,7 @@ import { getAddressById, getSavedAddress, resetAddress, setAddress } from './act
 import { getCountries } from './action-creators/countryActionCreator';
 import { getShippingFee } from './action-creators/shippingActionCreator';
 import { getOrders, resetOrder, setOrder } from './action-creators/orderActionCreator';
-import { searchBook, searchWholeBook } from './action-creators/searchBookActionCreator';
+import { resetSearchBook, searchBook, searchWholeBook } from './action-creators/searchBookActionCreator';
 import { createAuthorAction, getAuthors, resetAuthor } from './action-creators/authorActionCreator';
 import { createPublisherAction, getPublishers, resetPublisher } from './action-creators/publisherActionCreator';
 
@@ -69,7 +69,8 @@ const actionCreators = {
     getAllBookConditionsAction: getAllBookConditionsAction,
     editBook: editBook,
     getRecentlyViewedItems: getRecentlyViewedItemsAction,
-    getTrendingItems: getTrendingItemsAction
+    getTrendingItems: getTrendingItemsAction,
+    resetSearchBook: resetSearchBook
 };
 
 export default actionCreators;

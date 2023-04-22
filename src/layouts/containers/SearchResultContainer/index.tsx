@@ -10,7 +10,7 @@ import './SearchResultContainer.scss';
 export default function SearchResultContainer() {
     const { title } = useParams();
     const dispatch = useDispatch();
-    const { searchWholeBook } = bindActionCreators(actionCreators, dispatch);
+    const { searchWholeBook, resetSearchBook } = bindActionCreators(actionCreators, dispatch);
     const wholeBooks = useAppSelector((state) => state.searchBookReducer.wholeBooks);
     const navigate = useNavigate();
     useEffect(() => {
@@ -20,6 +20,12 @@ export default function SearchResultContainer() {
             navigate(routes.home);
         }
     }, [title]);
+
+    useEffect(() => {
+        return () => {
+            resetSearchBook();
+        }
+    }, []);
     return (
         <div className="search-result-container">
             {wholeBooks.map((wholeBook) => {

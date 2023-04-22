@@ -13,6 +13,7 @@ import { useAppSelector } from '~/hooks';
 import ErrorBox from '../ErrorBox';
 import { SignUpProps } from '~/redux/action-creators/userActionCreator';
 import { RequestStatus } from '~/constants';
+import { getLengthErrorMessage, validateEmail } from '~/commons/commonUsedFunctions';
 export default function SignupForm() {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -20,22 +21,44 @@ export default function SignupForm() {
     const [isUsernameValid, setIsUsernameValid] = useState<boolean>(true);
     const [isPasswordValid, setIsPasswordValid] = useState<boolean>(true);
     const [isReEnteredPasswordValid, setIsReEnteredPasswordValid] = useState<boolean>(true);
+    const [usernameErrorMessage, setUserNameErrorMessage] = useState<string>();
+    const [passwordErrorMessage, setPasswordErrorMessage] = useState<string>();
+    const [reEnteredPasswordErrorMessage, setReEnteredPasswordErrorMessage] = useState<string>();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { signUp, resetUserAction } = bindActionCreators(actionCreators, dispatch);
     const { signUpError, signUpStatus } = useAppSelector((state) => state.user);
     const onSubmit = useCallback((username: string, password: string, reEnteredPassword: string) => {
-        if (username.length < 6) {
+        const userNameValid = username.length >= 6 && validateEmail(username);
+        const passwordValid = password.length >= 6;
+        const reEnteredPasswordValid = password === reEnteredPassword;
+
+        if (!userNameValid) {
             setIsUsernameValid(false);
-        } else if (password.length < 6) {
+            if (username.length < 6) {
+                setUserNameErrorMessage(getLengthErrorMessage(6));
+            }
+            else if (!validateEmail(username)) {
+                setUserNameErrorMessage("Email not in correct format");
+            }
+        } 
+
+        if (!passwordValid) {
             setIsPasswordValid(false);
-        } else if (password !== reEnteredPassword) {
+            setPasswordErrorMessage(getLengthErrorMessage(6));
+        }
+
+        if (!reEnteredPasswordValid) {
             setIsReEnteredPasswordValid(false);
-        } else {
+            setReEnteredPasswordErrorMessage("Password you confirmed is not valid");
+        }
+
+        if (userNameValid && passwordValid && reEnteredPassword) {
             const signUpProps: SignUpProps = {
                 username,
                 password,
             };
+
             signUp(signUpProps);
         }
     }, []);
@@ -79,9 +102,6 @@ export default function SignupForm() {
                                 <Input inputType={InputTypes.SEARCH} placeholder={localizations.firstAndLastName} />
                             </div> */}
                             <div className="sign-in-form-input">
-                                <label htmlFor="" className="search-form-input__label">
-                                    {localizations.username}
-                                </label>
                                 <Input
                                     inputType={InputTypes.SEARCH}
                                     value={username}
@@ -90,6 +110,9 @@ export default function SignupForm() {
                                         setIsUsernameValid(true);
                                     }}
                                     isValid={isUsernameValid}
+                                    isRequired={true}
+                                    label={localizations.username}
+                                    errorMessage={usernameErrorMessage}
                                 />
                                 <Alert>
                                     <span className="sign-up-form-input__alert">
@@ -98,9 +121,6 @@ export default function SignupForm() {
                                 </Alert>
                             </div>
                             <div className="sign-in-form-input">
-                                <label htmlFor="" className="search-form-input__label">
-                                    {localizations.password}
-                                </label>
                                 <Input
                                     inputType={InputTypes.SEARCH}
                                     placeholder={localizations.atLeast6Charaters}
@@ -110,16 +130,16 @@ export default function SignupForm() {
                                         setIsPasswordValid(true);
                                     }}
                                     isValid={isPasswordValid}
+                                    isRequired={true}
+                                    label={localizations.password}
                                     type="password"
+                                    errorMessage={passwordErrorMessage}
                                 />
                                 <Alert>
                                     <span className="sign-up-form-input__alert">{localizations.alertPassword}</span>
                                 </Alert>
                             </div>
                             <div className="sign-in-form-input">
-                                <label htmlFor="" className="search-form-input__label">
-                                    {localizations.reEnterPassword}
-                                </label>
                                 <Input
                                     inputType={InputTypes.SEARCH}
                                     value={reEnteredPassword}
@@ -128,7 +148,10 @@ export default function SignupForm() {
                                         setReEnteredPassword(e.target.value);
                                         setIsReEnteredPasswordValid(true);
                                     }}
+                                    isRequired={true}
+                                    label={localizations.reEnterPassword}
                                     type="password"
+                                    errorMessage={reEnteredPasswordErrorMessage}
                                 />
                             </div>
                             <div className="sign-in-form-submit">

@@ -14,7 +14,7 @@ import { InputDropdownItem } from '~/components/InputDropdown';
 import { GoogleMap, useLoadScript } from '@react-google-maps/api';
 import { SetAddressReq } from '~/redux/action-creators/addressActionCreator';
 import jwtDecode from 'jwt-decode';
-import { checkTokenExpiry } from '~/commons/commonUsedFunctions';
+import { checkTokenExpiry, validatePhoneNumber } from '~/commons/commonUsedFunctions';
 export default function ShippingAddressContainer() {
     const mapRef = useRef<GoogleMap>();
     const navigate = useNavigate();
@@ -38,7 +38,7 @@ export default function ShippingAddressContainer() {
     const setAddressStatus = useAppSelector((state) => state.addressReducer.status);
     const { setAddress } = bindActionCreators(actionCreators, dispatch);
     const { isLoaded } = useLoadScript({
-        googleMapsApiKey: 'AIzaSyAe_Jd-K0gFFtUkIonRsv24f4b-WtkYHa0',
+        googleMapsApiKey: 'AIzaSyBPqQ2EN7r5_akXTlP1LXY4WRZMbJ8TRy8',
         libraries: ['places'],
     });
 
@@ -71,13 +71,13 @@ export default function ShippingAddressContainer() {
         if (!addressLine) {
             setIsAddresslineValid(false);
         }
-        if (!telephone) {
+        if (!telephone || !validatePhoneNumber(telephone)) {
             setIsTelephoneValid(false);
         }
         if (!currentPosition) {
             setIsCurrentPositionValid(false);
         }
-        if (fullName && addressLine && telephone && currentPosition && length && countryId && accessToken) {
+        if (fullName && addressLine && telephone && validatePhoneNumber(telephone) && currentPosition && length && countryId && accessToken) {
             const setAddressReq: SetAddressReq = {
                 fullName: fullName,
                 addressLine: addressLine,

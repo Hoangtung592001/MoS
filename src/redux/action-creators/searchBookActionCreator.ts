@@ -1,7 +1,7 @@
 import { BaseResponse } from '~/commons/response';
 import { fetchAsync, FETCH_TYPES } from '~/commons/sendRequest';
 import { SERVICE_URL } from '~/constants/server';
-import { get, getWhole } from '../reducers/searchBookReducer';
+import { get, getWhole, makeOriginal } from '../reducers/searchBookReducer';
 
 export type Book = {
     id: string;
@@ -41,4 +41,8 @@ export const searchWholeBook = (title: string) => async (dispatch: any) => {
 
         dispatch(getWhole(data.data));
     }
+};
+
+export const resetSearchBook = () => (dispatch: any) => {
+    dispatch(makeOriginal());
 };
