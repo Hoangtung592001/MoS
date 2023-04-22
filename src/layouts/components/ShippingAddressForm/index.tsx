@@ -50,6 +50,10 @@ interface ShippingAddressFormProps {
     setIsAddresslineValid: React.Dispatch<React.SetStateAction<boolean>>;
     setIsTelephoneValid: React.Dispatch<React.SetStateAction<boolean>>;
     setIsCurrentPositionValid: React.Dispatch<React.SetStateAction<boolean>>;
+    fullNameErrorMessage: string | undefined;
+    addressLineErrorMessage: string | undefined;
+    telephoneErrorMessage: string | undefined;
+    currentPositionErrorMessage: string | undefined;
 }
 
 export default function ShippingAddressForm(props: ShippingAddressFormProps) {
@@ -118,10 +122,6 @@ export default function ShippingAddressForm(props: ShippingAddressFormProps) {
                 </div>
                 <div className="shipping-address-inputs display-flex flex-direction--column">
                     <div className="shipping-address-input">
-                        <label htmlFor="" className="shipping-address-input__label">
-                            {localizations.fullName}
-                            <span className="shipping-address-input__label--required">*</span>
-                        </label>
                         <Input
                             inputType={InputTypes.ADDRESS_FORM}
                             isValid={props.isFullnameValid}
@@ -130,6 +130,9 @@ export default function ShippingAddressForm(props: ShippingAddressFormProps) {
                                 props.setFullname(e.target.value);
                                 props.setIsFullnameValid(true);
                             }}
+                            label={localizations.fullName}
+                            isRequired={true}
+                            errorMessage={props.fullNameErrorMessage}
                         />
                     </div>
                     <div className="shipping-address-input">
@@ -145,10 +148,6 @@ export default function ShippingAddressForm(props: ShippingAddressFormProps) {
                         />
                     </div>
                     <div className="shipping-address-input">
-                        <label htmlFor="" className="shipping-address-input__label">
-                            {localizations.addressLine}
-                            <span className="shipping-address-input__label--required">*</span>
-                        </label>
                         <Input
                             inputType={InputTypes.ADDRESS_FORM}
                             isValid={props.isAddressLineValid}
@@ -157,13 +156,12 @@ export default function ShippingAddressForm(props: ShippingAddressFormProps) {
                                 props.setAddressline(e.target.value);
                                 props.setIsAddresslineValid(true);
                             }}
+                            label={localizations.addressLine}
+                            isRequired={true}
+                            errorMessage={props.addressLineErrorMessage}
                         />
                     </div>
                     <div className="shipping-address-input">
-                        <label htmlFor="" className="shipping-address-input__label">
-                            {localizations.searchAddess}
-                            <span className="shipping-address-input__label--required">*</span>
-                        </label>
                         <InputDropdown
                             handleSelect={handleSelectPlace}
                             value={value}
@@ -172,6 +170,9 @@ export default function ShippingAddressForm(props: ShippingAddressFormProps) {
                             autoComplete="off"
                             disabled={!ready}
                             isValid={props.isCurrentPositionValid}
+                            label={localizations.searchAddess}
+                            isRequired={true}
+                            errorMessage={props.currentPositionErrorMessage}
                         />
                     </div>
                     {props.isGoogleMapLoaded && (
@@ -187,10 +188,6 @@ export default function ShippingAddressForm(props: ShippingAddressFormProps) {
                         </div>
                     )}
                     <div className="shipping-address-input">
-                        <label htmlFor="" className="shipping-address-input__label">
-                            {localizations.telephone}
-                            <span className="shipping-address-input__label--required">*</span>
-                        </label>
                         <Input
                             inputType={InputTypes.ADDRESS_FORM}
                             isValid={props.isTelephoneValid}
@@ -199,6 +196,9 @@ export default function ShippingAddressForm(props: ShippingAddressFormProps) {
                                 props.setTelephone(e.target.value);
                                 props.setIsTelephoneValid(true);
                             }}
+                            isRequired={true}
+                            label={localizations.telephone}
+                            errorMessage={props.telephoneErrorMessage}
                         />
                     </div>
                     <div className="shipping-address-input">

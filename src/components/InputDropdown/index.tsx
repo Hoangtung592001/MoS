@@ -16,10 +16,26 @@ export default function InputDropdown({
     isValid,
     setKey,
     actionOnClick,
+    label,
+    isRequired,
+    errorMessage,
     ...props
 }: any) {
     return (
         <Combobox className="input-dropdown-input">
+            {
+                label && 
+                <div className='input-container-label'>
+                    <span className='input-container-label__message'>
+                        {label}
+                    </span>
+                    { isRequired && 
+                        <span className='input-container-label__message--required'>
+                            *
+                        </span>
+                    }
+                </div>
+            }
             <ComboboxInput
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
@@ -30,6 +46,14 @@ export default function InputDropdown({
                 }
                 {...props}
             />
+            {
+                !isValid &&
+                <div className='input-container-error'>
+                    <span className='input-container-error__message'>
+                        {errorMessage}
+                    </span>
+                </div>
+            }
             <ComboboxPopover className="input-dropdown-popover">
                 <ComboboxList className="input-dropdown-container">
                     {selectItems &&

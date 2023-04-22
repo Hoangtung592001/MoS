@@ -14,7 +14,8 @@ import { InputDropdownItem } from '~/components/InputDropdown';
 import { GoogleMap, useLoadScript } from '@react-google-maps/api';
 import { SetAddressReq } from '~/redux/action-creators/addressActionCreator';
 import jwtDecode from 'jwt-decode';
-import { checkTokenExpiry, validatePhoneNumber } from '~/commons/commonUsedFunctions';
+import { checkTokenExpiry, getRequiredErrorMessage, validatePhoneNumber } from '~/commons/commonUsedFunctions';
+import localizations from '~/constants/locallizations';
 export default function ShippingAddressContainer() {
     const mapRef = useRef<GoogleMap>();
     const navigate = useNavigate();
@@ -31,6 +32,10 @@ export default function ShippingAddressContainer() {
     const [countryId, setCountryId] = useState<number>(VietNamId);
     const [currentPosition, setCurrentPosition] = useState<google.maps.LatLngLiteral>();
     const [isCurrentPositionValid, setIsCurrentPositionValid] = useState<boolean>(true);
+    const [fullNameErrorMessage, setFullNameErrorMessage] = useState<string>("");
+    const [addressLineErrorMessage, setAddressLineErrorMessage] = useState<string>("");
+    const [telephoneErrorMessage, setTelephoneErrorMessage] = useState<string>("");
+    const [currentPositionErrorMessage, setCurrentPositionErrorMessage] = useState<string>("");
     const dispatch = useAppDispatch();
     const { getSavedAddress, getCountries, resetAddress } = bindActionCreators(actionCreators, dispatch);
     const savedAddresses = useAppSelector((state) => state.addressReducer.savedAddresses);
@@ -67,15 +72,24 @@ export default function ShippingAddressContainer() {
     const onSubmit = () => {
         if (!fullName) {
             setIsFullnameValid(false);
+            setFullNameErrorMessage(getRequiredErrorMessage(localizations.fullName));
         }
         if (!addressLine) {
             setIsAddresslineValid(false);
+            setAddressLineErrorMessage(getRequiredErrorMessage(localizations.addressLine));
         }
-        if (!telephone || !validatePhoneNumber(telephone)) {
+        if (!telephone) {
             setIsTelephoneValid(false);
+            setTelephoneErrorMessage(getRequiredErrorMessage(localizations.telephone));
         }
+        if (telephone && !validatePhoneNumber(telephone)) {
+            setIsTelephoneValid(false);
+            setTelephoneErrorMessage("Your phone number is not in correct format");
+        }
+
         if (!currentPosition) {
             setIsCurrentPositionValid(false);
+            setCurrentPositionErrorMessage(getRequiredErrorMessage(localizations.currentPotision));
         }
         if (fullName && addressLine && telephone && validatePhoneNumber(telephone) && currentPosition && length && countryId && accessToken) {
             const setAddressReq: SetAddressReq = {
@@ -134,6 +148,10 @@ export default function ShippingAddressContainer() {
                     setIsTelephoneValid={setIsTelephoneValid}
                     isCurrentPositionValid={isCurrentPositionValid}
                     setIsCurrentPositionValid={setIsCurrentPositionValid}
+                    fullNameErrorMessage={fullNameErrorMessage}
+                    addressLineErrorMessage={addressLineErrorMessage}
+                    telephoneErrorMessage={telephoneErrorMessage}
+                    currentPositionErrorMessage={currentPositionErrorMessage}
                 />
             )}
         </Fragment>

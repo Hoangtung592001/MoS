@@ -127,7 +127,7 @@ const localizations = {
     shippingAddress: 'Shipping Address',
     addAndEditAddress: 'Add/Edit Address',
     fullName: 'Full name (First and Last name)',
-    addressLine: 'Address Line ',
+    addressLine: 'Address Line',
     searchAddess: 'Search your address',
     addressLine2: 'Address Line 2',
     country: 'Country',
@@ -179,7 +179,8 @@ const localizations = {
     bookDeleted: 'This book is deleted by Administrator',
     saveChangeModalTitle: 'Confirmation',
     saveChangeModalContent: 'Are you sure?',
-    delete: 'Delete'
+    delete: 'Delete',
+    currentPotision: 'Current Position'
 };
 
 export default localizations;

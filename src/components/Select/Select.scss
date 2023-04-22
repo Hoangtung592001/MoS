@@ -2,10 +2,11 @@
     &__label {
         font-size: 1.5rem;
         margin-bottom: 7px;
+        font-weight: 600;
 
         &--required {
             margin-left: 5px;
-            color: var(--abe-red);
+            color: #ff0033;
         }
     }
 

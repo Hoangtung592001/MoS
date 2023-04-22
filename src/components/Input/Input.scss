@@ -55,6 +55,7 @@
     margin-top: 3px;
     &__message {
         color: #ff0033;
+        font-size: 1.4rem;
         margin-top: 100px;
     }
 }
@@ -62,8 +63,10 @@
 .input-container-label {
     margin-bottom: 3px;
     &__message {
+        font-size: 1.5rem;
         font-weight: 600;
         &--required {
+            font-size: 1.5rem;
             color: #ff0033;
             margin-left: 3px;
             line-height: 0px;
