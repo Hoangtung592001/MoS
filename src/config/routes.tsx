@@ -21,7 +21,8 @@ const routes = {
     addNewPublisher: '/addNewPublisher',
     addNewAuthor: '/addNewAuthor',
     bookList: '/bookList',
-    editBook: '/editBook/:bookId'
+    editBook: '/editBook/:bookId',
+    all: '*'
 };
 
 export const getBookDetailsRoute = (bookId: string) => {

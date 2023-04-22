@@ -47,6 +47,12 @@ export default function SignupForm() {
         }
     }, [signUpStatus]);
 
+    useEffect(() => {
+        return () => {
+            resetUserAction();
+        }
+    }, []);
+
     return (
         <div className="sign-in">
             <div className="sign-in-container margin-auto display-flex flex-direction--column align-items--center">

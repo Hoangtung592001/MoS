@@ -9,7 +9,7 @@ function Button({ type, children, isLoading, loadingColor, ...props }: any) {
                     className="button__spinner"
                     color="#fff"
                     size={21}
-                    secondaryColor={loadingColor ? loadingColor : '#dc2a2b'}
+                    secondaryColor={loadingColor ? loadingColor : '#FFFAFA'}
                 />
             ) : (
                 children

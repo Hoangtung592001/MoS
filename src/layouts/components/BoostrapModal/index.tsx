@@ -26,14 +26,14 @@ function BoostrapModal({ show, setShow, isErrored = false, title, content, isDan
   return (
     <>
       <Modal show={show} onHide={handleClose} className='modal-custom-padding'>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton className='modal-header-custom'>
           <Modal.Title>
             <span className='modal-header__text'>
                 {title}
             </span>
         </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className='modal-body-custom'>
             <span className='modal-body__text'>
                 {content}
             </span>

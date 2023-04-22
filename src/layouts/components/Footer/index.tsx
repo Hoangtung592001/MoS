@@ -2,13 +2,18 @@ import './Footer.scss';
 import { TextLink } from '~/components';
 import localizations from '~/constants/locallizations';
 import { BiArrowToTop } from 'react-icons/bi';
+import { useCallback } from 'react';
 
 function Footer() {
+    const backToTop = useCallback(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return (
         <div className='footer'>
             <div className='footer-container'>
                 <div className='footer-to-top'>
-                    <TextLink>
+                    <TextLink onClick={backToTop}>
                         <span className='footer-to-top__text'>
                             {localizations.backToTop}
                         </span>

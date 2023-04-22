@@ -45,6 +45,8 @@ export const basketSlice = createSlice({
             state.status = RequestStatus.Nothing;
             state.removeItemStatus = RequestStatus.Nothing;
             state.changeItemQuantityStatus = RequestStatus.Nothing;
+            state.changeItemQuantityError = null;
+            state.addToBasketError = null;
         },
     },
     extraReducers(builder) {

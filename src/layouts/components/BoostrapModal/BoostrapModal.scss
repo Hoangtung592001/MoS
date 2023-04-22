@@ -10,18 +10,18 @@
     font-size: 2rem;
 }
 
-.modal-header {
-    padding-top: 15px;
-    padding-bottom: 15px;
+.modal-header-custom {
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
 }
 
-.modal-body {
-    padding-top: 15px;
-    padding-bottom: 15px;
+.modal-body-custom {
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
 }
 
 .btn {
-    padding: 8px 12px;
+    padding: 8px 12px !important;
 }
 
 .modal-custom-padding {

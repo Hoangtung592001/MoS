@@ -103,6 +103,12 @@ export default function BasketTable() {
         }
     }, [changeItemQuantityStatus]);
 
+    useEffect(() => {
+        return () => {
+            resetBasket();
+        }
+    }, []);
+
     return (
         <>
             <BoostrapModal show={showModal} setShow={setShowModal} isErrored={isErroredModal} title={titleModal} content={contentModal}/>
@@ -111,8 +117,7 @@ export default function BasketTable() {
                     <thead className="basket-table-row basket-table-row-header">
                         <tr className="basket-table-row__item1">
                             <td>
-                                {localizations.basketItems} ({basket.basketItems.length}
-                                {localizations.items})
+                                {`${localizations.basketItems} (${basket.basketItems.length} ${localizations.items})`}
                             </td>
                         </tr>
                         <tr className="basket-table-row__item2">
@@ -233,13 +238,15 @@ export default function BasketTable() {
                 </table>
                 <div className="basket-total display-flex justify-content--space-between">
                     <div className="basket-total-button basket-total-button--first display-flex">
-                        <Button
-                            onClick={(e: any) => {
-                                navigate(routes.home);
-                            }}
-                        >
-                            <span>AbeBooks Home</span>
-                        </Button>
+                        <div className='basket-total-button--first-button'>
+                            <Button
+                                onClick={(e: any) => {
+                                    navigate(routes.home);
+                                }}
+                            >
+                                <span>AbeBooks Home</span>
+                            </Button>
+                        </div>
                         <div className="basket-total-total">
                             <span className="basket-total-total__message">Order Total:</span>
                             <span className="basket-total-total__price">
@@ -249,21 +256,24 @@ export default function BasketTable() {
                     </div>
                     <div className="basket-total-button">
                         {basket.basketItems.length > 0 && (
-                            <Button
-                                onClick={(e: any) => {
-                                    if (!isQuantityValid) {
-                                        setShowModal(true);
-                                        setTitleModal(localizations.errorModalTitle);
-                                        setContentModal(localizations.quantityExceeded);
-                                    }
-                                    else {
-                                        onProceedToCheckout(basket);
-                                    }
-                                }}
-                                isLoading={changeItemQuantityStatus == RequestStatus.Pending}
-                            >
-                                <span>Proceed to Checkout</span>
-                            </Button>
+                            <div className='basket-total-button-button'>
+                                <Button
+                                    onClick={(e: any) => {
+                                        if (!isQuantityValid) {
+                                            setShowModal(true);
+                                            setTitleModal(localizations.errorModalTitle);
+                                            setContentModal(localizations.quantityExceeded);
+                                        }
+                                        else {
+                                            onProceedToCheckout(basket);
+                                        }
+                                    }}
+                                    isLoading={changeItemQuantityStatus == RequestStatus.Pending}
+                                    loadingColor="#32363a"
+                                >
+                                    <span className='basket-total-button-button__text'>Proceed to Checkout</span>
+                                </Button>
+                            </div>
                         )}
                     </div>
                 </div>

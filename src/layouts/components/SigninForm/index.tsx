@@ -12,21 +12,28 @@ import { useNavigate, Link } from "react-router-dom";
 import config from '~/config';
 import ErrorBox from '../ErrorBox';
 import routes from '~/config/routes';
+import { RequestStatus } from '~/constants';
 export default function SigninForm() {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const { accessToken } = useAppSelector(state => state.user.token);
-    const { isLoading } = useAppSelector(state => state.user);
+    const { isLoading, signInRequestStatus } = useAppSelector(state => state.user);
     const { errors } = useAppSelector(state => state.user);
-    const { signIn } = bindActionCreators(actionCreators, dispatch);
+    const { signIn, resetUserAction } = bindActionCreators(actionCreators, dispatch);
     
     useEffect(() => {
         if (!isLoading && accessToken) {
             navigate(config.routes.home);
         }
     }, [isLoading]);
+
+    useEffect(() => {
+        return () => {
+            resetUserAction();
+        }
+    }, []);
 
     return (
         <div className="sign-in">
@@ -79,6 +86,7 @@ export default function SigninForm() {
 
                                         signIn(user);
                                     }}
+                                    isLoading={signInRequestStatus === RequestStatus.Pending}
                                 >
                                     <span className="sign-in-form__submit-text">{localizations.signin}</span>
                                 </Button>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { publicRoutes } from '~/routes';
 import DefaultLayout from '~/layouts';
 import { Fragment } from 'react';
@@ -9,6 +9,7 @@ import { bindActionCreators } from 'redux';
 import actionCreators from './redux';
 import { Roles } from './constants';
 import config from './config';
+import routes from './config/routes';
 
 function App() {
     const accessToken = getAccessTokenFromCookies();
@@ -49,6 +50,7 @@ function App() {
                                 />
                             );
                         })}
+                        <Route path="*" element={<Navigate to={routes.home} replace />}/>
                     </Routes>
                 </div>
             </Router>

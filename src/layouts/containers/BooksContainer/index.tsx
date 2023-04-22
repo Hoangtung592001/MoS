@@ -70,7 +70,7 @@ export default function BooksContainer() {
                         url={getEditBookRoute(book.id)}
                         authorName={book.author.name}
                         Button={
-                            <div>
+                            <div className="book-container-item-remove-button">
                                 <Button type={ButtonTypes.ADDTOBASKET} onClick={(e : any) => {
                                     setSelectedBookId(book.id);
                                     setShowModal(true);

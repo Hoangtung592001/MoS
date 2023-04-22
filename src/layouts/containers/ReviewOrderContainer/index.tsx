@@ -114,141 +114,12 @@ export default function ReviewOrderContainer() {
                 )}
             </div>
             <div className="review-order-container-basket">
-                {/* <div className="basket">
-                    <table className="basket-table">
-                        <thead className="basket-table-row basket-table-row-header">
-                            <tr className="basket-table-row__item1">
-                                <td className="basket-table-row__item1">
-                                    {localizations.itemSummary} ({basket.basketItems.length} {localizations.items})
-                                </td>
-                            </tr>
-                            <tr className="basket-table-row__item2">
-                                <td>
-                                    {localizations.price}
-                                </td>
-                            </tr>
-                            <tr className="basket-table-row__item3">
-                                <td>
-                                    {localizations.quantity}
-                                </td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {basket.basketItems.map((item, index) => {
-                                return (
-                                    <>
-                                        <tr className="basket-table-row-container" key={item.bookId}>
-                                            <td className="basket-table-row">
-                                                <div className="basket-table-row__item1 basket-table-row-item display-flex">
-                                                    <div className="basket-table-row-info display-flex flex-direction--column">
-                                                        <TextLink
-                                                            type={TextLinkTypes.BLUE}
-                                                            to={getBookDetailsRoute(item.book.id)}
-                                                        >
-                                                            <span className="basket-table-row-info__title">
-                                                                {item.book.title}
-                                                            </span>
-                                                        </TextLink>
-                                                        <span className="basket-table-row-info__author">
-                                                            {item.book.author.name}
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div className="basket-table-row__item2 basket-table-row-price">
-                                                    <span className="basket-table-row-price__each">
-                                                        US$ {item.book.price}
-                                                    </span>
-                                                </div>
-                                                <div className="basket-table-row__item3 basket-table-row-quantity">
-                                                    <div className="basket-table-row-quantity-container display-flex align-items--center">
-                                                        <Input
-                                                            inputType={InputTypes.QUANTITY}
-                                                            value={item.book.quantity}
-                                                            disabled
-                                                        />
-                                                        <span>{`(of 1)`}</span>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr className="basket-table-row-payment">
-                                            <td className="basket-table-row">
-                                                <div className="basket-table-row__item1 basket-table-row-shipping display-flex justify-content--right">
-                                                    <span className="basket-table-row-shipping__text--sub-total basket-table-row-shipping__text">
-                                                        {localizations.subTotal}
-                                                    </span>
-                                                </div>
-                                                <div className="basket-table-row__item2 basket-table-row-price">
-                                                    <span className="basket-table-row-price__total--sub-total basket-table-row-shipping__text">
-                                                        US$ {Math.round(item.book.price * item.book.quantity * 100) / 100}
-                                                    </span>
-                                                </div>
-                                                <div className="basket-table-row__item3"></div>
-                                                <div className="basket-table-row__item4"></div>
-                                            </td>
-                                        </tr>
-                                    </>
-                                );
-                            })}
-                        </tbody>
-                    </table>
-                    <div className="basket-total display-flex justify-content--space-between">
-                        <div className="basket-total-button basket-total-button--first display-flex">
-                            <div></div>
-                            <div className="basket-total-total">
-                                <span className="basket-total-total__message">Order Total:</span>
-                                <span className="basket-total-total__price">US ${basket?.orderTotal}</span>
-                            </div>
-                        </div>
-                        <div className="basket-total-button"></div>
-                    </div>
-                    <div className="basket-total basket-total--small-margin display-flex justify-content--space-between">
-                        <div className="basket-total-button basket-total-button--first display-flex">
-                            <div></div>
-                            <div className="basket-total-total">
-                                <span className="basket-total-total__message">Shipping Fee:</span>
-                                <span className="basket-total-total__price">US ${shippingFee}</span>
-                            </div>
-                        </div>
-                        <div className="basket-total-button"></div>
-                    </div>
-                    <div className="basket-total basket-total--small-margin display-flex justify-content--space-between">
-                        <div className="basket-total-button basket-total-button--first display-flex">
-                            <div></div>
-                            <div className="basket-total-total">
-                                <span className="basket-total-total__message">Total:</span>
-                                <span className="basket-total-total__price">
-                                    US ${Math.round((shippingFee + basket?.orderTotal) * 100) / 100}
-                                </span>
-                            </div>
-                        </div>
-                        <div className="basket-total-button">
-                            <Button
-                                onClick={(e: any) => {
-                                    if (!securityCode && paymentOptionId !== CashPaymentOptionId ) {
-                                        setIsSecurityCodeValid(false);
-                                    } else {
-                                        const basketItemIDs = basket.basketItems.map((basketItem) => {
-                                            return basketItem.id;
-                                        });
-
-                                        onSubmit(basketItemIDs, addressId, paymentOptionId, accessToken);
-                                    }
-                                }}
-                                isLoading={status == RequestStatus.Pending}
-                            >
-                                <span>Place Order Now</span>
-                            </Button>
-                        </div>
-                    </div>
-                </div> */}
                 <div className="basket">
                 <table className="basket-table">
                     <thead className="basket-table-row basket-table-row-header">
                         <tr className="basket-table-row__item1">
                             <td>
-                                {localizations.basketItems} ({basket.basketItems.length}
-                                {localizations.items})
+                                {`${localizations.basketItems} (${basket.basketItems.length} ${localizations.items})`}
                             </td>
                         </tr>
                         <tr className="basket-table-row__item2">
@@ -385,22 +256,25 @@ export default function ReviewOrderContainer() {
                             </div>
                         </div>
                         <div className="basket-total-button">
-                            <Button
-                                onClick={(e: any) => {
-                                    if (!securityCode && paymentOptionId !== CashPaymentOptionId) {
-                                        setIsSecurityCodeValid(false);
-                                    } else {
-                                        const basketItemIDs = basket.basketItems.map((basketItem) => {
-                                            return basketItem.id;
-                                        });
+                            <div className='basket-total-button-button'>
+                                <Button
+                                    onClick={(e: any) => {
+                                        if (!securityCode && paymentOptionId !== CashPaymentOptionId) {
+                                            setIsSecurityCodeValid(false);
+                                        } else {
+                                            const basketItemIDs = basket.basketItems.map((basketItem) => {
+                                                return basketItem.id;
+                                            });
 
-                                        onSubmit(basketItemIDs, addressId, paymentOptionId, accessToken);
-                                    }
-                                }}
-                                isLoading={status == RequestStatus.Pending}
-                            >
-                                <span>Place Order Now</span>
-                            </Button>
+                                            onSubmit(basketItemIDs, addressId, paymentOptionId, accessToken);
+                                        }
+                                    }}
+                                    isLoading={status == RequestStatus.Pending}
+                                    loadingColor="#32363a"
+                                >
+                                    <span>Place Order Now</span>
+                                </Button>
+                            </div>
                         </div>
                     </div>
             </div>

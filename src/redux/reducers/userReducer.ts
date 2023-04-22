@@ -18,6 +18,7 @@ interface initialStateInterface {
     signUpError: Exception | null;
     signUpStatus: number;
     isAdmin: boolean;
+    signInRequestStatus: number;
 }
 
 const initialState: initialStateInterface = {
@@ -28,7 +29,8 @@ const initialState: initialStateInterface = {
     errors: null,
     signUpError: null,
     signUpStatus: RequestStatus.Nothing,
-    isAdmin: false
+    isAdmin: false,
+    signInRequestStatus: RequestStatus.Nothing
 };
 
 const userSlice = createSlice({
@@ -43,6 +45,7 @@ const userSlice = createSlice({
         makeOriginal(state) {
             state.signUpError = null;
             state.signUpStatus = RequestStatus.Nothing;
+            state.signInRequestStatus = RequestStatus.Nothing;
             state.errors = null;
         },
         checkAdmin(state, action: PayloadAction<boolean>) {
@@ -52,6 +55,7 @@ const userSlice = createSlice({
     extraReducers(builder) {
         builder.addCase(signIn.pending, (state) => {
             state.isLoading = true;
+            state.signInRequestStatus = RequestStatus.Pending;
         });
 
         builder.addCase(signIn.fulfilled, (state, action: PayloadAction<any>) => {
@@ -60,6 +64,8 @@ const userSlice = createSlice({
             state.errors = null;
 
             state.token.accessToken = action.payload;
+
+            state.signInRequestStatus = RequestStatus.Fulfilled;
         });
 
         builder.addCase(signIn.rejected, (state, action: PayloadAction<any>) => {
@@ -68,6 +74,8 @@ const userSlice = createSlice({
             state.token.accessToken = null;
 
             state.errors = action.payload;
+
+            state.signInRequestStatus = RequestStatus.Rejected;
         });
 
         builder.addCase(signUp.pending, (state) => {
