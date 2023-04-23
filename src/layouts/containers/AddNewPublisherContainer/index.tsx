@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { bindActionCreators } from "redux";
-import { getAccessTokenFromCookies } from "~/commons/commonUsedFunctions";
+import { getAccessTokenFromCookies, getRequiredErrorMessage } from "~/commons/commonUsedFunctions";
 import { Button, Input } from "~/components"
 import routes from "~/config/routes";
 import { RequestStatus } from "~/constants";
@@ -13,18 +13,29 @@ import { CreatePublisherReq } from "~/redux/action-creators/publisherActionCreat
 
 export default function AddNewPublisherContainer() {
     const [publisherName, setPublisherName] = useState<string>("");
+    const [isPublisherValid, setIsPublisherValid] = useState<boolean>(true);
+    const [publisherNameErrorMessage, setPublisherNameErrorMessage] = useState<string>("");
     const dispatch = useAppDispatch();
     const { createPublisherAction, resetPublisher } = bindActionCreators(actionCreators, dispatch);
     const createPublisherStatus = useAppSelector(state => state.publisherReducer.createPublisherStatus);
     const accessToken = getAccessTokenFromCookies();
     const navigate = useNavigate();
-    const onSubmit = useCallback((accessToken: string, authorName: string) => {
-        const request : CreatePublisherReq = {
-            accessToken: accessToken,
-            name: authorName
-        };
+    const onSubmit = useCallback((accessToken: string, publisherName: string) => {
+        const publisherNameValid = !!publisherName;
 
-        createPublisherAction(request);
+        if (!publisherNameValid) {
+            setIsPublisherValid(false);
+            setPublisherNameErrorMessage(getRequiredErrorMessage(localizations.publisherName));
+        }
+
+        if (publisherName) {
+            const request : CreatePublisherReq = {
+                accessToken: accessToken,
+                name: publisherName
+            };
+            createPublisherAction(request);
+        }
+
     }, []);
 
     useEffect(() => {
@@ -42,16 +53,17 @@ export default function AddNewPublisherContainer() {
                 </div>
                 <div>
                     <div className="shipping-address-input">
-                        <label htmlFor="" className="shipping-address-input__label">
-                                {localizations.publisherName}
-                                <span className="shipping-address-input__label--required">*</span>
-                        </label>
                         <Input
                             inputType={InputTypes.ADDRESS_FORM}
                             value={publisherName}
                             onChange={(e : any) => {
                                 setPublisherName(e.target.value)
+                                setIsPublisherValid(true);
                             }}
+                            isValid={isPublisherValid}
+                            errorMessage={publisherNameErrorMessage}
+                            isRequired={true}
+                            label={localizations.publisherName}
                         />
                     </div>
                     <div className="shipping-address-input">

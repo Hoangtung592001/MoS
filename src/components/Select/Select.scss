@@ -23,5 +23,9 @@
             height: inherit;
             line-height: 1rem;
         }
+
+        &--invalid {
+            border: 1px solid #ff0033;
+        }
     }
 }

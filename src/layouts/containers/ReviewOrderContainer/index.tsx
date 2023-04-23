@@ -1,7 +1,7 @@
 import { Fragment, useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { bindActionCreators } from 'redux';
-import { checkTokenExpiry, convertConcurrency, getAccessTokenFromCookies } from '~/commons/commonUsedFunctions';
+import { checkTokenExpiry, convertConcurrency, getAccessTokenFromCookies, getRequiredErrorMessage } from '~/commons/commonUsedFunctions';
 import { Button, Input, TextLink } from '~/components';
 import routes, { getBookDetailsRoute } from '~/config/routes';
 import { CashPaymentOptionId, RequestStatus } from '~/constants';
@@ -31,6 +31,7 @@ export default function ReviewOrderContainer() {
     const { status, newOrderId } = useAppSelector((state) => state.orderReducer);
     const [securityCode, setSecurityCode] = useState<string>('');
     const [IsSecurityCodeValid, setIsSecurityCodeValid] = useState<boolean>(true);
+    const [securityCodeErrorMessage, setSecurityCodeErrorMessage] = useState<string>("");
 
     useEffect(() => {
         if (status == RequestStatus.Fulfilled && newOrderId) {
@@ -107,6 +108,7 @@ export default function ReviewOrderContainer() {
                                     setSecurityCode={setSecurityCode}
                                     IsSecurityCodeValid={IsSecurityCodeValid}
                                     setIsSecurityCodeValid={setIsSecurityCodeValid}
+                                    securityCodeErrorMessage={securityCodeErrorMessage}
                                 />
                             )}
                         </div>
@@ -261,6 +263,7 @@ export default function ReviewOrderContainer() {
                                     onClick={(e: any) => {
                                         if (!securityCode && paymentOptionId !== CashPaymentOptionId) {
                                             setIsSecurityCodeValid(false);
+                                            setSecurityCodeErrorMessage(getRequiredErrorMessage(localizations.securityCode));
                                         } else {
                                             const basketItemIDs = basket.basketItems.map((basketItem) => {
                                                 return basketItem.id;

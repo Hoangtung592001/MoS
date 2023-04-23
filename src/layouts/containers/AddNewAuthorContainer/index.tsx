@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { bindActionCreators } from "redux";
-import { getAccessTokenFromCookies } from "~/commons/commonUsedFunctions";
+import { getAccessTokenFromCookies, getRequiredErrorMessage } from "~/commons/commonUsedFunctions";
 import { Button, Input } from "~/components"
 import routes from "~/config/routes";
 import { RequestStatus } from "~/constants";
@@ -13,18 +13,29 @@ import { CreateAuthorReq } from "~/redux/action-creators/authorActionCreator";
 
 export default function AddNewAuthorContainer() {
     const [authorName, setAuthorName] = useState<string>("");
+    const [isAuthorValid, setIsAuthorValid] = useState<boolean>(true);
+    const [authorNameErrorMessage, setAuthorNameErrorMessage] = useState<string>("");
     const dispatch = useAppDispatch();
     const { createAuthorAction, resetAuthor } = bindActionCreators(actionCreators, dispatch);
     const createAuthorStatus = useAppSelector(state => state.authorReducer.createAuthorStatus);
     const accessToken = getAccessTokenFromCookies();
     const navigate = useNavigate();
     const onSubmit = useCallback((accessToken: string, authorName: string) => {
-        const request : CreateAuthorReq = {
-            accessToken: accessToken,
-            name: authorName
-        };
+        const authorNameValid = !!authorName;
 
-        createAuthorAction(request);
+        if (!authorNameValid) {
+            setIsAuthorValid(false);
+            setAuthorNameErrorMessage(getRequiredErrorMessage(localizations.authorName));
+        }
+
+        if (authorName) {
+            const request : CreateAuthorReq = {
+                accessToken: accessToken,
+                name: authorName
+            };
+    
+            createAuthorAction(request);
+        }
     }, []);
 
     useEffect(() => {
@@ -42,16 +53,17 @@ export default function AddNewAuthorContainer() {
                 </div>
                 <div>
                     <div className="shipping-address-input">
-                        <label htmlFor="" className="shipping-address-input__label">
-                                {localizations.authorName}
-                                <span className="shipping-address-input__label--required">*</span>
-                        </label>
                         <Input
                             inputType={InputTypes.ADDRESS_FORM}
                             value={authorName}
                             onChange={(e : any) => {
-                                setAuthorName(e.target.value)
+                                setAuthorName(e.target.value);
+                                setIsAuthorValid(true)
                             }}
+                            isValid={isAuthorValid}
+                            errorMessage={authorNameErrorMessage}
+                            isRequired={true}
+                            label={localizations.authorName}
                         />
                     </div>
                     <div className="shipping-address-input">

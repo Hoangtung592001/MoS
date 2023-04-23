@@ -5,7 +5,7 @@ export interface SelectItem {
     value: string;
 }
 
-export default function Select({ label, isRequired, items, selectType, ...props }: any) {
+export default function Select({ label, isRequired, items, selectType, isValid = true, errorMessage, ...props }: any) {
     return (
         <div className="select display-flex flex-direction--column">
             {label && (
@@ -15,7 +15,10 @@ export default function Select({ label, isRequired, items, selectType, ...props 
                 </label>
             )}
             <select
-                className={`${selectType ? `select__content--${selectType} select__content` : 'select__content'}`}
+                className={
+                    `${selectType ? `select__content--${selectType} select__content` : 'select__content'}` +
+                    `${!isValid ? ' select__content--invalid' : ''}`
+                }
                 {...props}
             >
                 <option value=''></option>
@@ -29,6 +32,14 @@ export default function Select({ label, isRequired, items, selectType, ...props 
                         );
                     })}
             </select>
+            {
+                !isValid &&
+                <div className='input-container-error'>
+                    <span className='input-container-error__message'>
+                        {errorMessage}
+                    </span>
+                </div>
+            }
         </div>
     );
 }

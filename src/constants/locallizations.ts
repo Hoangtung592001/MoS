@@ -75,6 +75,7 @@ const localizations = {
     shipping: 'Shipping',
     subTotal: 'SubTotal',
     total: 'Toal',
+    securityCode: 'Security Code',
     seller: 'Seller',
     publishedBy: 'Published by',
     saveForLater: 'Save for Later',

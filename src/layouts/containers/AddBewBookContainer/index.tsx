@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useMemo, useState } from 'react';
 import { bindActionCreators } from 'redux';
-import { getAccessTokenFromCookies } from '~/commons/commonUsedFunctions';
+import { getAccessTokenFromCookies, getRequiredErrorMessage } from '~/commons/commonUsedFunctions';
 import { BaseResponse } from '~/commons/response';
 import { fetchAsyncWithAuthentitaion, FETCH_TYPES } from '~/commons/sendRequest';
 import { getImageAfterUploaded } from '~/commons/URLs';
@@ -48,6 +48,19 @@ export default function AddNewBookContainer() {
     const [isPublisherIdValid, setIsPublisherIdvalid] = useState<boolean>(true);
     const [isBookConditionIdValid, setIsBookConditionIdValid] = useState<boolean>(true);
     const [isAuthorIdValid, setIsAuthorIdValid] = useState<boolean>(true);
+    const [titleErrorMessage, setTitleErrorMessage] = useState<string>("");
+    const [quantityErrorMessage, setQuantityErrorMessage] = useState<string>("");
+    const [priceErrorMessage, setPriceErrorMessage] = useState<string>("");
+    const [publishedAtErrorMessage, setPublishedAtErrorMessage] = useState<string>("");
+    const [publisherErrorMessage, setPublisherErrorMessage] = useState<string>("");
+    const [bookConditionErrorMessage, setBookConditionErrorMessage] = useState<string>("");
+    const [authorErrorMessage, setAuthorErrorMessage] = useState<string>("");
+    const [aboutThisItemErrorMessage, setAboutThisItemErrorMessage] = useState<string>("");
+    const [storeDescriptionErrorMessage, setStoreDescriptionErrorMessage] = useState<string>("");
+    const [termOfSaleErrorMessage, setTermOfSaleErrorMessage] = useState<string>("");
+    const [shippingTermErrorMessage, setShippingTermErrorMessage] = useState<string>("");
+    const [synopsisErrorMessage, setSynopsisErrorMessage] = useState<string>("");
+    const [mainImageErrorMessage, setMainImageErrorMessage] = useState<string>("");
     const accessToken = getAccessTokenFromCookies();
     const dispatch = useAppDispatch();
     const { getAuthors, getPublishers, createBook, getAllBookConditionsAction, resetBookDetails } = bindActionCreators(actionCreators, dispatch);
@@ -121,6 +134,59 @@ export default function AddNewBookContainer() {
     }, []);
 
     const onSubmit = () => {
+        if (!title) {
+            setIsTitleValid(false);
+            setTitleErrorMessage(getRequiredErrorMessage(localizations.title));
+        }
+        if (!quantity) {
+            setIsQuanttiyValid(false)
+            setQuantityErrorMessage(getRequiredErrorMessage(localizations.quantity));
+        }
+        if (!price) {
+            setIsPriceValid(false)
+            setPriceErrorMessage(getRequiredErrorMessage(localizations.price));
+        }
+        if (!publishedAt) {
+            setIsPublishedAtValid(false)
+            setPublishedAtErrorMessage(getRequiredErrorMessage(localizations.publishedAt));
+        }
+        if (!aboutThisItem) {
+            setIsAboutThisItemValid(false)
+            setAboutThisItemErrorMessage(getRequiredErrorMessage(localizations.aboutThisItem));
+        }
+        if (!storeDescription) {
+            setIsStoreDescriptionValid(false)
+            setStoreDescriptionErrorMessage(getRequiredErrorMessage(localizations.storeDescription));
+        }
+        if (!termsOfSale) {
+            setIsTermsOfSaleValid(false)
+            setTermOfSaleErrorMessage(getRequiredErrorMessage(localizations.termOfSale));
+        }
+        if (!synopsis) {
+            setIsSynopsisValid(false)
+            setSynopsisErrorMessage(getRequiredErrorMessage(localizations.synopsis));
+        }
+        if (!shippingTerm) {
+            setIsShippingTermValid(false)
+            setShippingTermErrorMessage(getRequiredErrorMessage(localizations.shippingTerm));
+        }
+        if (!selectedImage) {
+            setIsSelectedImageValid(false)
+            setMainImageErrorMessage(getRequiredErrorMessage(localizations.mainImage));
+        }
+        if (!publisherId) {
+            setIsPublisherIdvalid(false)
+            setPublisherErrorMessage(getRequiredErrorMessage(localizations.publisher));
+        }
+        if (!bookConditionId) {
+            setIsBookConditionIdValid(false)
+            setBookConditionErrorMessage(getRequiredErrorMessage(localizations.bookCondition));
+        }
+        if (!authorId) {
+            setIsAuthorIdValid(false)
+            setAuthorErrorMessage(getRequiredErrorMessage(localizations.author));
+        }
+
         const bookDetails : any= {};
         bookDetails["Store Description"] = {};
         bookDetails["Store Description"].value = storeDescription;
@@ -128,46 +194,8 @@ export default function AddNewBookContainer() {
         bookDetails["Store Description"]["Shipping Terms"] = shippingTerm;
         bookDetails["About this title"] = {};
         bookDetails["About this title"]["Synopsis"] = synopsis;
-        if (!title) {
-            setIsTitleValid(false);
-        }
-        else if (!quantity) {
-            setIsQuanttiyValid(false)
-        }
-        else if (!price) {
-            setIsPriceValid(false)
-        }
-        else if (!publishedAt) {
-            setIsPublishedAtValid(false);
-        }
-        else if (!aboutThisItem) {
-            setIsAboutThisItemValid(false);
-        }
-        else if (!storeDescription) {
-            setIsStoreDescriptionValid(false)
-        }
-        else if (!termsOfSale) {
-            setIsTermsOfSaleValid(false)
-        }
-        else if (!synopsis) {
-            setIsSynopsisValid(false)
-        }
-        else if (!shippingTerm) {
-            setIsShippingTermValid(false)
-        }
-        else if (!selectedImage) {
-            setIsSelectedImageValid(false)
-        }
-        else if (!publisherId) {
-            setIsPublisherIdvalid(false);
-        }
-        else if (!bookConditionId) {
-            setIsBookConditionIdValid(false);
-        }
-        else if (!authorId) {
-            setIsAuthorIdValid(false);
-        }
-        else if (authorId && publisherId && publishedAt && title && selectedImage && quantity && price && storeDescription && bookConditionId) {
+
+        if (authorId && publisherId && publishedAt && title && selectedImage && quantity && price && aboutThisItem && storeDescription && bookConditionId && termsOfSale && shippingTerm && synopsis && bookDetails) {
             const mainImage : Image = {
                 url: selectedImage,
                 bookImageTypeId: BookImageTypeTDs.Main
@@ -201,10 +229,6 @@ export default function AddNewBookContainer() {
                 </div>
                 <div className="shipping-address-inputs display-flex flex-direction--column">
                     <div className="shipping-address-input">
-                        <label htmlFor="" className="shipping-address-input__label">
-                            {localizations.title}
-                            <span className="shipping-address-input__label--required">*</span>
-                        </label>
                         <Input
                             inputType={InputTypes.ADDRESS_FORM}
                             value={title}
@@ -213,14 +237,12 @@ export default function AddNewBookContainer() {
                                 setIsTitleValid(true);
                             }}
                             isValid={isTitleValid}
-                            
+                            isRequired={true}
+                            label={localizations.title}
+                            errorMessage={titleErrorMessage}
                         />
                     </div>
                     <div className="shipping-address-input">
-                        <label htmlFor="" className="shipping-address-input__label">
-                                {localizations.quantity}
-                                <span className="shipping-address-input__label--required">*</span>
-                        </label>
                         <Input
                             inputType={InputTypes.ADDRESS_FORM}
                             type="number"
@@ -230,13 +252,12 @@ export default function AddNewBookContainer() {
                                 setIsQuanttiyValid(true);
                             }}
                             isValid={isQuantityValid}
+                            isRequired={true}
+                            label={localizations.quantity}
+                            errorMessage={quantityErrorMessage}
                         />
                     </div>
                     <div className="shipping-address-input">
-                        <label htmlFor="" className="shipping-address-input__label">
-                            {localizations.price}
-                            <span className="shipping-address-input__label--required">*</span>
-                        </label>
                         <Input
                             inputType={InputTypes.ADDRESS_FORM}
                             type="number"
@@ -246,13 +267,12 @@ export default function AddNewBookContainer() {
                                 setIsPriceValid(true);
                             }}
                             isValid={isPriceValid}
+                            isRequired={true}
+                            label={localizations.price}
+                            errorMessage={priceErrorMessage}
                         />
                     </div>
                     <div className="shipping-address-input">
-                        <label htmlFor="" className="shipping-address-input__label">
-                                {localizations.publishedAt}
-                                <span className="shipping-address-input__label--required">*</span>
-                        </label>
                         <Input
                             inputType={InputTypes.ADDRESS_FORM}
                             value={publishedAt}
@@ -262,6 +282,9 @@ export default function AddNewBookContainer() {
                                 setIsPublishedAtValid(true);
                             }}
                             isValid={isPublishedAtValid}
+                            isRequired={true}
+                            label={localizations.publishedAt}
+                            errorMessage={publishedAtErrorMessage}
                         />
                     </div>
                     <div className="shipping-address-input">
@@ -276,6 +299,7 @@ export default function AddNewBookContainer() {
                                 setIsPublisherIdvalid(true);
                             }}
                             isValid={isPublisherIdValid}
+                            errorMessage={publisherErrorMessage}
                         />
                     </div>
                     <div className="shipping-address-input">
@@ -290,6 +314,7 @@ export default function AddNewBookContainer() {
                                 setIsBookConditionIdValid(true);
                             }}
                             isValid={isBookConditionIdValid}
+                            errorMessage={bookConditionErrorMessage}
                         />
                     </div>
                     <div className="shipping-address-input">
@@ -304,13 +329,10 @@ export default function AddNewBookContainer() {
                                 setIsAuthorIdValid(true);
                             }}
                             isValid={isAuthorIdValid}
+                            errorMessage={authorErrorMessage}
                         />
                     </div>
                     <div className="shipping-address-input">
-                        <label htmlFor="" className="shipping-address-input__label">
-                            {localizations.aboutThisItem}
-                            <span className="shipping-address-input__label--required">*</span>
-                        </label>
                         <InputTextArea 
                             cols={40} 
                             rows={5}
@@ -320,13 +342,12 @@ export default function AddNewBookContainer() {
                                 setIsAboutThisItemValid(true);
                             }}
                             isValid={isAboutThisItemValid}
+                            isRequired={true}
+                            label={localizations.aboutThisItem}
+                            errorMessage={aboutThisItemErrorMessage}
                         />
                     </div>
                     <div className="shipping-address-input">
-                        <label htmlFor="" className="shipping-address-input__label">
-                            {localizations.storeDescription}
-                            <span className="shipping-address-input__label--required">*</span>
-                        </label>
                         <InputTextArea
                             cols={40} 
                             rows={5}
@@ -336,13 +357,12 @@ export default function AddNewBookContainer() {
                                 setIsStoreDescriptionValid(true);
                             }}
                             isValid={isStoreDescriptionValid}
+                            isRequired={true}
+                            label={localizations.storeDescription}
+                            errorMessage={storeDescriptionErrorMessage}
                         />
                     </div>
                     <div className="shipping-address-input">
-                        <label htmlFor="" className="shipping-address-input__label">
-                            {localizations.termOfSale}
-                            <span className="shipping-address-input__label--required">*</span>
-                        </label>
                         <InputTextArea
                             cols={40} 
                             rows={5}
@@ -352,13 +372,12 @@ export default function AddNewBookContainer() {
                                 setIsTermsOfSaleValid(true);
                             }}
                             isValid={isTermsOfSaleValid}
+                            isRequired={true}
+                            label={localizations.termOfSale}
+                            errorMessage={termOfSaleErrorMessage}
                         />
                     </div>
                     <div className="shipping-address-input">
-                        <label htmlFor="" className="shipping-address-input__label">
-                            {localizations.shippingTerm}
-                            <span className="shipping-address-input__label--required">*</span>
-                        </label>
                         <InputTextArea
                             cols={40} 
                             rows={5}
@@ -368,13 +387,12 @@ export default function AddNewBookContainer() {
                                 setIsShippingTermValid(true);
                             }}
                             isValid={isShippingTermValid}
+                            isRequired={true}
+                            label={localizations.shippingTerm}
+                            errorMessage={shippingTermErrorMessage}
                         />
                     </div>
                     <div className="shipping-address-input">
-                        <label htmlFor="" className="shipping-address-input__label">
-                            {localizations.synopsis}
-                            <span className="shipping-address-input__label--required">*</span>
-                        </label>
                         <InputTextArea
                             cols={40} 
                             rows={5}
@@ -384,13 +402,12 @@ export default function AddNewBookContainer() {
                                 setIsSynopsisValid(true);
                             }}
                             isValid={isSynopsisValid}
+                            isRequired={true}
+                            label={localizations.synopsis}
+                            errorMessage={synopsisErrorMessage}
                         />
                     </div>
                     <div className="shipping-address-input">
-                        <label htmlFor="" className="shipping-address-input__label">
-                            {localizations.mainImage}
-                            <span className="shipping-address-input__label--required">*</span>
-                        </label>
                             <Input 
                                 type="file" 
                                 onChange={(e : any) => {
@@ -399,7 +416,10 @@ export default function AddNewBookContainer() {
                                 }}
                                 value={""}
                                 isValid={isSelectedImageValid}
-                                />
+                                isRequired={true}
+                                label={localizations.mainImage}
+                                errorMessage={mainImageErrorMessage}
+                            />
                         <div className='add-new-book-container-main-image'>
                             {
                                 selectedImage && selectedImage.length > 0 

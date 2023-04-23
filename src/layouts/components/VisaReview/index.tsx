@@ -11,6 +11,7 @@ type ShippingAddressReviewProps = {
     setSecurityCode: React.Dispatch<React.SetStateAction<string>>;
     IsSecurityCodeValid: boolean;
     setIsSecurityCodeValid: React.Dispatch<React.SetStateAction<boolean>>;
+    securityCodeErrorMessage: string;
 };
 
 export default function VisaReview({
@@ -22,6 +23,7 @@ export default function VisaReview({
     setSecurityCode,
     IsSecurityCodeValid,
     setIsSecurityCodeValid,
+    securityCodeErrorMessage
 }: ShippingAddressReviewProps) {
     const convertedExpirationDate = new Date(expirtaionDate);
     return (
@@ -45,6 +47,7 @@ export default function VisaReview({
                                 setIsSecurityCodeValid(true);
                             }}
                             isValid={IsSecurityCodeValid}
+                            errorMessage={securityCodeErrorMessage}
                         />
                     </div>
                 </span>
