@@ -1,6 +1,6 @@
 import { useEffect, useCallback, useState } from "react"
 import { bindActionCreators } from "redux";
-import { getAccessTokenFromCookies } from "~/commons/commonUsedFunctions";
+import { checkAdminPermissionForPage, getAccessTokenFromCookies } from "~/commons/commonUsedFunctions";
 import Button from "~/components/Button";
 import { RequestStatus } from "~/constants";
 import { ButtonTypes } from "~/constants/enums";
@@ -10,8 +10,9 @@ import OrderItem from "~/layouts/components/OrderItem";
 import actionCreators from "~/redux";
 import { RemoveBookReq } from "~/redux/action-creators/bookDetailsActionCreator";
 import './BooksContainer.scss';
-import { getEditBookRoute } from "~/config/routes";
+import routes, { getEditBookRoute } from "~/config/routes";
 import { BoostrapModal } from "~/layouts/components";
+import { useNavigate } from "react-router-dom";
 export default function BooksContainer() {
     const dispatch = useAppDispatch();
     const { GetAllBooks, removeBook, resetBookDetails } = bindActionCreators(actionCreators, dispatch);
@@ -21,6 +22,15 @@ export default function BooksContainer() {
     const [showModal, setShowModal] = useState(false);
     const [titleModal, setTitleModal] = useState(localizations.saveChangeModalTitle);
     const [contentModal, setContentModal] = useState(localizations.saveChangeModalContent);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        checkAdminPermissionForPage()
+            .then(isAdmin => {
+                if (!isAdmin) navigate(routes.home)
+            })
+    }, []);
+
     useEffect(() => {
         GetAllBooks();
         window.scrollTo(0, 0);
@@ -37,7 +47,8 @@ export default function BooksContainer() {
     useEffect(() => {
         if (removeBookStatus === RequestStatus.Fulfilled) {
             resetBookDetails();
-            window.location.reload();
+            GetAllBooks();
+            window.scrollTo(0, 0);
         }
     }, [removeBookStatus])
 

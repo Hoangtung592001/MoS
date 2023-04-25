@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useMemo, useState } from 'react';
 import { bindActionCreators } from 'redux';
-import { getAccessTokenFromCookies, getRequiredErrorMessage } from '~/commons/commonUsedFunctions';
+import { checkAdminPermissionForPage, getAccessTokenFromCookies, getRequiredErrorMessage } from '~/commons/commonUsedFunctions';
 import { BaseResponse } from '~/commons/response';
 import { fetchAsyncWithAuthentitaion, FETCH_TYPES } from '~/commons/sendRequest';
 import { getImageAfterUploaded } from '~/commons/URLs';
@@ -68,6 +68,13 @@ export default function AddNewBookContainer() {
     const publishers = useAppSelector(state => state.publisherReducer.publishers);
     const { bookConditions, createBookStatus } = useAppSelector(state => state.bookDetailsReducer);
     const navigate = useNavigate();
+    
+    useEffect(() => {
+        checkAdminPermissionForPage()
+            .then(isAdmin => {
+                if (!isAdmin) navigate(routes.home)
+            })
+    }, []);
 
     useEffect(() => {
         if (createBookStatus === RequestStatus.Fulfilled) {

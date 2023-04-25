@@ -39,6 +39,7 @@ export const bookDetailsSlice = createSlice({
       state.createBookStatus = RequestStatus.Nothing;
       state.editBookStatus = RequestStatus.Nothing;
       state.recentlyViewedItems = [];
+      state.books = [];
     },
     getAllBookConditions: (state, action: PayloadAction<Array<BookCondition>>) => {
       state.bookConditions = action.payload

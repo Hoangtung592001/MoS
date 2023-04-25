@@ -6,7 +6,7 @@ import routes from "~/config/routes";
 import { useEffect } from 'react';
 import Cookies from 'universal-cookie';
 import { accessTokenKey } from "~/constants";
-import { checkTokenExpiry } from '~/commons/commonUsedFunctions';
+import { checkTokenExpiry, checkTokenPermissionPage } from '~/commons/commonUsedFunctions';
 import { bindActionCreators } from "redux";
 import actionCreators from "~/redux";
 import { useAppDispatch, useAppSelector } from "~/hooks";
@@ -20,17 +20,12 @@ export default function MyAccountContainer() {
     const { isAdmin } = useAppSelector(state => state.user)
     
     useEffect(() => {
-        if (!accessToken) {
-            navigate(routes.signin);
-        } else {
-            const tokenExpire = checkTokenExpiry(accessToken);
-            if (tokenExpire) 
-                navigate(routes.signin);
-        }
-    }, []);
+        const isTokenInvalid = checkTokenPermissionPage();
 
-    useEffect(() => {
-        checkAdminAction(accessToken);
+        if (isTokenInvalid) navigate(routes.signin)
+        else {
+            checkAdminAction(accessToken);
+        }
     }, []);
 
     return (

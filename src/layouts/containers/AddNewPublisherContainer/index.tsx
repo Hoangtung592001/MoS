@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { bindActionCreators } from "redux";
-import { getAccessTokenFromCookies, getRequiredErrorMessage } from "~/commons/commonUsedFunctions";
+import { checkAdminPermissionForPage, getAccessTokenFromCookies, getRequiredErrorMessage } from "~/commons/commonUsedFunctions";
 import { Button, Input } from "~/components"
 import routes from "~/config/routes";
 import { RequestStatus } from "~/constants";
@@ -20,6 +20,12 @@ export default function AddNewPublisherContainer() {
     const createPublisherStatus = useAppSelector(state => state.publisherReducer.createPublisherStatus);
     const accessToken = getAccessTokenFromCookies();
     const navigate = useNavigate();
+    useEffect(() => {
+        checkAdminPermissionForPage()
+            .then(isAdmin => {
+                if (!isAdmin) navigate(routes.home)
+            })
+    }, []);
     const onSubmit = useCallback((accessToken: string, publisherName: string) => {
         const publisherNameValid = !!publisherName;
 

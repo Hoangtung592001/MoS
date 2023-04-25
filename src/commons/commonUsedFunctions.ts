@@ -1,6 +1,11 @@
 import jwtDecode from 'jwt-decode';
 import Cookies from 'universal-cookie';
 import { accessTokenKey, months } from '~/constants';
+import { FETCH_TYPES, fetchAsyncWithAuthentitaion } from './sendRequest';
+import { SERVICE_URL } from '~/constants/server';
+import { BaseResponse } from './response';
+import { NavigateFunction } from 'react-router-dom';
+import routes from '~/config/routes';
 
 export const getAccessTokenFromCookies = () => {
     const cookies = new Cookies();
@@ -74,4 +79,24 @@ export const getLengthErrorMessage = (length: number) => {
 
 export const getRequiredErrorMessage = (label: string) => {
     return `${label} is required`
+}
+
+export const checkAdminPermissionForPage = async () => {
+    const accessToken = getAccessTokenFromCookies();
+
+    const response = await fetchAsyncWithAuthentitaion<BaseResponse<boolean>>(
+        SERVICE_URL.USER.CHECK_ADMIN,
+        FETCH_TYPES.GET,
+        accessToken
+    );
+    
+    return response.data.data;
+};
+
+export const checkTokenPermissionPage = () => {
+    const accessToken = getAccessTokenFromCookies();
+
+    const isTokenExpired = checkTokenExpiry(accessToken);
+
+    return isTokenExpired;
 }

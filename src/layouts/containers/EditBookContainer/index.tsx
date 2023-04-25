@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { bindActionCreators } from 'redux';
-import { getAccessTokenFromCookies, getDateTimeFromServer, getRequiredErrorMessage } from '~/commons/commonUsedFunctions';
+import { checkAdminPermissionForPage, getAccessTokenFromCookies, getDateTimeFromServer, getRequiredErrorMessage } from '~/commons/commonUsedFunctions';
 import { BaseResponse } from '~/commons/response';
 import { fetchAsyncWithAuthentitaion, FETCH_TYPES } from '~/commons/sendRequest';
 import { getImageAfterUploaded } from '~/commons/URLs';
@@ -68,6 +68,13 @@ export default function EditBookContainer() {
     const navigate = useNavigate();
     const { bookId } = useParams();
     const bookDetails = useAppSelector((state) => state.bookDetailsReducer.bookDetails);
+
+    useEffect(() => {
+        checkAdminPermissionForPage()
+            .then(isAdmin => {
+                if (!isAdmin) navigate(routes.home)
+            })
+    }, []);
 
     useEffect(() => {
         if (bookDetails) {

@@ -31,12 +31,12 @@ function App() {
                         {publicRoutes.map((route, index: number) => {
                             const Page = route.component;
                             const Layout = route.layout === null ? Fragment : route.layout ? route.layout : DefaultLayout;
-                            const cannotAccess = (!isAdmin && route.accessPermission === Roles.Admin) ||
-                                                (isSignedIn && route.accessPermission === Roles.NotSignedIn)
+                            // const cannotAccess = (!isAdmin && route.accessPermission === Roles.Admin) ||
+                            //                     (isSignedIn && route.accessPermission === Roles.NotSignedIn)
                             
-                            if (cannotAccess) {
-                                return;
-                            }
+                            // if (cannotAccess) {
+                            //     return;
+                            // }
 
                             return (
                                 <Route
